@@ -70,7 +70,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="relative left-[300px] z-10 mx-auto w-full max-w-10xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="relative left-[290px] z-10 mx-auto w-full max-w-10xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Left Content */}
         <motion.div style={{ y: yContent }} className="flex flex-col">
 
@@ -123,7 +123,7 @@ export default function HeroSection() {
           style={{ scale: scaleVisual, opacity: opacityVisual }}
           className="relative flex flex-col items-center justify-center pt-8"
         >
-          <div className="relative right-[90px] top-[20px] w-full aspect-square h-[450px] md:h-[600px] lg:h-[660px] flex items-center justify-center">
+          <div className="relative right-[200px] top-[20px] w-full aspect-square h-[450px] md:h-[600px] lg:h-[615px] flex items-center justify-center">
             <InfrastructureMap />
           </div>
 
@@ -435,7 +435,7 @@ function InfrastructureMap() {
 
       {/* Main Cinematic UI Group with Subtle Parallax Drift */}
       <motion.div
-        className="relative w-full h-full bottom-[60px] right-[300px] overflow-visible"
+        className="relative w-full h-full bottom-[60px] right-[210px] overflow-visible"
         animate={{ y: [0, -4, 0], rotate: [0, 0.5, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
