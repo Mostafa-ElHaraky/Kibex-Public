@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #110f1d;
+  color: #ffffff;
+  font-family: var(--font-geist), system-ui, -apple-system, Segoe UI, Roboto,
+    Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

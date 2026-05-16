@@ -1,0 +1,276 @@
+.footer {
+  position: relative;
+  min-height: 360px;
+  background: #110f1d;
+  overflow: hidden;
+}
+
+.background {
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 15, 29, 0.85);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px 24px;
+}
+
+.contentRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.companyCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.companyDescription {
+  margin: 0;
+  max-width: 20rem;
+  color: rgb(255 255 255 / 60%);
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.columnTitle {
+  margin: 0 0 16px;
+  color: #ffffff;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navItem+.navItem {
+  margin-top: 8px;
+}
+
+.navLink {
+  display: inline-block;
+  color: rgb(255 255 255 / 60%);
+  text-decoration: none;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  font-weight: 400;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.navLink:hover {
+  color: #4633ff;
+  transform: translateX(3px);
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  font-style: normal;
+}
+
+.contactLink,
+.contactEmail {
+  color: rgb(255 255 255 / 80%);
+  text-decoration: none;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  font-weight: 400;
+  transition: color 200ms ease;
+}
+
+.contactLink {
+  margin-bottom: 4px;
+}
+
+.contactEmail {
+  margin-bottom: 16px;
+}
+
+.contactLink:hover,
+.contactEmail:hover {
+  color: #4633ff;
+}
+
+.socialList {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logoButton {
+  position: relative;
+  width: 188px;
+  height: 72px;
+  border-radius: 12px;
+  background: transparent;
+  border: 0;
+  text-decoration: none;
+  transition: opacity 180ms ease;
+  flex: 0 0 auto;
+}
+
+.logoImage {
+  position: absolute;
+  width: 126px;
+  height: 26px;
+  left: 22px;
+  top: 23px;
+  background: url("/kibex-logo.png") center / contain no-repeat;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 200ms ease;
+}
+
+.socialLink:hover {
+  opacity: 1;
+}
+
+.socialIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.bottomDivider {
+  width: 100%;
+  height: 1px;
+  margin: 32px 0 16px;
+  background: rgb(255 255 255 / 10%);
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.copyright,
+.privacyLink {
+  margin: 0;
+  color: rgb(255 255 255 / 50%);
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.privacyLink {
+  transition: color 200ms ease;
+}
+
+.privacyLink:hover {
+  color: #4633ff;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 48px 16px 32px;
+  }
+
+  .contentRow {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .companyCol {
+    align-items: center;
+  }
+
+  .logoButton {
+    width: 140px;
+    height: 48px;
+    margin: 0 auto;
+  }
+
+  .logoImage {
+    width: 110px;
+    height: 22px;
+    left: 15px;
+    top: 13px;
+  }
+
+  .companyDescription {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .navList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .navItem + .navItem {
+    margin-top: 0;
+  }
+
+  .navLink {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding: 4px 0;
+  }
+
+  .socialList {
+    justify-content: center;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .socialIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .privacyLink {
+    font-size: 0.875rem;
+  }
+}
