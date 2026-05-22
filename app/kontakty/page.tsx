@@ -171,7 +171,7 @@ export default function ContactsPage() {
       "@type": "Organization",
       "name": "Kibex",
       "description": "Enterprise engineering and architecture consultancy.",
-      "url": "https://kibex.io",
+      "url": "https://kibex.ru",
       "knowsAbout": ["ERP systems", "Highload infrastructure", "E-commerce architecture", "Security audit"]
     }
   };

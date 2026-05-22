@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Архитектура цифровых платформ и ERP систем | Подход Kibex",
     description: "Kibex проектирует e-commerce платформы, ERP системы и highload инфраструктуру через инженерный подход.",
-    url: "https://kibex.io/approach",
+    url: "https://kibex.ru/approach",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

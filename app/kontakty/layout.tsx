@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "архитектура e-commerce платформ"
   ],
   alternates: {
-    canonical: "https://kibex.io/kontakty",
+    canonical: "https://kibex.ru/kontakty",
   },
 };
 

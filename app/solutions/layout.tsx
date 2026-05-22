@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "автоматизация бизнес-процессов"
   ],
   alternates: {
-    canonical: "https://kibex.io/solutions",
+    canonical: "https://kibex.ru/solutions",
   },
   openGraph: {
     title: "Разработка e-commerce платформ, ERP систем и цифровой инфраструктуры | Kibex",
     description: "Kibex проектирует и разрабатывает корпоративные платформы, ERP системы и цифровую инфраструктуру: модернизация CMS, высоконагруженные архитектуры и кибербезопасность.",
-    url: "https://kibex.io/solutions",
+    url: "https://kibex.ru/solutions",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

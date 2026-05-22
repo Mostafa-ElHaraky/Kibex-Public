@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     "анализ защищенности сайта",
   ],
   alternates: {
-    canonical: "https://kibex.io/solutions/security",
+    canonical: "https://kibex.ru/solutions/security",
   },
   openGraph: {
     title: "Аудит безопасности сайтов и e-commerce платформ | Kibex",
     description:
       "Проводим аудит безопасности сайтов, интернет-магазинов и веб-приложений: поиск уязвимостей, проверка API, анализ инфраструктуры и подробный технический отчёт с рекомендациями.",
-    url: "https://kibex.io/solutions/security",
+    url: "https://kibex.ru/solutions/security",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

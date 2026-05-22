@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Разработка ERP систем и корпоративных платформ | Kibex",
     description: "Проектируем и внедряем кастомные ERP решения для управления бизнесом, масштабирования операций и цифровой трансформации предприятия.",
-    url: "https://kibex.io/solutions/erp",
+    url: "https://kibex.ru/solutions/erp",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

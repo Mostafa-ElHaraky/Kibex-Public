@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Исследования ERP, highload и e-commerce архитектуры | Kibex Research",
     description: "Практические исследования Kibex о проектировании ERP систем, highload платформ и масштабируемой инфраструктуры.",
-    url: "https://kibex.io/research",
+    url: "https://kibex.ru/research",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

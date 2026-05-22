@@ -20,11 +20,11 @@ export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Kibex",
-  "url": "https://kibex.io",
-  "logo": "https://kibex.io/logo.png",
+  "url": "https://kibex.ru",
+  "logo": "https://kibex.ru/logo.png",
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "hello@kibex.io",
+    "email": "hello@kibex.ru",
     "contactType": "customer service"
   },
   "description": "Инженерная компания, специализирующаяся на разработке ERP систем, высоконагруженных платформ и цифровой инфраструктуры.",
@@ -48,7 +48,7 @@ export const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Kibex",
-  "url": "https://kibex.io",
+  "url": "https://kibex.ru",
   "publisher": {
     "@type": "Organization",
     "name": "Kibex"

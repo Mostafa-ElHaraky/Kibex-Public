@@ -1,128 +1,123 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Server, Share2, Activity, Zap, ShieldCheck, Search } from "lucide-react";
+import { motion } from "framer-motion";
 
-const features = [
-  { icon: Share2, title: "Distributed systems", desc: "Распределенная архитектура для исключения единой точки отказа." },
-  { icon: Activity, title: "Observability", desc: "Полный мониторинг производительности и логирование в реальном времени." },
-  { icon: Zap, title: "Caching strategies", desc: "Многоуровневое кеширование (Redis, CDN, App) для мгновенного отклика." },
-  { icon: Server, title: "Horizontal scaling", desc: "Автоматическое масштабирование ресурсов при пиковых нагрузках." },
+// ─── HIGHLOAD INFRASTRUCTURE MODULES ──────────────────────────────────────────
+
+const MODULES = [
+  {
+    title: "Распределённые системы",
+    desc: "Исключение единой точки отказа и независимая работа сервисов.",
+  },
+  {
+    title: "Observability",
+    desc: "Мониторинг инфраструктуры, логирование и анализ производительности в реальном времени.",
+  },
+  {
+    title: "Многоуровневое кеширование",
+    desc: "Redis, CDN и application cache для минимизации задержек.",
+  },
+  {
+    title: "Горизонтальное масштабирование",
+    desc: "Автоматическое расширение инфраструктуры при росте нагрузки.",
+  },
 ];
 
 export default function HighloadSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const graphWidth = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "100%"]);
-
   return (
-    <section ref={ref} className="bg-[#0A0A0B] py-32 overflow-hidden border-t border-white/5">
-      <div className="mx-auto w-full max-w-7xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          {/* Left: Load Scaling Visual */}
-          <div className="relative p-12 bg-white/[0.02] rounded-3xl border border-white/5 overflow-hidden">
-            <div className="flex items-center justify-between mb-12">
-              <h3 className="font-geist text-2xl font-bold text-white">Load Scaling Analysis</h3>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#4633FF]/20 text-[#4633FF] text-[10px] font-bold uppercase tracking-widest">
-                Live Simulation
-              </div>
-            </div>
+    <section className="bg-[#0A0A0B] py-20 sm:py-24 lg:py-32 overflow-hidden border-t border-white/5 relative">
+      
+      {/* Background Image & Gradient overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img 
+          src="/highloadgpt.png" 
+          alt="" 
+          className="w-full h-full object-cover opacity-[0.55] select-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/50 to-[#0A0A0B]/90" />
+        
+        {/* Subtle Indigo Glow and Grid Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
 
-            {/* Graph Visualization */}
-            <div className="relative h-64 flex items-end gap-2">
-              {[40, 65, 45, 80, 55, 90, 70, 100, 85, 120, 100, 140, 120, 160].map((height, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ height: 0 }}
-                  whileInView={{ height: `${(height / 160) * 100}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: i * 0.05 }}
-                  className="flex-1 bg-gradient-to-t from-[#4633FF]/20 to-[#4633FF] rounded-t-sm"
-                />
-              ))}
-              
-              {/* Animated Progress Line */}
-              <motion.div 
-                style={{ width: graphWidth }}
-                className="absolute bottom-0 left-0 h-px bg-[#4633FF] shadow-[0_0_15px_#4633FF] z-10"
-              />
-            </div>
+      <div className="mx-auto w-full max-w-7xl px-6 relative z-10">
+        
+        {/* CENTERED HEADER */}
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs font-mono font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-4 block"
+          >
+            РАСПРЕДЕЛЁННАЯ ИНФРАСТРУКТУРА
+          </motion.span>
 
-            <div className="mt-12 grid grid-cols-3 gap-8">
-              {[
-                { label: "Request/sec", value: "50k+" },
-                { label: "Throughput", value: "4.2 GB/s" },
-                { label: "Uptime", value: "99.99%" }
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-[10px] uppercase tracking-widest text-white/30 font-bold mb-1">{stat.label}</div>
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="text-xl font-geist font-bold text-white"
-                  >
-                    {stat.value}
-                  </motion.div>
-                </div>
-              ))}
-            </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight font-sans"
+          >
+            Highload архитектура для экстремальных нагрузок
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-base text-white/50 leading-relaxed font-sans"
+          >
+            Система должна сохранять стабильность независимо от количества пользователей, объема данных и пиковых нагрузок. Kibex проектирует распределённую инфраструктуру, которая масштабируется вместе с ростом бизнеса.
+          </motion.p>
+        </div>
+
+        {/* Live Metrics Block (Minimal, Premium, Integrated 4-Column Panel) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-y border-white/[0.05] py-8 mb-16 max-w-5xl mx-auto w-full text-center">
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-white/35 mb-1.5">Запросов / сек</span>
+            <span className="text-3xl font-extrabold text-white tracking-tight">50k+</span>
           </div>
-
-          {/* Right: Content */}
-          <div className="pt-8">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="font-geist text-sm font-bold uppercase tracking-[0.2em] text-[#4633FF] mb-6"
-            >
-              Highload Архитектура
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-geist text-4xl md:text-5xl font-bold tracking-tight text-[#FFFFFF] leading-tight"
-            >
-              Архитектура для экстремальных нагрузок
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="mt-8 font-geist text-lg text-[#FFFFFF]/60 leading-relaxed"
-            >
-              Система должна сохранять стабильность независимо от количества пользователей и объема данных. Мы проектируем решения, которые горизонтально масштабируются при росте вашего бизнеса.
-            </motion.p>
-
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {features.map((f, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                  className="space-y-3"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded bg-white/5 text-[#4633FF]">
-                      <f.icon className="w-4 h-4" />
-                    </div>
-                    <h4 className="font-geist text-sm font-bold text-white uppercase tracking-wider">{f.title}</h4>
-                  </div>
-                  <p className="text-xs text-white/40 leading-relaxed">{f.desc}</p>
-                </motion.div>
-              ))}
-            </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-white/35 mb-1.5">Пропускная способность</span>
+            <span className="text-3xl font-extrabold text-white tracking-tight">4.2 GB/s</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-white/35 mb-1.5">Uptime</span>
+            <span className="text-3xl font-extrabold text-[#8C76FF] tracking-tight">99.99%</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-white/35 mb-1.5">Активные узлы</span>
+            <span className="text-3xl font-extrabold text-white tracking-tight">128</span>
           </div>
         </div>
+
+        {/* Engineering Modules List (4-Column Layout) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-4">
+          {MODULES.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.08 * i }}
+              className="p-6 bg-white/[0.01] border border-white/[0.03] rounded-xl flex flex-col gap-3 hover:border-white/10 transition-colors duration-300"
+            >
+              <span className="text-xs font-mono text-[#8C76FF] select-none">0{i + 1} /</span>
+              <div>
+                <h4 className="text-sm font-bold text-white mb-1.5 font-sans">
+                  {m.title}
+                </h4>
+                <p className="text-xs text-white/40 leading-relaxed font-sans">{m.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

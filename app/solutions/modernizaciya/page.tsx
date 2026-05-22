@@ -103,7 +103,7 @@ const painPoints = [
   {
     icon: Lock,
     title: "Технический предел",
-    desc: "Монолитная архитектура Bitrix или WordPress ограничивает масштабирование бизнеса и внедрение современных e-commerce функций.",
+    desc: "Монолитная архитектура и накопленный технический долг ограничивают развитие платформы и внедрение новых e-commerce функций.",
   },
 ];
 
@@ -111,12 +111,12 @@ const lifecycle = [
   { stage: "Запуск", desc: "Коробочная CMS", status: "stable" },
   { stage: "Рост", desc: "Плагины и модули", status: "growth" },
   { stage: "Предел", desc: "Технический долг", status: "warning" },
-  { stage: "Кризис", desc: "Остановка развития", status: "critical" },
+  { stage: "Предел масштабирования", desc: "Рост стоимости изменений", status: "critical" },
 ];
 
 const steps = [
   { n: "01", title: "Технический аудит", desc: "Глубокий анализ архитектуры, выявление узких мест производительности и рисков безопасности." },
-  { n: "02", title: "Проектирование", desc: "Создание архитектуры новой платформы, готовой к десятикратному росту нагрузок и каталога." },
+  { n: "02", title: "Проектирование", desc: "Создание архитектуры, рассчитанной на рост нагрузки, каталога и количества интеграций." },
   { n: "03", title: "Безопасная миграция", desc: "Перенос данных, истории заказов и пользователей. Главный приоритет — миграция без потери SEO-трафика." },
   { n: "04", title: "API-интеграции", desc: "Синхронизация с 1С, складскими системами и маркетплейсами через надежный и быстрый API-слой." },
   { n: "05", title: "Стабильный запуск", desc: "Плавное переключение на новую систему без остановки продаж и операционных процессов." },
@@ -125,7 +125,7 @@ const steps = [
 const results = [
   { metric: "< 1.2с", title: "Скорость загрузки", desc: "Даже при экстремальных нагрузках и больших каталогах." },
   { metric: "99.99%", title: "Uptime системы", desc: "Гарантированная стабильность работы всей инфраструктуры." },
-  { metric: "500k+", title: "Масштабируемость", desc: "Готовность к росту SKU без деградации производительности." },
+  { metric: "500k+ SKU", title: "Поддержка крупных каталогов", desc: "Поддержка крупных каталогов без деградации производительности." },
 ];
 
 const cases = [
@@ -138,10 +138,10 @@ const cases = [
   },
   {
     industry: "Fashion-ритейл",
-    metric: "x3 рост конверсии",
+    metric: "+28%",
     problem: "Медленная работа WordPress и ошибки в корзине приводили к потере до 40% потенциальных заказов.",
     solution: "Перенос интернет-магазина на современный стек с сохранением всех SEO-позиций.",
-    result: "Рост онлайн-продаж втрое и полная безопасность всех клиентских данных.",
+    result: "Стабильная работа платформы под нагрузкой и рост конверсии после модернизации.",
   },
 ];
 
@@ -155,16 +155,16 @@ const faqs = [
     a: "Да. Это наш приоритет №1. Мы сохраняем структуру URL, настраиваем систему 301-редиректов и переносим все мета-теги. После модернизации сайты обычно растут в поиске благодаря улучшению Core Web Vitals.",
   },
   {
-    q: "Что делать, если WordPress тормозит при росте каталога?",
-    a: "WordPress имеет архитектурные ограничения для e-commerce. При росте каталога свыше 5-10 тысяч товаров нагрузка на базу данных становится критической. Мы предлагаем переход на Kibex — платформу, изначально созданную для больших нагрузок.",
+    q: "Почему интернет-магазин начинает терять производительность при росте каталога?",
+    a: "Коробочные CMS (такие как WordPress с WooCommerce или базовый Bitrix) имеют архитектурные ограничения в структуре базы данных. При росте каталога свыше 10-20 тысяч SKU количество запросов к БД растет экспоненциально. Мы решаем это переходом на специализированную e-commerce платформу Kibex с оптимизированной схемой хранения и кэшированием.",
   },
   {
     q: "Как модернизировать интернет-магазин без остановки продаж?",
     a: "Новая платформа разрабатывается параллельно с работой текущего сайта. Мы настраиваем синхронизацию данных в реальном времени. В момент запуска происходит мгновенное переключение DNS, которое пользователи не замечают.",
   },
   {
-    q: "Почему интеграции с 1С становятся нестабильными?",
-    a: "Стандартные модули CMS часто создают избыточную нагрузку при обмене большими объемами данных. Мы заменяем их на кастомный API-слой, который работает асинхронно и гарантирует стабильность обмена даже при 100k+ запросов.",
+    q: "Почему интеграции с 1С начинают создавать ошибки при росте нагрузки?",
+    a: "При увеличении количества заказов и обновлений остатков синхронный обмен данными перегружает базу данных CMS и саму 1С. Мы решаем эту проблему внедрением асинхронной шины данных и оптимизированного API-слоя, гарантирующего стабильный обмен при любых пиковых нагрузках.",
   },
 ];
 
@@ -172,7 +172,7 @@ const platforms = [
   { name: "Bitrix", desc: "Замена монолитной архитектуры на масштабируемый стек." },
   { name: "WordPress", desc: "Переход с WooCommerce на профессиональное e-commerce решение." },
   { name: "OpenCart", desc: "Устранение ограничений производительности и безопасности." },
-  { name: "Magento", desc: "Снижение стоимости поддержки при сохранении гибкости." },
+  { name: "Magento", desc: "Оптимизация сложной enterprise-инфраструктуры и снижение стоимости сопровождения." },
   { name: "Custom CMS", desc: "Модернизация устаревших самописных систем." },
 ];
 
@@ -231,13 +231,21 @@ export default function ModernizaciyaPage() {
 
       {/* ── 1. HERO ─────────────────────────────────────────────────────────── */}
       <section className={s.hero}>
-        <div className={s.heroBg} aria-hidden>
-          <div className={s.heroGrid} />
-          <motion.div 
-            className={s.heroAtmosphere}
-            animate={{ opacity: [0.1, 0.15, 0.1], scale: [1, 1.05, 1] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        {/* Background Image & Gradient overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden>
+          <img 
+            src="/modernizationgpt.png" 
+            alt="" 
+            className="w-full h-full object-cover opacity-[0.55] select-none"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/50 to-[#0A0A0B]/90" />
+          
+          {/* Subtle Indigo Glow and Grid Background */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{ 
+            backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} />
         </div>
 
         <div className={s.heroInner}>
@@ -259,13 +267,12 @@ export default function ModernizaciyaPage() {
             </motion.h1>
 
             <motion.p className={s.heroSubtitle} variants={fadeUp}>
-              Перенос сайта с Bitrix, WordPress и устаревших CMS на платформу, готовую к росту. 
-              Сохраняем SEO-трафик, историю данных и стабильность продаж.
+              Перенос интернет-магазина с Bitrix, WordPress и legacy-систем на современную инфраструктуру без потери SEO, данных и стабильности продаж.
             </motion.p>
 
             <motion.div className={s.heroActions} variants={fadeUp}>
               <button className={s.ctaButton} onClick={() => setPopupOpen(true)}>
-                Обсудить перенос сайта
+                Обсудить модернизацию платформы
               </button>
             </motion.div>
 
@@ -314,7 +321,7 @@ export default function ModernizaciyaPage() {
             variants={fadeUp}
           >
             <span className={s.sectionTag}>Диагностика</span>
-            <h2 className={s.sectionTitle}>Когда интернет-магазину нужна модернизация</h2>
+            <h2 className={s.sectionTitle}>Когда платформа начинает ограничивать бизнес</h2>
           </motion.div>
 
           <motion.div className={s.painGrid} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
@@ -455,7 +462,7 @@ export default function ModernizaciyaPage() {
         <div className={s.sectionInner}>
           <motion.div className={s.sectionHeaderCenter} initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <span className={s.sectionTag}>Безопасность</span>
-            <h2 className={s.sectionTitle}>Перенос интернет-магазина без потери SEO</h2>
+            <h2 className={s.sectionTitle}>Контролируемая миграция без потери SEO</h2>
             <p className={s.sectionSubtitleCenter}>
               Во время перехода бизнес продолжает работать в штатном режиме. Мы сохраняем все критические данные и позиции в поиске.
             </p>
@@ -490,10 +497,10 @@ export default function ModernizaciyaPage() {
         </div>
         <div className={s.techMarquee}>
           <motion.div className={s.marqueeTrack} animate={{ x: ["0%", "-50%"] }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
-            {["Next.js", "React", "Node.js", "PostgreSQL", "API-first", "Microservices", "Docker", "Kubernetes", "Redis", "Elasticsearch"].map((t, i) => (
+            {["Next.js", "TypeScript", "Go", "Node.js", "PostgreSQL", "Redis", "Docker", "Kubernetes", "RabbitMQ", "GraphQL", "Elasticsearch", "S3", "gRPC", "NestJS"].map((t, i) => (
               <div key={i} className={s.marqueeItem}>{t}</div>
             ))}
-            {["Next.js", "React", "Node.js", "PostgreSQL", "API-first", "Microservices", "Docker", "Kubernetes", "Redis", "Elasticsearch"].map((t, i) => (
+            {["Next.js", "TypeScript", "Go", "Node.js", "PostgreSQL", "Redis", "Docker", "Kubernetes", "RabbitMQ", "GraphQL", "Elasticsearch", "S3", "gRPC", "NestJS"].map((t, i) => (
               <div key={`dup-${i}`} className={s.marqueeItem}>{t}</div>
             ))}
           </motion.div>
@@ -519,7 +526,7 @@ export default function ModernizaciyaPage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <motion.h2 className={s.ctaLargeTitle} variants={fadeUp}>Платформа не должна ограничивать рост бизнеса</motion.h2>
             <motion.p className={s.ctaLargeSubtitle} variants={fadeUp}>Получите бесплатную экспертную оценку вашей текущей платформы и план безопасного переноса.</motion.p>
-            <motion.button className={s.ctaButton} onClick={() => setPopupOpen(true)} variants={fadeUp}>Получить оценку платформы</motion.button>
+            <motion.button className={s.ctaButton} onClick={() => setPopupOpen(true)} variants={fadeUp}>Получить архитектурную оценку</motion.button>
           </motion.div>
         </div>
       </section>

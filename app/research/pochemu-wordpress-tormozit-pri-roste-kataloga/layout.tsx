@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Почему WordPress и WooCommerce тормозят при росте каталога интернет-магазина | Kibex Research",
     description: "Разбор системных ограничений WordPress и WooCommerce при масштабировании e-commerce платформ.",
-    url: "https://kibex.io/research/pochemu-wordpress-tormozit-pri-roste-kataloga",
+    url: "https://kibex.ru/research/pochemu-wordpress-tormozit-pri-roste-kataloga",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "article",

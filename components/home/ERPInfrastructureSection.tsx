@@ -1,148 +1,105 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Database, 
-  Package, 
-  Users, 
-  BarChart3, 
-  Truck, 
-  Wallet,
-  Cpu
-} from "lucide-react";
 
-const modules = [
-  { icon: Package, label: "Склады", x: 20, y: 30 },
-  { icon: Wallet, label: "Финансы", x: 80, y: 30 },
-  { icon: Users, label: "HR", x: 15, y: 65 },
-  { icon: Truck, label: "Логистика", x: 85, y: 65 },
-  { icon: BarChart3, label: "Аналитика", x: 50, y: 85 },
+// ─── CENTRAL OPERATING INFRASTRUCTURE MODULES ───────────────────────────────
+
+const MODULE_BENEFITS = [
+  {
+    title: "Автоматизация процессов",
+    desc: "Устранение ручных операций и дублирования данных.",
+  },
+  {
+    title: "Управление складами",
+    desc: "Синхронизация остатков и логистики в реальном времени.",
+  },
+  {
+    title: "Финансовый контроль",
+    desc: "Централизованное управление платежами и отчётностью.",
+  },
+  {
+    title: "Интеграция 1С и API",
+    desc: "Единая инфраструктура обмена данными между системами.",
+  },
 ];
 
 export default function ERPInfrastructureSection() {
   return (
-    <section className="bg-[#0A0A0B] py-32 border-t border-white/5 overflow-hidden">
-      <div className="mx-auto w-full max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        {/* Left Content */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+    <section className="relative bg-[#0A0A0B] py-24 sm:py-32 lg:py-52 border-t border-white/5 overflow-hidden">
+      
+      {/* Background Image & Gradient overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img 
+          src="/handled_MVP_1080_1920_80.jpg" 
+          alt="" 
+          className="w-full h-full object-cover opacity-[0.55] select-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/50 to-[#0A0A0B]/90" />
+        
+        {/* Subtle Indigo Glow and Grid Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-12 relative z-10">
+        
+        {/* CENTERED HEADER */}
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-geist text-sm font-bold uppercase tracking-[0.2em] text-[#4633FF] mb-6"
+            className="text-xs font-bold tracking-[0.25em] text-[#8C76FF] uppercase mb-4 block"
           >
-            Единая операционная система
-          </motion.div>
+            ЦЕНТРАЛИЗОВАННАЯ ИНФРАСТРУКТУРА
+          </motion.span>
+          
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-geist text-4xl md:text-5xl font-bold tracking-tight text-[#FFFFFF] leading-tight"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight font-sans"
           >
-            ERP как фундамент цифрового бизнеса
+            ERP как цифровое ядро современного бизнеса
           </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+          
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-8 space-y-6 font-geist text-lg text-[#FFFFFF]/60 leading-relaxed"
+            className="text-base text-white/50 leading-relaxed font-sans"
           >
-            <p>
-              Современный enterprise-бизнес не может зависеть от разрозненных таблиц и хаотичных интеграций. Мы проектируем кастомные ERP-системы, которые становятся единым источником правды для всей компании.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {[
-                "Автоматизация процессов",
-                "Управление складами",
-                "Финансовый контроль",
-                "Интеграция 1С и внешних API"
-              ].map((text, i) => (
-                <div key={i} className="flex items-center gap-3 text-sm font-medium text-[#FFFFFF]/80">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#4633FF]" />
-                  {text}
+            Современная компания не может масштабироваться через разрозненные таблицы, ручные процессы и хаотичные интеграции. Kibex проектирует ERP-системы, которые становятся единым центром управления продажами, складами, логистикой, финансами и внутренними операциями бизнеса.
+          </motion.p>
+        </div>
+
+        {/* Benefits Grid - 4 Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          {MODULE_BENEFITS.map((benefit, i) => {
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="p-6 bg-white/[0.01] border border-white/[0.03] rounded-xl flex flex-col gap-3 hover:border-white/10 transition-colors duration-300"
+              >
+                <div className="text-[11px] font-mono font-bold text-[#8C76FF]">
+                  0{i + 1} /
                 </div>
-              ))}
-            </div>
-          </motion.div>
+                <div>
+                  <h4 className="text-sm font-bold text-white mb-1.5">{benefit.title}</h4>
+                  <p className="text-white/40 text-xs leading-relaxed">{benefit.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Right Visual: ERP Core Animation */}
-        <div className="relative aspect-square bg-white/[0.02] rounded-3xl border border-white/5 p-12 flex items-center justify-center overflow-hidden">
-          {/* Engineering Grid Reaction */}
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-            <div className="absolute inset-0" style={{ 
-              backgroundImage: `radial-gradient(#4633FF 1px, transparent 1px)`,
-              backgroundSize: '30px 30px'
-            }} />
-          </div>
-
-          <svg viewBox="0 0 100 100" className="w-full h-full relative z-10">
-            {/* Center Core */}
-            <motion.g
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <circle cx="50" cy="50" r="12" fill="#0A0A0B" stroke="#4633FF" strokeWidth="0.5" />
-              <Cpu className="w-6 h-6 text-[#4633FF] x-[50%] y-[50%]" x="44" y="44" />
-              <text x="50" y="68" textAnchor="middle" fill="#FFFFFF" fontSize="3" className="font-geist font-bold tracking-widest uppercase">ERP CORE</text>
-            </motion.g>
-
-            {/* Modules & Connections */}
-            {modules.map((mod, i) => (
-              <g key={i}>
-                <motion.path
-                  d={`M 50 50 L ${mod.x} ${mod.y}`}
-                  stroke="rgba(70, 51, 255, 0.2)"
-                  strokeWidth="0.3"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: i * 0.1 }}
-                />
-                <motion.circle
-                  r="0.6"
-                  fill="#4633FF"
-                  animate={{ offsetDistance: ["0%", "100%"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                  style={{ offsetPath: `path('M 50 50 L ${mod.x} ${mod.y}')` }}
-                />
-                <motion.circle
-                  r="0.6"
-                  fill="#4633FF"
-                  animate={{ offsetDistance: ["100%", "0%"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: i * 0.7 }}
-                  style={{ offsetPath: `path('M 50 50 L ${mod.x} ${mod.y}')` }}
-                />
-                
-                <motion.g 
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
-                >
-                  <circle cx={mod.x} cy={mod.y} r="5" fill="#0A0A0B" stroke="white" strokeOpacity="0.1" strokeWidth="0.3" />
-                  <mod.icon className="w-3 h-3 text-white/40" x={mod.x - 1.5} y={mod.y - 1.5} />
-                  <text x={mod.x} y={mod.y + 8} textAnchor="middle" fill="white" fillOpacity="0.4" fontSize="2.5" className="font-geist tracking-wide">{mod.label}</text>
-                </motion.g>
-              </g>
-            ))}
-          </svg>
-
-          {/* Live Metrics Overlay */}
-          <div className="absolute bottom-8 left-8 right-8 flex justify-between gap-4">
-            {[
-              { label: "Orders Sync", value: "Real-time" },
-              { label: "API Latency", value: "< 40ms" },
-              { label: "Nodes Active", value: "12/12" }
-            ].map((metric, i) => (
-              <div key={i} className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 font-bold">{metric.label}</span>
-                <span className="text-xs font-geist font-bold text-[#4633FF]">{metric.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

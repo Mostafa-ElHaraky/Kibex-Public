@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Модернизация интернет-магазинов в России — перенос с WordPress, Bitrix и CMS | Kibex",
+  title: "Модернизация e-commerce платформ и перенос с Bitrix | Kibex",
   description: "Модернизация интернет-магазинов без потери SEO, данных и продаж. Архитектурная реконструкция сайтов на WordPress, Bitrix и других CMS. Инженерный аудит Kibex.",
   keywords: [
     "модернизация интернет-магазина",
@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     "редизайн интернет-магазина без потери SEO",
   ],
   alternates: {
-    canonical: "https://kibex.io/solutions/modernizaciya",
+    canonical: "https://kibex.ru/solutions/modernizaciya",
   },
   openGraph: {
     title: "Модернизация интернет-магазинов — Kibex",
     description: "Архитектурная реконструкция e-commerce платформ без потери SEO, данных и бизнес-процессов.",
-    url: "https://kibex.io/solutions/modernizaciya",
+    url: "https://kibex.ru/solutions/modernizaciya",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "website",

@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     "масштабирование бизнеса"
   ],
   alternates: {
-    canonical: "https://kibex.io/research/pochemu-excel-razrushaet-biznes",
+    canonical: "https://kibex.ru/research/pochemu-excel-razrushaet-biznes",
   },
   openGraph: {
     title: "Почему Excel и ручные процессы разрушают бизнес | Kibex Research",
     description: "Исследование операционного хаоса при росте бизнеса без централизованной ERP системы.",
-    url: "https://kibex.io/research/pochemu-excel-razrushaet-biznes",
+    url: "https://kibex.ru/research/pochemu-excel-razrushaet-biznes",
     siteName: "Kibex",
     locale: "ru_RU",
     type: "article",
