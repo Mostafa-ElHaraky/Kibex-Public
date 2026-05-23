@@ -30,8 +30,8 @@ export default function ComparisonSection() {
         <div className="overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02]">
           <div className="grid grid-cols-1 md:grid-cols-3 bg-white/5 border-b border-white/5">
             <div className="p-8 font-geist text-xs font-bold uppercase tracking-widest text-white/30">Параметр</div>
-            <div className="p-8 font-geist text-xs font-bold uppercase tracking-widest text-white/30 text-center border-l border-white/5">WordPress / Bitrix / CMS</div>
-            <div className="p-8 font-geist text-xs font-bold uppercase tracking-widest text-[#4633FF] text-center border-l border-white/5 bg-[#4633FF]/5">Kibex Architecture</div>
+            <div className="p-8 font-geist text-xs font-bold uppercase tracking-widest text-white/30 text-center border-l border-white/5">WordPress / Bitrix / Drupal</div>
+            <div className="p-8 font-geist text-xs font-bold uppercase tracking-widest text-[#4633FF] text-center border-l border-white/5 bg-[#4633FF]/5">Kibex архитектура</div>
           </div>
 
           {rows.map((row, i) => (

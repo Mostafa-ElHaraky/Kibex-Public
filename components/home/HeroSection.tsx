@@ -23,15 +23,19 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A0B] pt-32 pb-20 lg:py-0"
+      className="relative min-h-screen flex items-center bg-[#0A0A0B] pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-20"
     >
-      {/* Main Background Image (Minimized Further) */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <img
-          src="/handled_Ui Design_1080_1920_80.jpg"
-          alt="Infrastructure Background"
-          className="relative right-0 lg:right-[65px] w-full h-full object-cover opacity-[0.1] scale-69"
-        />
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-[0.18]"
+        >
+          <source src="/Luxury_Russian_Logo_In_a_dark_industrial_space_glowing_blue_circuit_vw2uUsbY.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
       </div>
 
@@ -70,11 +74,11 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="relative left-0 lg:left-[240px] z-10 mx-auto w-full max-w-10xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Left Content */}
         <motion.div style={{ y: yContent }} className="flex flex-col">
 
-          <h1 className="font-geist text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-[#FFFFFF] leading-[1.1]">
+          <h1 className="font-geist text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight text-[#FFFFFF] leading-[1.1]">
             {["РАЗРАБАТЫВАЕМ", "ЦИФРОВЫЕ", "ПЛАТФОРМЫ,", "КОТОРЫЕ НЕ ОГРАНИЧИВАЮТ", "РОСТ БИЗНЕСА"].map((line, i) => (
               <motion.span
                 key={i}
@@ -92,7 +96,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-8 font-geist text-base sm:text-lg text-[#FFFFFF]/60 max-w-xl leading-relaxed"
+            className="mt-4 lg:mt-5 font-geist text-base sm:text-lg text-[#FFFFFF]/60 max-w-xl leading-relaxed"
           >
             КиБекс проектирует e-commerce платформы, ERP системы и highload инфраструктуру для компаний, которым важны масштабируемость, стабильность, интеграции и контроль над развитием бизнеса.
           </motion.p>
@@ -101,7 +105,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-10 flex flex-wrap gap-4"
+            className="mt-5 lg:mt-6 flex flex-wrap gap-4"
           >
             <button
               onClick={() => setIsModalOpen(true)}
@@ -123,7 +127,7 @@ export default function HeroSection() {
           style={{ scale: scaleVisual, opacity: opacityVisual }}
           className="relative flex flex-col items-center justify-center pt-8"
         >
-          <div className="relative right-0 lg:right-[180px] top-[20px] w-full aspect-square h-[380px] sm:h-[450px] md:h-[600px] lg:h-[615px] flex items-center justify-center">
+          <div className="relative w-full aspect-square max-w-[280px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[480px] xl:max-w-[580px] 2xl:max-w-[650px] flex items-center justify-center">
             <InfrastructureMap />
           </div>
 
@@ -435,11 +439,11 @@ function InfrastructureMap() {
 
       {/* Main Cinematic UI Group with Subtle Parallax Drift */}
       <motion.div
-        className="relative w-full h-full bottom-[60px] right-0 lg:right-[210px] overflow-visible"
+        className="relative w-full h-full overflow-visible"
         animate={{ y: [0, -4, 0], rotate: [0, 0.5, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
-        <svg viewBox="0 0 160 160" className="w-full h-full overflow-visible z-10 scale-[1.3] sm:scale-[1.4] lg:scale-[1.5]">
+        <svg viewBox="0 0 160 160" className="w-full h-full overflow-visible z-10 scale-[0.95] sm:scale-[1.0] lg:scale-[1.05]">
           <defs>
             {/* High-Fidelity Cinematic Bloom Filter */}
             <filter id="ultra-bloom" x="-100%" y="-100%" width="300%" height="300%">

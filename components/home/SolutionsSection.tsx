@@ -341,67 +341,6 @@ function SecurityVisual({ isHovered }: { isHovered: boolean }) {
   );
 }
 
-// ----------------------------------------------------------------------
-// 3. LARGE SUBTLE LEFT CARD SYSTEM TOPOLOGY (Stripe/Apple Style)
-// ----------------------------------------------------------------------
-function LeftSystemTopology() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
-
-  if (!mounted) return null;
-
-  return (
-    <div className="w-full h-64 mt-auto relative overflow-hidden select-none opacity-40">
-      <svg className="w-full h-full" viewBox="0 0 320 240" fill="none">
-        {/* Concentric paths */}
-        <circle cx="160" cy="120" r="95" stroke="#8C76FF" strokeWidth="0.5" strokeDasharray="3 14" strokeOpacity="0.2" />
-        <circle cx="160" cy="120" r="65" stroke="#8C76FF" strokeWidth="0.5" strokeDasharray="4 8" strokeOpacity="0.15" />
-        <circle cx="160" cy="120" r="35" stroke="#8C76FF" strokeWidth="0.5" strokeOpacity="0.1" />
-
-        {/* Quiet Radial Conduits */}
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, idx) => {
-          const rad = (angle * Math.PI) / 180;
-          const x2 = 160 + Math.cos(rad) * 95;
-          const y2 = 120 + Math.sin(rad) * 95;
-          return (
-            <g key={idx}>
-              <line x1="160" y1="120" x2={x2} y2={y2} stroke="#8C76FF" strokeWidth="0.5" strokeOpacity="0.08" />
-              {/* Slowly blinking node lights */}
-              <motion.circle
-                cx={x2} cy={y2} r="1.2" fill="#8c76ff"
-                animate={{ opacity: [0.1, 0.5, 0.1] }}
-                transition={{ duration: 3.5 + idx * 0.3, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </g>
-          );
-        })}
-
-        {/* Slow electricity packet */}
-        <path id="left-ring-path-fixed" d="M 65 120 A 95 95 0 1 1 255 120 A 95 95 0 1 1 65 120" fill="none" />
-        <motion.circle
-          r="1.8" fill="#a78bfa"
-          animate={{ offsetDistance: ["0%", "100%"] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          style={{ motionPath: "url(#left-ring-path-fixed)" }}
-        />
-
-        {/* Core Node */}
-        <circle cx="160" cy="120" r="4.5" fill="#050508" stroke="#8C76FF" strokeWidth="1.2" />
-        <motion.circle
-          cx="160" cy="120" r="7.5" fill="none" stroke="#8C76FF" strokeWidth="0.5" strokeOpacity="0.3"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
-          transition={{ duration: 4.5, repeat: Infinity }}
-        />
-
-        {/* Subtle grid pattern */}
-        <pattern id="left-card-grid-subtle" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-          <circle cx="1.5" cy="1.5" r="0.4" fill="#8C76FF" opacity="0.1" />
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#left-card-grid-subtle)" />
-      </svg>
-    </div>
-  );
-}
 
 // ----------------------------------------------------------------------
 // 4. INLINE LINK COMPONENT (Line extending, shifting arrow)
@@ -452,19 +391,36 @@ export default function SolutionsSection() {
   return (
     <section
       ref={containerRef}
-      className="relative py-28 md:py-40 overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(circle at 50% 25%, rgba(47, 33, 115, 0.12) 0%, transparent 60%),
-          radial-gradient(circle at 80% 70%, rgba(91, 60, 255, 0.04) 0%, transparent 50%),
-          radial-gradient(circle at 10% 90%, rgba(140, 118, 255, 0.03) 0%, transparent 40%),
-          linear-gradient(180deg, #050508 0%, #0a0915 50%, #050508 100%)
-        `
-      }}
+      className="relative py-28 md:py-40 overflow-hidden bg-[#050508]"
     >
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          src="/solution.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-[0.15]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050508] via-transparent to-[#050508] opacity-80" />
+        <div className="absolute inset-0 bg-[#050508]/40" />
+      </div>
+
+      {/* Volumetric glow effects overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: `
+            radial-gradient(circle at 50% 25%, rgba(47, 33, 115, 0.1) 0%, transparent 60%),
+            radial-gradient(circle at 80% 70%, rgba(91, 60, 255, 0.03) 0%, transparent 50%)
+          `
+        }}
+      />
+
       {/* Background Grid Pattern (5-8% opacity) */}
       <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
+        className="absolute inset-0 opacity-[0.06] pointer-events-none z-0"
         style={{
           backgroundImage: `
             linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), 
@@ -477,58 +433,22 @@ export default function SolutionsSection() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* ------------------------------------------------------------------
-              LEFT COLUMN (Symmetric Vertical Identity Card)
-              ------------------------------------------------------------------ */}
-          <div className="group lg:col-span-4 lg:sticky lg:top-28 h-auto lg:h-[1398px] flex flex-col justify-between py-2 overflow-hidden rounded-3xl border border-white/[0.04] bg-white/[0.01] backdrop-blur-md p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)] relative">
-            
-            {/* Visual Image Background overlay */}
-            <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-              <img 
-                src="/handled_Ui Design_1080_1920_80.jpg" 
-                alt="" 
-                className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.7] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/65 to-[#050508]/20" />
-            </div>
+        {/* Section Header */}
+        <div className="max-w-4xl mx-auto mb-16 md:mb-24 text-center">
+          <Link href="/solutions" className="group/title inline-block cursor-pointer">
+            <span className="text-[12px] font-bold tracking-[0.25em] text-[#8C76FF] group-hover/title:text-purple-300 transition-colors duration-300 uppercase mb-4 block">
+              ИНЖЕНЕРНЫЕ РЕШЕНИЯ KIBEX
+            </span>
+            <h2 className="font-geist text-[42px] lg:text-[46px] font-extrabold tracking-tight text-white group-hover/title:text-purple-100 transition-colors duration-300 mb-6 leading-[1.1]">
+              Инженерные решения Kibex
+            </h2>
+          </Link>
+          <p className="font-geist text-[18px] text-gray-300 leading-relaxed max-w-2xl mx-auto">
+            Каждая система проектируется под нагрузку, бизнес-логику и долгосрочное развитие.
+          </p>
+        </div>
 
-            <div className="relative z-10">
-              <Link href="/solutions" className="group/title block cursor-pointer">
-                <span className="text-[12px] font-bold tracking-[0.25em] text-[#8C76FF] group-hover/title:text-purple-300 transition-colors duration-300 uppercase mb-4 block">
-                  ИНЖЕНЕРНЫЕ РЕШЕНИЯ KIBEX
-                </span>
-                <h2 className="font-geist text-[42px] lg:text-[46px] font-extrabold tracking-tight text-white group-hover/title:text-purple-100 transition-colors duration-300 mb-6 leading-[1.1]">
-                  Инженерные решения Kibex
-                </h2>
-              </Link>
-              <p className="font-geist text-[18px] text-gray-300 leading-relaxed">
-                Каждая система проектируется под нагрузку, бизнес-логику и долгосрочное развитие.
-              </p>
-            </div>
-
-            {/* Apple/Stripe-like quiet topology visual */}
-            <div className="relative z-10">
-              <LeftSystemTopology />
-            </div>
-
-            {/* Bottom micro metadata */}
-            <div className="relative z-10 pt-6 border-t border-white/5">
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[13px] font-medium text-gray-400 font-mono">
-                <span>API-first</span>
-                <span className="text-purple-500/30">•</span>
-                <span>Защищённая архитектура</span>
-                <span className="text-purple-500/30">•</span>
-                <span>Highload</span>
-              </div>
-            </div>
-          </div>
-
-          {/* ------------------------------------------------------------------
-              RIGHT COLUMN (Symmetric Cards Layout - Row 1, Row 2, Row 3)
-              ------------------------------------------------------------------ */}
-          <div className="lg:col-span-8 relative">
+        <div className="relative">
             
             {/* Ultra-thin ecosystem lines in background */}
             {mounted && (
@@ -880,7 +800,6 @@ export default function SolutionsSection() {
           </div>
 
         </div>
-      </div>
-    </section>
+      </section>
   );
 }

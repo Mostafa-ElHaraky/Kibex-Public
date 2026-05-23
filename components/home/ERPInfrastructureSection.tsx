@@ -25,7 +25,7 @@ const MODULE_BENEFITS = [
 
 export default function ERPInfrastructureSection() {
   return (
-    <section className="relative bg-[#0A0A0B] py-24 sm:py-32 lg:py-52 border-t border-white/5 overflow-hidden">
+    <section className="relative bg-[#0A0A0B] py-20 lg:py-28 border-t border-white/5 overflow-hidden">
       
       {/* Background Image & Gradient overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -47,12 +47,12 @@ export default function ERPInfrastructureSection() {
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-12 relative z-10">
         
         {/* CENTERED HEADER */}
-        <div className="max-w-3xl mx-auto text-center flex flex-col items-center mb-16">
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-12 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-bold tracking-[0.25em] text-[#8C76FF] uppercase mb-4 block"
+            className="text-xs lg:text-sm font-bold tracking-[0.25em] text-[#8C76FF] uppercase mb-4 block"
           >
             ЦЕНТРАЛИЗОВАННАЯ ИНФРАСТРУКТУРА
           </motion.span>
@@ -61,7 +61,7 @@ export default function ERPInfrastructureSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-tight font-sans"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1] font-sans"
           >
             ERP как цифровое ядро современного бизнеса
           </motion.h2>
@@ -70,14 +70,14 @@ export default function ERPInfrastructureSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-base text-white/50 leading-relaxed font-sans"
+            className="text-base lg:text-lg text-white/50 leading-relaxed font-sans max-w-3xl"
           >
             Современная компания не может масштабироваться через разрозненные таблицы, ручные процессы и хаотичные интеграции. Kibex проектирует ERP-системы, которые становятся единым центром управления продажами, складами, логистикой, финансами и внутренними операциями бизнеса.
           </motion.p>
         </div>
 
         {/* Benefits Grid - 4 Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 w-full">
           {MODULE_BENEFITS.map((benefit, i) => {
             return (
               <motion.div
@@ -86,14 +86,14 @@ export default function ERPInfrastructureSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="p-6 bg-white/[0.01] border border-white/[0.03] rounded-xl flex flex-col gap-3 hover:border-white/10 transition-colors duration-300"
+                className="p-5 lg:p-6 bg-black/60 backdrop-blur-md border border-white/[0.04] rounded-2xl flex flex-col gap-3 lg:gap-4 hover:border-[#8C76FF]/30 hover:bg-black/80 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)] min-h-[160px] lg:min-h-[180px] justify-between"
               >
-                <div className="text-[11px] font-mono font-bold text-[#8C76FF]">
+                <div className="text-[11px] lg:text-xs font-mono font-bold text-[#8C76FF]">
                   0{i + 1} /
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white mb-1.5">{benefit.title}</h4>
-                  <p className="text-white/40 text-xs leading-relaxed">{benefit.desc}</p>
+                  <h4 className="text-sm lg:text-lg font-bold text-white mb-2 lg:mb-3">{benefit.title}</h4>
+                  <p className="text-white/40 text-xs lg:text-sm leading-relaxed">{benefit.desc}</p>
                 </div>
               </motion.div>
             );

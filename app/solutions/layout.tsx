@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Разработка e-commerce платформ, ERP систем и цифровой инфраструктуры | Kibex",
+  title: {
+    absolute: "Архитектура ERP систем и highload платформ — Kibex"
+  },
   description: "Kibex проектирует и разрабатывает e-commerce платформы, ERP системы и корпоративную цифровую инфраструктуру для бизнеса: модернизация CMS, высоконагруженные архитектуры, интеграции и кибербезопасность.",
   keywords: [
     "разработка корпоративных систем",
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     canonical: "https://kibex.ru/solutions",
   },
   openGraph: {
-    title: "Разработка e-commerce платформ, ERP систем и цифровой инфраструктуры | Kibex",
+    title: "Архитектура ERP систем и highload платформ — Kibex",
     description: "Kibex проектирует и разрабатывает корпоративные платформы, ERP системы и цифровую инфраструктуру: модернизация CMS, высоконагруженные архитектуры и кибербезопасность.",
     url: "https://kibex.ru/solutions",
     siteName: "Kibex",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Разработка e-commerce платформ, ERP систем и цифровой инфраструктуры | Kibex",
+    title: "Архитектура ERP систем и highload платформ — Kibex",
     description: "Проектируем цифровые платформы и ERP системы, которые выдерживают рост бизнеса и сложные интеграции.",
   },
 };

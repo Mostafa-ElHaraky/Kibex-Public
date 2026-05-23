@@ -51,7 +51,7 @@ const BLOCKS = [
     title: "Модернизация платформ",
     desc: "Переход с WordPress, Bitrix и legacy-систем на современную API-first инфраструктуру без потери SEO, данных и бизнес-процессов.",
     includes: [
-      "SEO-safe миграция",
+      "Безопасная SEO-миграция",
       "API-first архитектура",
       "Разделение монолита",
       "Миграция базы данных",
@@ -88,7 +88,7 @@ const BLOCKS = [
       "Очереди сообщений",
       "Распределённые сервисы",
       "Кэширование и CDN",
-      "Infrastructure observability",
+      "Мониторинг инфраструктуры",
     ],
     href: "/solutions/highload",
     cta: "Изучить Highload архитектуру",
@@ -101,10 +101,10 @@ const BLOCKS = [
     includes: [
       "Каталоги 500k+ SKU",
       "B2B кабинеты",
-      "API-first checkout",
+      "API-first оформление заказов",
       "OMS/WMS интеграции",
       "SEO-архитектура",
-      "Real-time остатки",
+      "Остатки в реальном времени",
     ],
     href: "/solutions/razrabotka-platformy",
     cta: "Изучить E-commerce платформы",
@@ -115,7 +115,7 @@ const BLOCKS = [
     title: "Кибербезопасность",
     desc: "Защита корпоративной инфраструктуры, контроль доступа и аудит безопасности на уровне архитектуры.",
     includes: [
-      "Security-by-design",
+      "Безопасность на уровне архитектуры",
       "RBAC и контроль доступа",
       "Аудит безопасности",
       "WAF и защита API",
@@ -167,7 +167,7 @@ const TECH_CATEGORIES: TechCategory[] = [
 const LIMITS_DATA = [
   { title: "Платформа начинает тормозить при росте каталога", desc: "Стандартные CMS (Bitrix, WooCommerce) упираются в ограничения базы данных при количестве товаров свыше 100k SKU." },
   { title: "Интеграции с 1С становятся нестабильными", desc: "Обмен данными зависает или приводит к рассинхронизации остатков, срывая заказы и вызывая недовольство клиентов." },
-  { title: "WordPress больше не выдерживает нагрузку", desc: "Пиковый трафик во время промо-акций роняет сайт из-за тяжелой архитектуры плагинов и отсутствия кэширования." },
+  { title: "Текущая архитектура перестаёт справляться с пиковыми нагрузками", desc: "Пиковый трафик во время промо-акций роняет сайт из-за тяжелой архитектуры плагинов и отсутствия кэширования." },
   { title: "ERP система ограничивает бизнес-процессы", desc: "Готовые коробочные решения не позволяют внедрить уникальную логику компании, замедляя операционную работу." },
   { title: "Стоимость поддержки постоянно растёт", desc: "Устранение старых багов (legacy) и попытки доработать закрытый код CMS обходятся дороже создания кастомной системы." },
   { title: "Архитектура мешает масштабированию", desc: "Любая новая фича требует переписывания половины проекта, создавая новые риски безопасности и стабильности." },
@@ -195,7 +195,7 @@ const RESEARCH_DATA = [
     desc: "Как разделение интерфейсов и логики (headless) обеспечивает технологическую независимость и гибкость.",
     time: "12 мин чтения",
     slug: "api-first-architecture-standard",
-    type: "архитектурный стандарт",
+    type: "архитектура",
     href: "/research/api-first-architecture-standard"
   },
   {
@@ -203,7 +203,7 @@ const RESEARCH_DATA = [
     desc: "Практическое руководство по созданию распределенного API чекаута, кэширования и WMS интеграций.",
     time: "18 мин чтения",
     slug: "highload-ecommerce-scale",
-    type: "кейс-гайд",
+    type: "инженерный обзор",
     href: "/solutions/razrabotka-platformy"
   },
 ];
@@ -217,276 +217,7 @@ const SEGMENTS = [
   "Распределённые цифровые системы"
 ];
 
-// ─── HIGH-FIDELITY INFRASTRUCTURE TOPOLOGY ───────────────────────────────────
 
-interface TopologyNode {
-  id: string;
-  label: string;
-  icon: any;
-  angle: number;
-  radius: number;
-}
-
-const TOPOLOGY_NODES: TopologyNode[] = [
-  { id: "api", label: "API GATEWAY", icon: Globe, angle: -90, radius: 52 },
-  { id: "erp", label: "ERP CORE", icon: Cpu, angle: -30, radius: 50 },
-  { id: "db", label: "DB CLUSTER", icon: Database, angle: 30, radius: 55 },
-  { id: "security", label: "SECURE LAYER", icon: Shield, angle: 90, radius: 48 },
-  { id: "broker", label: "MSG BROKER", icon: Workflow, angle: 150, radius: 53 },
-  { id: "cache", label: "FAST CACHE", icon: Zap, angle: 210, radius: 50 },
-];
-
-function InfrastructureTopology() {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [telemetry, setTelemetry] = useState({
-    latency: 8,
-    sync: 100,
-    load: 14.5
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTelemetry({
-        latency: Math.max(4, +(8 + Math.sin(Date.now() / 1000) * 1.5).toFixed(1)),
-        sync: Math.max(98.8, +(99.9 + Math.cos(Date.now() / 2000) * 0.05).toFixed(2)),
-        load: Math.max(5, +(14.5 + Math.sin(Date.now() / 800) * 1.2).toFixed(1))
-      });
-    }, 1200);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 select-none">
-      {/* Background Volumetric Gradients */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.15)_0%,transparent_70%)] blur-2xl" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0B]/30 to-transparent" />
-      </div>
-
-      {/* Main Animated Topology Container */}
-      <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
-        <svg viewBox="0 0 160 160" className="w-full h-full overflow-visible z-10">
-          <defs>
-            {/* Volumetric glow effects */}
-            <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <filter id="glow-light" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Core System Energy Waves */}
-          {[0, 1, 2].map((wave) => (
-            <motion.circle
-              key={wave}
-              cx="80"
-              cy="80"
-              fill="none"
-              stroke="#4633FF"
-              strokeWidth="0.12"
-              initial={{ r: 12, opacity: 0 }}
-              animate={{
-                r: [12, 64],
-                opacity: [0, 0.35, 0]
-              }}
-              transition={{
-                duration: 4.5,
-                repeat: Infinity,
-                delay: wave * 1.5,
-                ease: "easeOut"
-              }}
-              style={{ filter: "url(#glow-light)" }}
-            />
-          ))}
-
-          {/* Radiating Orbital Tracks */}
-          {[26, 38, 52].map((r, idx) => (
-            <motion.circle
-              key={idx}
-              cx="80"
-              cy="80"
-              r={r}
-              fill="none"
-              stroke="rgba(255, 255, 255, 0.03)"
-              strokeWidth="0.15"
-              strokeDasharray={idx === 1 ? "1.5 5" : "none"}
-              animate={idx === 1 ? { rotate: -360 } : {}}
-              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            />
-          ))}
-
-          {/* Connection Conduits */}
-          {TOPOLOGY_NODES.map((node, i) => {
-            const rad = (node.angle * Math.PI) / 180;
-            const nx = 80 + Math.cos(rad) * node.radius;
-            const ny = 80 + Math.sin(rad) * node.radius;
-            const pathD = `M 80 80 L ${nx} ${ny}`;
-            const isHovered = hoveredNode === node.id;
-
-            return (
-              <g key={node.id}>
-                {/* Structural Line */}
-                <motion.path
-                  d={pathD}
-                  fill="none"
-                  stroke="#4633FF"
-                  strokeWidth="0.25"
-                  animate={isHovered ? { strokeOpacity: 0.8, strokeWidth: 0.4 } : { strokeOpacity: 0.35, strokeWidth: 0.25 }}
-                  transition={{ duration: 0.4 }}
-                />
-
-                {/* Energy Pulse (Packets) */}
-                <motion.path
-                  d={pathD}
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="0.5"
-                  strokeOpacity="0.85"
-                  strokeDasharray="0.8 28"
-                  animate={{ strokeDashoffset: -56 }}
-                  transition={{
-                    duration: 2.2 + (i % 2) * 0.4,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: i * 0.25
-                  }}
-                  style={{ filter: "url(#glow-heavy)" }}
-                />
-              </g>
-            );
-          })}
-
-          {/* Central System Core */}
-          <motion.g
-            className="cursor-pointer"
-            onHoverStart={() => setHoveredNode("core")}
-            onHoverEnd={() => setHoveredNode(null)}
-          >
-            <circle cx="80" cy="80" r="13" fill="#0A0A0B" stroke="rgba(255,255,255,0.08)" strokeWidth="0.4" />
-            <motion.circle
-              cx="80"
-              cy="80"
-              r="10"
-              fill="rgba(70, 51, 255, 0.12)"
-              stroke="#4633FF"
-              strokeWidth="0.8"
-              animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.75, 1, 0.75],
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ filter: "url(#glow-heavy)" }}
-            />
-            <text x="80" y="81.2" textAnchor="middle" fontSize="2.8" fill="white" fontWeight="800" letterSpacing="0.04em" style={{ opacity: 0.9 }}>
-              KIBEX
-            </text>
-          </motion.g>
-
-          {/* Peripheral Operational Nodes */}
-          {TOPOLOGY_NODES.map((node, i) => {
-            const rad = (node.angle * Math.PI) / 180;
-            const x = 80 + Math.cos(rad) * node.radius;
-            const y = 80 + Math.sin(rad) * node.radius;
-            const isHovered = hoveredNode === node.id;
-
-            return (
-              <motion.g
-                key={node.id}
-                onHoverStart={() => setHoveredNode(node.id)}
-                onHoverEnd={() => setHoveredNode(null)}
-                className="cursor-pointer"
-                animate={{
-                  y: [0, -1.2, 0],
-                  x: [0, (i % 2 === 0 ? 0.4 : -0.4), 0]
-                }}
-                transition={{
-                  duration: 4.5 + (i % 3) * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.15
-                }}
-              >
-                {/* Node shell */}
-                <circle cx={x} cy={y} r="7" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255,255,255,0.06)" strokeWidth="0.25" />
-                <motion.circle
-                  cx={x}
-                  cy={y}
-                  r={isHovered ? 7.8 : 7}
-                  fill="none"
-                  stroke={isHovered ? "white" : "rgba(70, 51, 255, 0.3)"}
-                  strokeWidth={isHovered ? 0.8 : 0.25}
-                  animate={isHovered ? { opacity: [0.4, 0.8, 0.4] } : { opacity: 1 }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-
-                {/* Node Icon */}
-                <foreignObject x={x - 4.5} y={y - 4.5} width="9" height="9" className="overflow-visible pointer-events-none">
-                  <div className={`flex items-center justify-center w-full h-full transition-colors duration-300 ${isHovered ? 'text-white' : 'text-white/60'}`}>
-                    <node.icon size={4} strokeWidth={isHovered ? 1.6 : 1.2} />
-                  </div>
-                </foreignObject>
-
-                {/* Node Title */}
-                <text
-                  x={x}
-                  y={y + 11}
-                  textAnchor="middle"
-                  fill={isHovered ? "white" : "rgba(255, 255, 255, 0.4)"}
-                  fontSize="2"
-                  fontWeight="700"
-                  letterSpacing="0.02em"
-                >
-                  {node.label}
-                </text>
-              </motion.g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Monospace telemetry logs panel */}
-      <div className="w-full max-w-[380px] bg-white/[0.02] border border-white/5 rounded-xl p-4 font-mono text-[11px] text-white/50 space-y-2 mt-4 backdrop-blur-md shadow-lg">
-        <div className="flex justify-between border-b border-white/5 pb-1">
-          <span className="text-[#8C76FF] font-bold">KIBEX_ORCHESTRATOR: ACTIVE</span>
-          <span className="text-emerald-400 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            ONLINE
-          </span>
-        </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-          <div className="flex justify-between">
-            <span>SYS_LATENCY:</span>
-            <span className="text-white font-medium">{telemetry.latency} ms</span>
-          </div>
-          <div className="flex justify-between">
-            <span>NET_SYNC:</span>
-            <span className="text-white font-medium">{telemetry.sync}%</span>
-          </div>
-          <div className="flex justify-between">
-            <span>CORE_LOAD:</span>
-            <span className="text-white font-medium">{telemetry.load}%</span>
-          </div>
-          <div className="flex justify-between">
-            <span>ACTIVE_NODES:</span>
-            <span className="text-white font-medium">6 / 6</span>
-          </div>
-        </div>
-        <div className="text-[9px] text-white/30 truncate mt-1">
-          // routing packets via fast_channel_02.ssl_handshake ... ok
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── MAIN SOLUTIONS HUB PAGE ─────────────────────────────────────────────────
 
@@ -594,10 +325,26 @@ export default function SolutionsPage() {
 
       {/* ── 1. HERO SECTION ── */}
       <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+        {/* Cinematic Video Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            src="/solution.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-25"
+          />
+          {/* Volumetric overlays for seamless blend with #0A0A0B */}
+          <div className="absolute inset-0 bg-[#0A0A0B]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/40 to-[#0A0A0B]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/20 via-[#0A0A0B]/60 to-[#0A0A0B]" />
+        </div>
+
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           
           {/* Left Hero Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-8 flex flex-col items-start text-left">
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -627,7 +374,7 @@ export default function SolutionsPage() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-lg text-white/60 leading-relaxed max-w-2xl mb-10 font-sans"
             >
-              Kibex разрабатывает ERP системы, highload платформы и e-commerce инфраструктуру для компаний, которым необходимы производительность, масштабируемость и полный контроль над архитектурой.
+              Kibex проектирует ERP системы, highload платформы и e-commerce инфраструктуру для компаний, которым необходимы масштабируемость, производительность и полный контроль над цифровой архитектурой.
             </motion.p>
 
             <motion.div
@@ -651,16 +398,6 @@ export default function SolutionsPage() {
               </button>
             </motion.div>
           </div>
-
-          {/* Right Hero Visual (Animated Topology) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.3 }}
-            className="lg:col-span-5 flex items-center justify-center relative"
-          >
-            <InfrastructureTopology />
-          </motion.div>
         </div>
       </section>
 
@@ -673,7 +410,7 @@ export default function SolutionsPage() {
               Архитектурные направления Kibex
             </h2>
             <p className="text-white/50 text-lg leading-relaxed">
-              Мы строим кастомные решения, полностью адаптированные под ваши операционные процессы, минуя вендорские ограничения.
+              Мы строим кастомные решения, полностью адаптированные под ваши операционные процессы, без зависимости от ограничений типовых платформ и вендоров.
             </p>
           </div>
 
@@ -743,7 +480,7 @@ export default function SolutionsPage() {
               Как Kibex проектирует системы
             </h2>
             <p className="text-white/50 text-lg leading-relaxed">
-              Мы опираемся на строгие инженерные фазы, гарантирующие прозрачность интеграции, предсказуемость отказоустойчивости и готовность к нагрузкам.
+              Мы опираемся на строгие инженерные фазы, гарантирующие предсказуемость масштабирования, стабильность интеграций и готовность инфраструктуры к нагрузкам.
             </p>
           </div>
 
@@ -776,12 +513,8 @@ export default function SolutionsPage() {
                       />
                     </div>
 
-                    <div className="flex items-center justify-between mb-6 lg:mt-8">
+                    <div className="mb-6 lg:mt-8">
                       <span className="font-mono text-sm text-[#8C76FF] font-bold">{step.num}</span>
-                      <div className="flex items-center gap-1.5 font-mono text-[9px] tracking-wider text-white/30 uppercase">
-                        <Activity size={10} className="text-[#8C76FF] animate-pulse" />
-                        phase_{step.num}
-                      </div>
                     </div>
 
                     <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#8C76FF]">
@@ -802,7 +535,7 @@ export default function SolutionsPage() {
       <section className="py-24 border-t border-white/5 bg-[#09090A] relative">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
           <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">ТЕХНОЛОГИЧЕСКИЙ АРСЕНАЛ</span>
+            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">ТЕХНОЛОГИЧЕСКИЙ СТЕК</span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
               Технологическая инфраструктура
             </h2>
@@ -942,9 +675,9 @@ export default function SolutionsPage() {
       <section className="py-24 border-t border-white/5 bg-[#0A0A0B] relative">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
           <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">ЦЕЛЕВЫЕ СЕГМЕНТЫ</span>
+            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">СФЕРА ПРИМЕНЕНИЯ</span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Для кого эти решения
+              Для каких компаний подходят эти решения
             </h2>
             <p className="text-white/50 text-lg leading-relaxed">
               Мы сотрудничаем с компаниями, готовыми инвестировать в технологическую независимость и создание собственного цифрового ядра.
@@ -998,7 +731,7 @@ export default function SolutionsPage() {
               <div className="space-y-4 border-t border-white/5 pt-8">
                 {[
                   "Абсолютная конфиденциальность данных",
-                  "Разбор ограничений вашей текущей CMS",
+                  "Аудит текущей архитектуры и ограничений платформы",
                   "Ориентировочные сроки и бюджет перехода"
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3 text-xs text-white/40">
@@ -1062,7 +795,7 @@ export default function SolutionsPage() {
                     <label className="text-xs font-medium text-white/40 ml-1 block">Описание задачи</label>
                     <textarea
                       ref={descRef}
-                      placeholder="Кратко опишите текущую платформу, задачи или ограничения"
+                      placeholder="Опишите текущую систему, ограничения или задачи бизнеса"
                       rows={4}
                       className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 transition-colors resize-none"
                     />

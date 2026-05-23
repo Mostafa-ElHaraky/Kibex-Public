@@ -8,27 +8,27 @@ const cases = [
     title: "Enterprise Retail Platform",
     desc: "Модернизация инфраструктуры для федеральной сети магазинов.",
     metrics: [
-      { label: "Conversion Growth", value: 24, suffix: "%" },
-      { label: "API Response", value: 45, suffix: "ms" },
-      { label: "Uptime", value: 99.99, suffix: "%" }
+      { label: "Рост конверсии", value: 24, suffix: "%" },
+      { label: "Ответ API", value: 45, suffix: "ms" },
+      { label: "Время работы", value: 99.99, suffix: "%" }
     ]
   },
   {
-    title: "Global Distribution ERP",
+    title: "Глобальные ERP-системы для дистрибуции",
     desc: "Разработка ядра системы управления для дистрибьюторской компании.",
     metrics: [
-      { label: "Sync Speed", value: 10, suffix: "x" },
-      { label: "Inventory Error", value: 0.01, suffix: "%" },
-      { label: "Nodes Connected", value: 120, suffix: "+" }
+      { label: "Скорость синхронизации", value: 10, suffix: "x" },
+      { label: "Ошибка инвентаризации", value: 0.01, suffix: "%" },
+      { label: "Подключенные узлы", value: 120, suffix: "+" }
     ]
   },
   {
-    title: "Highload B2B Portal",
+    title: "B2B Портал высокой нагрузки",
     desc: "Проектирование и запуск портала для 100k+ SKU.",
     metrics: [
-      { label: "Page Load", value: 0.8, suffix: "s" },
-      { label: "Concurrent Users", value: 15, suffix: "k" },
-      { label: "Security Score", value: 100, suffix: "/100" }
+      { label: "Время загрузки страницы", value: 0.8, suffix: "s" },
+      { label: "Одновременные пользователи", value: 15, suffix: "k" },
+      { label: "Оценка безопасности", value: 100, suffix: "/100" }
     ]
   }
 ];

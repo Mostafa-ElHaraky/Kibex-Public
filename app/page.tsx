@@ -18,7 +18,7 @@ import FinalCTASection from "../components/home/FinalCTASection";
 
 export default function HomePage() {
   return (
-    <main className="bg-[#0A0A0B]">
+    <main className="bg-[#0A0A0B] overflow-x-hidden">
       <Header />
       
       {/* 1. HERO */}

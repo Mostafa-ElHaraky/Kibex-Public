@@ -4,26 +4,26 @@ import { motion } from "framer-motion";
 
 const layers = [
   {
-    title: "Frontend Layer",
-    role: "User Experience",
+    title: "Frontend слой",
+    role: "Пользовательский интерфейс",
     impact: "Высокая скорость отклика и SEO-оптимизация",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"]
   },
   {
-    title: "Backend Layer",
-    role: "Business Logic",
+    title: "Backend слой",
+    role: "Бизнес логика",
     impact: "Отказоустойчивость и сложные интеграции",
     tech: ["Node.js", "Go", "PostgreSQL", "Redis"]
   },
   {
-    title: "Infrastructure Layer",
-    role: "Stability",
+    title: "Инфраструктуры слой",
+    role: "Стабильность",
     impact: "Горизонтальное масштабирование и Docker/K8s",
     tech: ["Docker", "Kubernetes", "AWS/Cloud", "CI/CD"]
   },
   {
-    title: "Observability Layer",
-    role: "Monitoring",
+    title: "Наблюдаемость слой",
+    role: "Мониторинг",
     impact: "Проактивное обнаружение ошибок и логов",
     tech: ["Prometheus", "Grafana", "ELK Stack", "Sentry"]
   }
@@ -66,7 +66,7 @@ export default function TechArchitectureSection() {
                 <div className="text-[10px] font-bold text-[#4633FF] uppercase tracking-widest mb-2">{layer.role}</div>
                 <h3 className="font-geist text-xl font-bold text-white">{layer.title}</h3>
               </div>
-              
+
               <div className="md:col-span-5 flex items-center">
                 <p className="font-geist text-sm text-white/50 leading-relaxed italic border-l border-white/10 pl-6">
                   &quot;{layer.impact}&quot;
