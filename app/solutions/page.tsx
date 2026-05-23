@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Cpu,
@@ -27,6 +28,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SolutionPopup from "../../components/SolutionPopup";
+import SolutionsSection from "../../components/home/SolutionsSection";
 
 // ─── TYPES & INTERFACES ──────────────────────────────────────────────────────
 
@@ -223,6 +225,13 @@ const SEGMENTS = [
 
 export default function SolutionsPage() {
   const [popupOpen, setPopupOpen] = useState(false);
+  const [consultPopupOpen, setConsultPopupOpen] = useState(false);
+  const [consultName, setConsultName] = useState("");
+  const [consultPhone, setConsultPhone] = useState("");
+  const [consultConsent, setConsultConsent] = useState(false);
+  const [consultSubmitted, setConsultSubmitted] = useState(false);
+  const [consultSubmitting, setConsultSubmitting] = useState(false);
+  const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
   // Form submission states for Final CTA
@@ -333,12 +342,11 @@ export default function SolutionsPage() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-25"
+            className="w-full h-full object-cover opacity-50"
           />
-          {/* Volumetric overlays for seamless blend with #0A0A0B */}
-          <div className="absolute inset-0 bg-[#0A0A0B]/40" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/40 to-[#0A0A0B]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/20 via-[#0A0A0B]/60 to-[#0A0A0B]" />
+          {/* Light blend — keeps video visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/60 via-transparent to-[#0A0A0B]/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/10 via-transparent to-[#0A0A0B]" />
         </div>
 
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
@@ -384,14 +392,14 @@ export default function SolutionsPage() {
               className="flex flex-wrap gap-4"
             >
               <button
-                onClick={() => setPopupOpen(true)}
+                onClick={() => setConsultPopupOpen(true)}
                 className="group relative flex items-center justify-center gap-2 bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white px-8 py-4.5 rounded-xl font-bold transition-all duration-300 shadow-[0_0_20px_rgba(70,51,255,0.25)] hover:shadow-[0_0_35px_rgba(70,51,255,0.45)] hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
               >
                 Получить архитектурную консультацию
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </button>
               <button
-                onClick={() => scrollToId("research-section")}
+                onClick={() => router.push("/research")}
                 className="group flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4.5 rounded-xl font-bold transition-all cursor-pointer"
               >
                 Изучить исследования
@@ -401,75 +409,8 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* ── 2. SECTION: ЧТО МЫ ПРОЕКТИРУЕМ ── */}
-      <section className="py-24 border-t border-white/5 relative bg-[#09090A]">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
-          <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">НАПРАВЛЕНИЯ ЭКСПЕРТИЗЫ</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Архитектурные направления Kibex
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              Мы строим кастомные решения, полностью адаптированные под ваши операционные процессы, без зависимости от ограничений типовых платформ и вендоров.
-            </p>
-          </div>
-
-          {/* Blocks Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {BLOCKS.map((block, index) => {
-              const BlockIcon = block.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.08 }}
-                  className="group flex flex-col justify-between p-8 bg-white/[0.01] border border-white/[0.04] rounded-2xl hover:border-[#4633FF]/30 hover:bg-white/[0.02] transition-all duration-300 relative overflow-hidden shadow-lg"
-                >
-                  {/* Hover Accent Line */}
-                  <div className="absolute top-0 left-0 w-0 h-[3px] bg-gradient-to-r from-[#4633FF] to-[#8C76FF] group-hover:w-full transition-all duration-500" />
-                  
-                  <div>
-                    {/* Block Header */}
-                    <div className="flex items-center justify-between mb-8">
-                      <span className="font-mono text-sm text-[#8C76FF] font-semibold">{block.num}</span>
-                      <div className="w-10 h-10 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/70 group-hover:text-white group-hover:border-[#4633FF]/20 group-hover:bg-[#4633FF]/5 transition-all">
-                        <BlockIcon size={20} strokeWidth={1.5} />
-                      </div>
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#8C76FF] transition-colors">
-                      {block.title}
-                    </h3>
-                    <p className="text-white/50 text-sm leading-relaxed mb-6">
-                      {block.desc}
-                    </p>
-
-                    {/* Features list */}
-                    <ul className="space-y-2 border-t border-white/5 pt-6 mb-8">
-                      {block.includes.map((inc, i) => (
-                        <li key={i} className="flex items-center gap-2 text-xs text-white/40 group-hover:text-white/60 transition-colors">
-                          <span className="w-1 h-1 rounded-full bg-[#4633FF]" />
-                          <span>{inc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Link
-                    href={block.href}
-                    className="group/btn flex items-center justify-center gap-2 w-full py-3.5 bg-white/[0.02] border border-white/5 group-hover:bg-[#4633FF] group-hover:border-[#4633FF] rounded-xl text-xs font-bold text-white tracking-wide transition-all"
-                  >
-                    {block.cta}
-                    <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* ── 2. SECTION: ИНЖЕНЕРНЫЕ РЕШЕНИЯ ── */}
+      <SolutionsSection />
 
       {/* ── 3. SECTION: АРХИТЕКТУРНЫЙ ПОДХОД ── */}
       <section className="py-24 border-t border-white/5 bg-[#0A0A0B] relative">
@@ -839,6 +780,120 @@ export default function SolutionsPage() {
 
       <Footer />
       <SolutionPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+
+      {/* ── Simple Consultation Popup ── */}
+      <AnimatePresence>
+        {consultPopupOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            onClick={() => { setConsultPopupOpen(false); setConsultSubmitted(false); }}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-md bg-[#0E0E12] border border-white/10 rounded-2xl p-8 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close */}
+              <button
+                onClick={() => { setConsultPopupOpen(false); setConsultSubmitted(false); }}
+                className="absolute top-5 right-5 text-white/40 hover:text-white transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+
+              {consultSubmitted ? (
+                <div className="text-center py-6">
+                  <div className="w-14 h-14 rounded-full bg-[#4633FF]/15 border border-[#4633FF]/30 flex items-center justify-center mx-auto mb-5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Заявка отправлена!</h3>
+                  <p className="text-white/50 text-sm">Наш менеджер свяжется с вами в ближайшее время.</p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-xl font-bold text-white mb-2 pr-6">Оставьте контакты</h3>
+                  <p className="text-white/50 text-sm mb-7 leading-relaxed">
+                    Оставьте контакты и наш менеджер свяжется с вами в ближайшее время
+                  </p>
+
+                  <div className="flex flex-col gap-4">
+                    <input
+                      type="text"
+                      placeholder="Введите имя"
+                      value={consultName}
+                      onChange={(e) => setConsultName(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#4633FF]/60 transition-colors"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Введите телефон"
+                      value={consultPhone}
+                      onChange={(e) => setConsultPhone(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#4633FF]/60 transition-colors"
+                    />
+
+                    <button
+                      disabled={consultSubmitting}
+                      onClick={async () => {
+                        if (!consultName.trim() || !consultPhone.trim() || !consultConsent) return;
+                        setConsultSubmitting(true);
+                        await new Promise(r => setTimeout(r, 800));
+                        setConsultSubmitting(false);
+                        setConsultSubmitted(true);
+                        setConsultName("");
+                        setConsultPhone("");
+                      }}
+                      className={`w-full bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white font-bold py-4 rounded-xl transition-all hover:shadow-[0_0_25px_rgba(70,51,255,0.4)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed mt-1`}
+                      disabled={consultSubmitting || !consultConsent}
+                    >
+                      {consultSubmitting ? "Отправляем..." : "Оставить заявку"}
+                    </button>
+                  </div>
+
+                  {/* Checkbox consent */}
+                  <label className="flex items-start gap-3 mt-4 cursor-pointer group">
+                    <div
+                      onClick={() => setConsultConsent(v => !v)}
+                      className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded-md border transition-all ${
+                        consultConsent
+                          ? "bg-[#4633FF] border-[#4633FF]"
+                          : "bg-white/5 border-white/15 group-hover:border-white/30"
+                      } flex items-center justify-center`}
+                    >
+                      {consultConsent && (
+                        <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
+                          <polyline points="1 4 4 7 10 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-white/35 text-xs leading-relaxed select-none" onClick={() => setConsultConsent(v => !v)}>
+                      Нажимая кнопку,{" "}
+                      <Link
+                        href="/privacy-policy"
+                        target="_blank"
+                        className="text-white/55 underline hover:text-white/80 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        даю согласие на обработку персональных данных
+                      </Link>
+                    </span>
+                  </label>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

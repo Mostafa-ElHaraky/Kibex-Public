@@ -86,22 +86,22 @@ const fadeUp = {
 
 const painPoints = [
   {
-    icon: Zap,
+    image: "/load_kibex.png",
     title: "Деградация скорости",
     desc: "Сайт тормозит при росте каталога и трафика. Медленная загрузка страниц напрямую снижает конверсию и позиции в поиске.",
   },
   {
-    icon: AlertTriangle,
+    image: "/intigration_error.png",
     title: "Ошибки интеграций",
     desc: "Сложные и нестабильные интеграции с 1С, ERP и CRM работают с задержками, вызывая ошибки в складских остатках и заказах.",
   },
   {
-    icon: DollarSign,
+    image: "/expensive.png",
     title: "Дорогая поддержка",
     desc: "Любые доработки устаревшей CMS занимают всё больше времени и увеличивают бюджет. Развитие системы становится невыгодным.",
   },
   {
-    icon: Lock,
+    image: "/monolith.png",
     title: "Технический предел",
     desc: "Монолитная архитектура и накопленный технический долг ограничивают развитие платформы и внедрение новых e-commerce функций.",
   },
@@ -169,24 +169,24 @@ const faqs = [
 ];
 
 const platforms = [
-  { name: "Bitrix", desc: "Замена монолитной архитектуры на масштабируемый стек." },
-  { name: "WordPress", desc: "Переход с WooCommerce на профессиональное e-commerce решение." },
-  { name: "OpenCart", desc: "Устранение ограничений производительности и безопасности." },
-  { name: "Magento", desc: "Оптимизация сложной enterprise-инфраструктуры и снижение стоимости сопровождения." },
-  { name: "Custom CMS", desc: "Модернизация устаревших самописных систем." },
+  { name: "Bitrix", desc: "Замена монолитной архитектуры на масштабируемый стек.", image: "/1c-bitrix.png" },
+  { name: "WordPress", desc: "Переход с WooCommerce на профессиональное e-commerce решение.", image: "/wordpress.png" },
+  { name: "OpenCart", desc: "Устранение ограничений производительности и безопасности.", image: "/opencart.png" },
+  { name: "Magento", desc: "Оптимизация сложной enterprise-инфраструктуры и снижение стоимости сопровождения.", image: "/magento.png" },
+  { name: "Drupal", desc: "Модернизация устаревших самописных систем.", image: "/drupal.png" },
 ];
 
 const preserved = [
-  "SEO-позиции и трафик", "Структура URL и редиректы", 
+  "SEO-позиции и трафик", "Структура URL и редиректы",
   "История заказов и клиенты", "Интеграции с 1С и ERP",
   "Мета-теги и контент", "Аналитика и e-commerce события"
 ];
 
-// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+// ─── PAGE COMPONENT ────────────────────────────────────────────────  ───────────
 
 export default function ModernizaciyaPage() {
   const [popupOpen, setPopupOpen] = useState(false);
-  
+
   const lifecycleRef = useRef(null);
   const { scrollYProgress: lifeProgress } = useScroll({
     target: lifecycleRef,
@@ -198,7 +198,7 @@ export default function ModernizaciyaPage() {
     target: processRef,
     offset: ["start center", "end center"]
   });
-  
+
   const scaleLine = useSpring(useTransform(processProgress, [0, 1], [0, 1]), {
     stiffness: 100,
     damping: 30,
@@ -222,7 +222,7 @@ export default function ModernizaciyaPage() {
   return (
     <div className={s.page}>
       <Header />
-      
+
       {/* SEO Head implementation (handled via metadata if this was SSR, but here we add scripts) */}
       <script
         type="application/ld+json"
@@ -233,16 +233,16 @@ export default function ModernizaciyaPage() {
       <section className={s.hero}>
         {/* Background Image & Gradient overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden>
-          <img 
-            src="/modernizationgpt.png" 
-            alt="" 
+          <img
+            src="/modernizationgpt.png"
+            alt=""
             className="w-full h-full object-cover opacity-[0.55] select-none"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/50 to-[#0A0A0B]/90" />
-          
+
           {/* Subtle Indigo Glow and Grid Background */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }} />
@@ -255,9 +255,6 @@ export default function ModernizaciyaPage() {
             animate="show"
             variants={stagger}
           >
-            <motion.span className={s.heroLabel} variants={fadeUp}>
-              Инфраструктурная модернизация
-            </motion.span>
 
             <motion.h1 className={s.heroTitle} variants={fadeUp}>
               Модернизация интернет-магазинов{" "}
@@ -291,8 +288,8 @@ export default function ModernizaciyaPage() {
           >
             <div className={s.sceneContainer}>
               <div className={s.sceneNodeOld}>
-                <div className={s.nodeLabel}>CMS</div>
-                <motion.div 
+                <div className={s.nodeLabel}>WORDPRESS</div>
+                <motion.div
                   className={s.nodePulseBad}
                   animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0, 0.3] }}
                   transition={{ duration: 3, repeat: Infinity }}
@@ -313,7 +310,7 @@ export default function ModernizaciyaPage() {
       {/* ── 2. DIAGNOSIS ───────────────────────────────────────────────────── */}
       <section className={s.section}>
         <div className={s.sectionInner}>
-          <motion.div 
+          <motion.div
             className={s.sectionHeader}
             initial="hidden"
             whileInView="show"
@@ -326,10 +323,23 @@ export default function ModernizaciyaPage() {
 
           <motion.div className={s.painGrid} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
             {painPoints.map((p, i) => (
-              <motion.div key={i} className={`${s.painCard} ${s[`painCard-${i}`]}`} variants={fadeUp} whileHover={{ y: -4 }}>
-                <div className={s.painIcon}><p.icon size={28} strokeWidth={1.5} /></div>
-                <h3 className={s.painCardTitle}>{p.title}</h3>
-                <p className={s.painCardDesc}>{p.desc}</p>
+              <motion.div key={i} className={`group ${s.painCard} ${s[`painCard-${i}`]}`} variants={fadeUp} whileHover={{ y: -4 }}>
+                {/* Background Image Covering the Entire Card */}
+                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-95 group-hover:scale-[1.02] transition-all duration-700 ease-out"
+                  />
+                </div>
+
+                {/* Subtle gradient overlay to ensure high text contrast on the left */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#07070a]/90 via-[#07070a]/50 to-transparent z-5 pointer-events-none" />
+
+                <div className="relative z-10 md:max-w-[65%] flex flex-col justify-center h-full">
+                  <h3 className={s.painCardTitle}>{p.title}</h3>
+                  <p className={s.painCardDesc}>{p.desc}</p>
+                </div>
                 <div className={s.painCardBg} />
               </motion.div>
             ))}
@@ -340,7 +350,7 @@ export default function ModernizaciyaPage() {
       {/* ── 3. PLATFORMS (SEO Depth) ────────────────────────────────────────── */}
       <section className={s.section} style={{ background: '#050508' }}>
         <div className={s.sectionInner}>
-          <motion.div 
+          <motion.div
             className={s.sectionHeaderCenter}
             initial="hidden"
             whileInView="show"
@@ -356,13 +366,20 @@ export default function ModernizaciyaPage() {
 
           <div className={s.platformGrid}>
             {platforms.map((pl, i) => (
-              <motion.div 
-                key={i} 
-                className={s.platformCard}
+              <motion.div
+                key={i}
+                className={`group ${s.platformCard}`}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.1 }}
               >
+                <div className="w-[60px] h-[60px] mb-6 flex items-center justify-center bg-white/[0.02] border border-white/[0.05] rounded-2xl p-2.5 overflow-hidden group-hover:border-[#4633ff]/30 transition-all duration-300">
+                  <img
+                    src={pl.image}
+                    alt={pl.name}
+                    className="w-full h-full object-contain filter brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-all duration-300"
+                  />
+                </div>
                 <h3 className={s.platformName}>{pl.name}</h3>
                 <p className={s.platformDesc}>{pl.desc}</p>
               </motion.div>

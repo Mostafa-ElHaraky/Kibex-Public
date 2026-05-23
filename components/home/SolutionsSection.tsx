@@ -12,51 +12,51 @@ import Link from "next/link";
 const solutions = [
   {
     id: "01",
-    title: "Модернизация платформ",
+    title: "Модернизация интернет-магазинов",
     description: "Бесшовный переход с WordPress, Bitrix и legacy-систем на современную API-first архитектуру без потери данных и SEO.",
     metadata: "WordPress → Kibex Core • Bitrix → API-first • Legacy → Современная инфраструктура",
     metricLine: "Плавная миграция",
-    label: "01 / МОДЕРНИЗАЦИЯ ПЛАТФОРМ",
+    label: "01 / МОДЕРНИЗАЦИЯ ИНТЕРНЕТ-МАГАЗИНОВ",
     bgImage: "/modernizationgpt.png",
     path: "/solutions/modernizaciya"
   },
   {
     id: "02",
-    title: "Разработка ERP систем",
+    title: "Разработка ERP-систем",
     description: "Проектирование единого цифрового ядра для управления складами, логистикой, финансами и продажами в реальном времени.",
     metadata: "Синхронизация в реальном времени",
     metricLine: "Единый центр данных",
-    label: "02 / ЦИФРОВОЕ ЯДРО",
+    label: "02 / РАЗРАБОТКА ERP-СИСТЕМ",
     bgImage: "/erpgpt.png",
     path: "/solutions/erp"
   },
   {
     id: "03",
-    title: "Highload архитектура",
+    title: "Разработка Highload-систем",
     description: "Создание отказоустойчивых систем, рассчитанных на миллионы SKU и тысячи одновременных заказов.",
     metadata: "Распределённая инфраструктура",
     metricLine: "Балансировка нагрузки",
-    label: "03 / HIGHLOAD АРХИТЕКТУРА",
+    label: "03 / РАЗРАБОТКА HIGHLOAD-СИСТЕМ",
     bgImage: "/highloadgpt.png",
     path: "/solutions/highload"
   },
   {
     id: "04",
-    title: "Разработка e-commerce платформ",
+    title: "Разработка E-commerce-платформ",
     description: "Кастомные интернет-платформы на базе Kibex Core с гибкой бизнес-логикой и глубокими интеграциями.",
     metadata: "API-интеграции",
     metricLine: "Потоки обработки заказов",
-    label: "04 / E-COMMERCE ПЛАТФОРМЫ",
+    label: "04 / РАЗРАБОТКА E-COMMERCE-ПЛАТФОРМ",
     bgImage: "/e-commercegpt.png",
     path: "/solutions/razrabotka-platformy"
   },
   {
     id: "05",
-    title: "Кибербезопасность",
+    title: "Аудит безопасности",
     description: "Встроенная защита на уровне архитектуры: аудит кода, защита от атак и соответствие стандартам безопасности.",
     metadata: "Защищённая инфраструктура",
     metricLine: "Контроль безопасности",
-    label: "05 / КИБЕРБЕЗОПАСНОСТЬ",
+    label: "05 / АУДИТ БЕЗОПАСНОСТИ",
     bgImage: "/cybersecuritygpt.png",
     path: "/solutions/security"
   }
@@ -408,7 +408,7 @@ export default function SolutionsSection() {
       </div>
 
       {/* Volumetric glow effects overlay */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `
@@ -449,357 +449,357 @@ export default function SolutionsSection() {
         </div>
 
         <div className="relative">
-            
-            {/* Ultra-thin ecosystem lines in background */}
-            {mounted && (
-              <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
-                <svg className="w-full h-full" preserveAspectRatio="none">
-                  <motion.path
-                    d="M 100 100 Q 300 200 150 400 T 350 700"
-                    fill="none"
-                    stroke="#8c76ff"
-                    strokeWidth="0.6"
-                    strokeOpacity="0.25"
-                    strokeDasharray="3 160"
-                    animate={{ strokeDashoffset: [-350, 350] }}
-                    transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-                  />
-                  <motion.path
-                    d="M 420 50 Q 200 300 380 620"
-                    fill="none"
-                    stroke="#8c76ff"
-                    strokeWidth="0.6"
-                    strokeOpacity="0.2"
-                    strokeDasharray="4 120"
-                    animate={{ strokeDashoffset: [350, -350] }}
-                    transition={{ duration: 13, repeat: Infinity, ease: "linear" }}
-                  />
-                </svg>
-              </div>
-            )}
 
-            {/* Grid structure */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-              
-              {/* CARD 01: Модернизация платформ (ROW 1 - LEFT) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                onHoverStart={() => setHoveredIdx(0)}
-                onHoverEnd={() => setHoveredIdx(null)}
-                className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
-                style={{
-                  boxShadow: hoveredIdx === 0 
-                    ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)" 
-                    : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
-                }}
-              >
-                {/* Visual Image Background overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-                  <img 
-                    src={solutions[0].bgImage} 
-                    alt="" 
-                    className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
-                </div>
-
-                <div className="relative z-10">
-                  {/* TOP */}
-                  <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                    {solutions[0].label}
-                  </span>
-                  {/* CENTER */}
-                  <Link href={solutions[0].path}>
-                    <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
-                      {solutions[0].title}
-                    </h3>
-                  </Link>
-                  <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
-                    {solutions[0].description}
-                  </p>
-                </div>
-
-                {/* LOWER AREA */}
-                <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
-                  <MigrationVisual isHovered={hoveredIdx === 0} />
-                </div>
-
-                {/* BOTTOM */}
-                <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
-                  <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
-                    {solutions[0].metadata}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
-                      {solutions[0].metricLine}
-                    </span>
-                    
-                    <motion.div animate={hoveredIdx === 0 ? "hover" : "initial"} initial="initial">
-                      <CustomLink href={solutions[0].path} />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CARD 02: Разработка ERP систем (ROW 1 - RIGHT) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
-                onHoverStart={() => setHoveredIdx(1)}
-                onHoverEnd={() => setHoveredIdx(null)}
-                className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
-                style={{
-                  boxShadow: hoveredIdx === 1 
-                    ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)" 
-                    : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
-                }}
-              >
-                {/* Visual Image Background overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-                  <img 
-                    src={solutions[1].bgImage} 
-                    alt="" 
-                    className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
-                </div>
-
-                <div className="relative z-10">
-                  {/* TOP */}
-                  <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                    {solutions[1].label}
-                  </span>
-                  {/* CENTER */}
-                  <Link href={solutions[1].path}>
-                    <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
-                      {solutions[1].title}
-                    </h3>
-                  </Link>
-                  <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
-                    {solutions[1].description}
-                  </p>
-                </div>
-
-                {/* LOWER AREA */}
-                <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
-                  <ERPVisual isHovered={hoveredIdx === 1} />
-                </div>
-
-                {/* BOTTOM */}
-                <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
-                  <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
-                    {solutions[1].metadata}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
-                      {solutions[1].metricLine}
-                    </span>
-                    
-                    <motion.div animate={hoveredIdx === 1 ? "hover" : "initial"} initial="initial">
-                      <CustomLink href={solutions[1].path} />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CARD 03: Highload архитектура (ROW 2 - LEFT) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                onHoverStart={() => setHoveredIdx(2)}
-                onHoverEnd={() => setHoveredIdx(null)}
-                className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
-                style={{
-                  boxShadow: hoveredIdx === 2 
-                    ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)" 
-                    : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
-                }}
-              >
-                {/* Visual Image Background overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-                  <img 
-                    src={solutions[2].bgImage} 
-                    alt="" 
-                    className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
-                </div>
-
-                <div className="relative z-10">
-                  {/* TOP */}
-                  <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                    {solutions[2].label}
-                  </span>
-                  {/* CENTER */}
-                  <Link href={solutions[2].path}>
-                    <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
-                      {solutions[2].title}
-                    </h3>
-                  </Link>
-                  <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
-                    {solutions[2].description}
-                  </p>
-                </div>
-
-                {/* LOWER AREA */}
-                <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
-                  <HighloadVisual isHovered={hoveredIdx === 2} />
-                </div>
-
-                {/* BOTTOM */}
-                <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
-                  <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
-                    {solutions[2].metadata}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
-                      {solutions[2].metricLine}
-                    </span>
-                    
-                    <motion.div animate={hoveredIdx === 2 ? "hover" : "initial"} initial="initial">
-                      <CustomLink href={solutions[2].path} />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CARD 04: Разработка e-commerce платформ (ROW 2 - RIGHT) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-                onHoverStart={() => setHoveredIdx(3)}
-                onHoverEnd={() => setHoveredIdx(null)}
-                className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
-                style={{
-                  boxShadow: hoveredIdx === 3 
-                    ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)" 
-                    : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
-                }}
-              >
-                {/* Visual Image Background overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-                  <img 
-                    src={solutions[3].bgImage} 
-                    alt="" 
-                    className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
-                </div>
-
-                <div className="relative z-10">
-                  {/* TOP */}
-                  <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                    {solutions[3].label}
-                  </span>
-                  {/* CENTER */}
-                  <Link href={solutions[3].path}>
-                    <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
-                      {solutions[3].title}
-                    </h3>
-                  </Link>
-                  <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
-                    {solutions[3].description}
-                  </p>
-                </div>
-
-                {/* LOWER AREA */}
-                <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
-                  <EcommerceVisual isHovered={hoveredIdx === 3} />
-                </div>
-
-                {/* BOTTOM */}
-                <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
-                  <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
-                    {solutions[3].metadata}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
-                      {solutions[3].metricLine}
-                    </span>
-                    
-                    <motion.div animate={hoveredIdx === 3 ? "hover" : "initial"} initial="initial">
-                      <CustomLink href={solutions[3].path} />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CARD 05: Кибербезопасность (ROW 3 - FULL WIDTH) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                onHoverStart={() => setHoveredIdx(4)}
-                onHoverEnd={() => setHoveredIdx(null)}
-                className="md:col-span-2 group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
-                style={{
-                  boxShadow: hoveredIdx === 4 
-                    ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)" 
-                    : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
-                }}
-              >
-                {/* Visual Image Background overlay */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
-                  <img 
-                    src={solutions[4].bgImage} 
-                    alt="" 
-                    className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
-                </div>
-
-                <div className="relative z-10">
-                  {/* TOP */}
-                  <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                    {solutions[4].label}
-                  </span>
-                  {/* CENTER */}
-                  <Link href={solutions[4].path}>
-                    <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
-                      {solutions[4].title}
-                    </h3>
-                  </Link>
-                  <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
-                    {solutions[4].description}
-                  </p>
-                </div>
-
-                {/* LOWER AREA (Horizontal wide visual) */}
-                <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
-                  <SecurityVisual isHovered={hoveredIdx === 4} />
-                </div>
-
-                {/* BOTTOM */}
-                <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
-                  <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
-                    {solutions[4].metadata}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
-                      {solutions[4].metricLine}
-                    </span>
-                    
-                    <motion.div animate={hoveredIdx === 4 ? "hover" : "initial"} initial="initial">
-                      <CustomLink href={solutions[4].path} />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
+          {/* Ultra-thin ecosystem lines in background */}
+          {mounted && (
+            <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
+              <svg className="w-full h-full" preserveAspectRatio="none">
+                <motion.path
+                  d="M 100 100 Q 300 200 150 400 T 350 700"
+                  fill="none"
+                  stroke="#8c76ff"
+                  strokeWidth="0.6"
+                  strokeOpacity="0.25"
+                  strokeDasharray="3 160"
+                  animate={{ strokeDashoffset: [-350, 350] }}
+                  transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.path
+                  d="M 420 50 Q 200 300 380 620"
+                  fill="none"
+                  stroke="#8c76ff"
+                  strokeWidth="0.6"
+                  strokeOpacity="0.2"
+                  strokeDasharray="4 120"
+                  animate={{ strokeDashoffset: [350, -350] }}
+                  transition={{ duration: 13, repeat: Infinity, ease: "linear" }}
+                />
+              </svg>
             </div>
-          </div>
+          )}
 
+          {/* Grid structure */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+
+            {/* CARD 01: Модернизация платформ (ROW 1 - LEFT) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              onHoverStart={() => setHoveredIdx(0)}
+              onHoverEnd={() => setHoveredIdx(null)}
+              className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
+              style={{
+                boxShadow: hoveredIdx === 0
+                  ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)"
+                  : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
+              }}
+            >
+              {/* Visual Image Background overlay */}
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <img
+                  src={solutions[0].bgImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
+              </div>
+
+              <div className="relative z-10">
+                {/* TOP */}
+                <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                  {solutions[0].label}
+                </span>
+                {/* CENTER */}
+                <Link href={solutions[0].path}>
+                  <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
+                    {solutions[0].title}
+                  </h3>
+                </Link>
+                <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
+                  {solutions[0].description}
+                </p>
+              </div>
+
+              {/* LOWER AREA */}
+              <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
+                <MigrationVisual isHovered={hoveredIdx === 0} />
+              </div>
+
+              {/* BOTTOM */}
+              <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
+                <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
+                  {solutions[0].metadata}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
+                    {solutions[0].metricLine}
+                  </span>
+
+                  <motion.div animate={hoveredIdx === 0 ? "hover" : "initial"} initial="initial">
+                    <CustomLink href={solutions[0].path} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CARD 02: Разработка ERP систем (ROW 1 - RIGHT) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
+              onHoverStart={() => setHoveredIdx(1)}
+              onHoverEnd={() => setHoveredIdx(null)}
+              className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
+              style={{
+                boxShadow: hoveredIdx === 1
+                  ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)"
+                  : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
+              }}
+            >
+              {/* Visual Image Background overlay */}
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <img
+                  src={solutions[1].bgImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
+              </div>
+
+              <div className="relative z-10">
+                {/* TOP */}
+                <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                  {solutions[1].label}
+                </span>
+                {/* CENTER */}
+                <Link href={solutions[1].path}>
+                  <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
+                    {solutions[1].title}
+                  </h3>
+                </Link>
+                <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
+                  {solutions[1].description}
+                </p>
+              </div>
+
+              {/* LOWER AREA */}
+              <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
+                <ERPVisual isHovered={hoveredIdx === 1} />
+              </div>
+
+              {/* BOTTOM */}
+              <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
+                <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
+                  {solutions[1].metadata}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
+                    {solutions[1].metricLine}
+                  </span>
+
+                  <motion.div animate={hoveredIdx === 1 ? "hover" : "initial"} initial="initial">
+                    <CustomLink href={solutions[1].path} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CARD 03: Highload архитектура (ROW 2 - LEFT) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              onHoverStart={() => setHoveredIdx(2)}
+              onHoverEnd={() => setHoveredIdx(null)}
+              className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
+              style={{
+                boxShadow: hoveredIdx === 2
+                  ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)"
+                  : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
+              }}
+            >
+              {/* Visual Image Background overlay */}
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <img
+                  src={solutions[2].bgImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
+              </div>
+
+              <div className="relative z-10">
+                {/* TOP */}
+                <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                  {solutions[2].label}
+                </span>
+                {/* CENTER */}
+                <Link href={solutions[2].path}>
+                  <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
+                    {solutions[2].title}
+                  </h3>
+                </Link>
+                <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
+                  {solutions[2].description}
+                </p>
+              </div>
+
+              {/* LOWER AREA */}
+              <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
+                <HighloadVisual isHovered={hoveredIdx === 2} />
+              </div>
+
+              {/* BOTTOM */}
+              <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
+                <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
+                  {solutions[2].metadata}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
+                    {solutions[2].metricLine}
+                  </span>
+
+                  <motion.div animate={hoveredIdx === 2 ? "hover" : "initial"} initial="initial">
+                    <CustomLink href={solutions[2].path} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CARD 04: Разработка e-commerce платформ (ROW 2 - RIGHT) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+              onHoverStart={() => setHoveredIdx(3)}
+              onHoverEnd={() => setHoveredIdx(null)}
+              className="group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
+              style={{
+                boxShadow: hoveredIdx === 3
+                  ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)"
+                  : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
+              }}
+            >
+              {/* Visual Image Background overlay */}
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <img
+                  src={solutions[3].bgImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
+              </div>
+
+              <div className="relative z-10">
+                {/* TOP */}
+                <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                  {solutions[3].label}
+                </span>
+                {/* CENTER */}
+                <Link href={solutions[3].path}>
+                  <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
+                    {solutions[3].title}
+                  </h3>
+                </Link>
+                <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
+                  {solutions[3].description}
+                </p>
+              </div>
+
+              {/* LOWER AREA */}
+              <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
+                <EcommerceVisual isHovered={hoveredIdx === 3} />
+              </div>
+
+              {/* BOTTOM */}
+              <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
+                <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
+                  {solutions[3].metadata}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
+                    {solutions[3].metricLine}
+                  </span>
+
+                  <motion.div animate={hoveredIdx === 3 ? "hover" : "initial"} initial="initial">
+                    <CustomLink href={solutions[3].path} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CARD 05: Кибербезопасность (ROW 3 - FULL WIDTH) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              onHoverStart={() => setHoveredIdx(4)}
+              onHoverEnd={() => setHoveredIdx(null)}
+              className="md:col-span-2 group relative rounded-3xl bg-white/[0.01] border border-white/[0.04] transition-all duration-500 overflow-hidden flex flex-col justify-between p-8 h-auto lg:h-[450px]"
+              style={{
+                boxShadow: hoveredIdx === 4
+                  ? "0 20px 50px rgba(91, 60, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.03)"
+                  : "inset 0 1px 1px rgba(255, 255, 255, 0.01)"
+              }}
+            >
+              {/* Visual Image Background overlay */}
+              <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none">
+                <img
+                  src={solutions[4].bgImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-[0.5] group-hover:opacity-[0.75] transition-all duration-700 select-none scale-100 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-[#050508]/50 to-[#050508]/10" />
+              </div>
+
+              <div className="relative z-10">
+                {/* TOP */}
+                <span className="text-[12px] font-mono font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                  {solutions[4].label}
+                </span>
+                {/* CENTER */}
+                <Link href={solutions[4].path}>
+                  <h3 className="font-geist text-xl md:text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-purple-300 transition-colors duration-300 cursor-pointer">
+                    {solutions[4].title}
+                  </h3>
+                </Link>
+                <p className="font-geist text-[15px] text-gray-300 leading-relaxed mb-4">
+                  {solutions[4].description}
+                </p>
+              </div>
+
+              {/* LOWER AREA (Horizontal wide visual) */}
+              <div className="w-full h-32 flex items-center justify-center bg-black/20 rounded-2xl border border-white/[0.02] p-2 my-1 relative z-10">
+                <SecurityVisual isHovered={hoveredIdx === 4} />
+              </div>
+
+              {/* BOTTOM */}
+              <div className="space-y-4 pt-3 border-t border-white/5 relative z-10">
+                <div className="text-[13px] font-mono text-gray-400 font-medium leading-relaxed">
+                  {solutions[4].metadata}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] text-[#8C76FF] font-mono font-medium tracking-wide">
+                    {solutions[4].metricLine}
+                  </span>
+
+                  <motion.div animate={hoveredIdx === 4 ? "hover" : "initial"} initial="initial">
+                    <CustomLink href={solutions[4].path} />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
-      </section>
+
+      </div>
+    </section>
   );
 }

@@ -67,18 +67,21 @@
 
 /* Hero Section */
 .hero {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  position: relative;
-  padding: 160px 0 100px;
+  padding: 160px 0 120px;
 }
 
 .heroInner {
-  display: grid;
-  grid-template-columns: 65% 35%;
-  gap: 60px;
-  align-items: center;
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   z-index: 2;
 }
@@ -88,30 +91,25 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  left: -80px;
+  max-width: 800px;
 }
 
 .heroLabel {
   display: inline-block;
-  align-self: flex-start;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: #818cf8;
+  font-size: 12px;
   font-weight: 800;
+  color: #818cf8;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
   margin-bottom: 32px;
-  background: rgba(129, 140, 248, 0.08);
-  border: 1px solid rgba(129, 140, 248, 0.15);
-  padding: 6px 14px;
-  border-radius: 100px;
 }
 
 .heroH1 {
-  font-size: clamp(38px, 5vw, 76px);
+  font-size: clamp(44px, 5vw, 84px);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 0.95;
   letter-spacing: -0.05em;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .heroH1 span {
@@ -130,21 +128,32 @@
 }
 
 .heroSubtitle {
-  font-size: clamp(16px, 1.3vw, 20px);
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 40px;
-  max-width: 750px;
+  font-size: clamp(18px, 1.4vw, 24px);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.45;
+  margin-bottom: 56px;
+  max-width: 620px;
 }
 
-.useInText {
+.heroH1Accent {
+  display: block;
+  background: linear-gradient(135deg, #4633ff, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroTrustLine {
+  display: flex;
+  gap: 24px;
+  margin-top: 80px;
+}
+
+.trustBadge {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.3);
-  font-weight: 600;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0.05em;
-  margin-bottom: 48px;
-  border-left: 2px solid rgba(129, 140, 248, 0.3);
-  padding-left: 16px;
 }
 
 .heroActions {
@@ -167,6 +176,23 @@
 .primaryBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(70, 51, 255, 0.35);
+}
+
+.ctaButton {
+  padding: 24px 64px;
+  background: #4633ff;
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(70, 51, 255, 0.4);
 }
 
 .secondaryBtn {
@@ -219,8 +245,10 @@
 .heroVisual {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.1;
-  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
 }
 
 .topologySvg {
@@ -372,48 +400,83 @@
 }
 
 .moduleCard {
-  background: rgba(15, 14, 26, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 48px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 24px;
+  overflow: hidden;
+  height: 320px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: flex-end;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .moduleCard:hover {
-  background: rgba(15, 14, 26, 0.7);
-  border-color: rgba(70, 51, 255, 0.25);
+  border-color: rgba(129, 140, 248, 0.3);
   transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.moduleIcon {
-  color: #818cf8;
+/* Absolute image wrapper */
+.moduleCardBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.moduleCard h4 {
+/* Full-cover image, bright — no dark */
+.moduleCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.92;
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+.moduleCard:hover .moduleCardImg {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Gradient only at the bottom for text legibility */
+.moduleCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 8, 0.88) 0%,
+    rgba(5, 5, 8, 0.45) 40%,
+    transparent 100%
+  );
+}
+
+/* Text positioned at bottom */
+.moduleCardContent {
+  position: relative;
+  z-index: 2;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.moduleCardContent h4 {
   font-size: 20px;
   font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.moduleCardContent p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
   margin: 0;
 }
 
-.moduleCard p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.6;
-  margin: 0;
-}
 
-/* Micro Diagram container */
-.microDiagram {
-  height: 50px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  padding-top: 20px;
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-}
 
 /* Horizontal Timeline */
 .timelineHorizontal {

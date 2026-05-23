@@ -131,84 +131,89 @@ export default function BusinessProblemsSection() {
           </motion.div>
         </div>
 
-        {/* Symmetrical 3x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        {/* Premium Sticky Stacked Cards Layout */}
+        <div className="flex flex-col gap-0 max-w-4xl mx-auto relative z-10 pb-16">
           {problems.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              onHoverStart={() => setHoveredIdx(i)}
-              onHoverEnd={() => setHoveredIdx(null)}
-              className="group relative"
+              className="md:sticky w-full"
+              style={{
+                top: `calc(120px + ${i * 24}px)`
+              }}
             >
-              {/* Premium Infrastructure Card */}
-              {/* Premium Infrastructure Card */}
-              <div
-                className="relative h-full rounded-2xl border transition-all duration-500 backdrop-blur-[14px] overflow-hidden"
+              <motion.div
+                initial={{ opacity: 0, y: -60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: i * 0.05 }}
+                onHoverStart={() => setHoveredIdx(i)}
+                onHoverEnd={() => setHoveredIdx(null)}
+                className="group relative w-full h-auto md:h-[320px] rounded-3xl border transition-all duration-500 backdrop-blur-[14px] overflow-hidden mb-8 md:mb-12"
                 style={{
-                  backgroundColor: hoveredIdx === i ? 'rgba(24, 24, 35, 0.82)' : 'rgba(18, 18, 24, 0.72)',
-                  borderColor: hoveredIdx === i ? 'rgba(120, 90, 255, 0.24)' : 'rgba(120, 90, 255, 0.08)',
+                  backgroundColor: hoveredIdx === i ? 'rgba(24, 24, 35, 0.95)' : 'rgba(18, 18, 24, 0.90)',
+                  borderColor: hoveredIdx === i ? 'rgba(120, 90, 255, 0.3)' : 'rgba(120, 90, 255, 0.1)',
                   boxShadow: hoveredIdx === i
-                    ? '0 20px 50px -12px rgba(91, 60, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08)'
-                    : 'inset 0 1px 1px rgba(255, 255, 255, 0.03)'
+                    ? '0 30px 60px -15px rgba(91, 60, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.20)'
+                    : '0 20px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.05)'
                 }}
               >
-                {/* Background Image Filling the Card */}
-                <div className="absolute inset-0 z-0">
+                {/* Background Image Covering the Entire Card */}
+                <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-[1.05] transition-all duration-700 ease-out"
-                  />
-                  {/* Subtle Gradient Overlay for Text Readability */}
-                  <div 
-                    className="absolute inset-0 transition-colors duration-500"
-                    style={{
-                      background: hoveredIdx === i 
-                        ? 'linear-gradient(to top, rgba(24, 24, 35, 0.96) 20%, rgba(24, 24, 35, 0.85) 60%, rgba(24, 24, 35, 0.4) 100%)'
-                        : 'linear-gradient(to top, rgba(18, 18, 24, 0.96) 20%, rgba(18, 18, 24, 0.85) 60%, rgba(18, 18, 24, 0.4) 100%)'
-                    }}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-95 group-hover:scale-[1.02] transition-all duration-700 ease-out"
                   />
                 </div>
 
+                {/* Subtle Left-to-Right Gradient Overlay for Text Readability */}
+                <div
+                  className="absolute inset-0 transition-colors duration-500 z-5 pointer-events-none bg-gradient-to-r from-[#0c0c10]/95 via-[#0c0c10]/55 to-transparent"
+                />
+
                 {/* Internal Illumination */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(120,90,255,0.04)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl z-10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(120,90,255,0.04)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl z-10" />
 
-                <div className="relative z-20 flex flex-col h-full justify-between p-10 md:p-12">
-                  <div>
-                    <h3 className="font-geist text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight leading-tight group-hover:text-[#B4A6FF] transition-colors duration-500">
-                      {item.title}
-                    </h3>
-
-                    <p className="font-geist text-lg md:text-[19px] text-white/80 leading-[1.7] mb-10 group-hover:text-white transition-colors duration-500">
-                      {item.description}
-                    </p>
+                <div className="relative z-20 flex h-full p-8 md:p-10">
+                  {/* Item Number on the left */}
+                  <div className="font-geist text-3xl md:text-4xl font-extrabold text-[#8C76FF]/40 group-hover:text-[#B4A6FF]/70 transition-colors duration-500 mr-6 md:mr-8 pt-0.5 select-none">
+                    {String(i + 1).padStart(2, '0')}
                   </div>
 
-                  {/* Single Infrastructure Accent Line */}
-                  <div className="pt-8 border-t border-[rgba(120,90,255,0.08)] group-hover:border-[rgba(120,90,255,0.18)] transition-colors duration-500">
-                    <div className="flex items-center justify-between">
-                      <div className="h-[1px] w-12 bg-[#8C76FF]/40" />
+                  {/* Text Content in the middle */}
+                  <div className="flex flex-col justify-between h-full flex-grow md:max-w-[50%]">
+                    <div>
+                      <h3 className="font-geist text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight leading-tight group-hover:text-[#B4A6FF] transition-colors duration-500">
+                        {item.title}
+                      </h3>
 
-                      {/* Tiny Topology Pulse (Hover Only) */}
-                      <AnimatePresence>
-                        {hoveredIdx === i && (
-                          <motion.div
-                            initial={{ scaleX: 0, opacity: 0 }}
-                            animate={{ scaleX: 1, opacity: 0.4 }}
-                            exit={{ scaleX: 0, opacity: 0 }}
-                            className="h-[1px] w-full bg-[#8C76FF] origin-right ml-4"
-                          />
-                        )}
-                      </AnimatePresence>
+                      <p className="font-geist text-base md:text-lg text-white/80 leading-[1.6] mb-6 group-hover:text-white transition-colors duration-500">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {/* Single Infrastructure Accent Line */}
+                    <div className="pt-6 border-t border-[rgba(120,90,255,0.08)] group-hover:border-[rgba(120,90,255,0.18)] transition-colors duration-500">
+                      <div className="flex items-center justify-between">
+                        <div className="h-[1px] w-12 bg-[#8C76FF]/40" />
+
+                        {/* Tiny Topology Pulse (Hover Only) */}
+                        <AnimatePresence>
+                          {hoveredIdx === i && (
+                            <motion.div
+                              initial={{ scaleX: 0, opacity: 0 }}
+                              animate={{ scaleX: 1, opacity: 0.4 }}
+                              exit={{ scaleX: 0, opacity: 0 }}
+                              className="h-[1px] w-full bg-[#8C76FF] origin-right ml-4"
+                            />
+                          )}
+                        </AnimatePresence>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>

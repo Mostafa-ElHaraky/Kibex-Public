@@ -1,25 +1,25 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { 
-  motion, 
-  AnimatePresence, 
-  useScroll, 
-  useTransform, 
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
   useSpring,
 } from "framer-motion";
-import { 
-  Database, 
-  ShoppingBag, 
-  Box, 
-  DollarSign, 
-  Users, 
-  Truck, 
-  BarChart3, 
-  UserCheck, 
-  Network, 
-  Check, 
-  ArrowRight, 
+import {
+  Database,
+  ShoppingBag,
+  Box,
+  DollarSign,
+  Users,
+  Truck,
+  BarChart3,
+  UserCheck,
+  Network,
+  Check,
+  ArrowRight,
   Activity,
   Layers,
   ShieldCheck,
@@ -50,21 +50,21 @@ const HERO_NODES = [
 ];
 
 const DIAGNOSTICS = [
-  { 
-    title: "Разрозненные процессы продаж", 
-    desc: "Менеджеры используют Excel, таблицы и мессенджеры вместо единой системы управления, что приводит к потере лидов и задержке сделок." 
+  {
+    title: "Разрозненные процессы продаж",
+    desc: "Менеджеры используют Excel, таблицы и мессенджеры вместо единой системы управления, что приводит к потере лидов и задержке сделок."
   },
-  { 
-    title: "Рассинхронизация данных", 
-    desc: "Склад, CRM и бухгалтерия не связаны. Остатки обновляются вручную или с задержкой в несколько часов, провоцируя конфликты заказов." 
+  {
+    title: "Рассинхронизация данных",
+    desc: "Склад, CRM и бухгалтерия не связаны. Остатки обновляются вручную или с задержкой в несколько часов, провоцируя конфликты заказов."
   },
-  { 
-    title: "Операционные риски", 
-    desc: "Человеческий фактор при сборке и отгрузке ведет к потере товаров, ошибкам комплектации и росту возвратов." 
+  {
+    title: "Операционные риски",
+    desc: "Человеческий фактор при сборке и отгрузке ведет к потере товаров, ошибкам комплектации и росту возвратов."
   },
-  { 
-    title: "Непрозрачная аналитика", 
-    desc: "Руководство не видит реальную маржинальность направлений, чистую прибыль и состояние активов в режиме реального времени." 
+  {
+    title: "Непрозрачная аналитика",
+    desc: "Руководство не видит реальную маржинальность направлений, чистую прибыль и состояние активов в режиме реального времени."
   }
 ];
 
@@ -72,94 +72,32 @@ const ERP_MODULES = [
   {
     title: "Продажи и CRM",
     desc: "Кабинеты дистрибьюторов, сквозная CRM-система, автоматизация воронки лидов и гибкая система скидок.",
-    icon: ShoppingBag,
-    diagram: (
-      <div className={s.miniChart}>
-        <div className={s.chartBar} style={{ height: "40%" }} />
-        <div className={s.chartBar} style={{ height: "65%" }} />
-        <div className={s.chartBar} style={{ height: "90%" }} />
-      </div>
-    )
+    image: "/sales_crm.png",
   },
   {
     title: "Склад и логистика",
     desc: "WMS-модуль, адресное хранение, автоматический расчет габаритов, интеграция с ПВЗ и курьерскими службами.",
-    icon: Warehouse,
-    diagram: (
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "4px", width: "100%" }}>
-        {Array.from({ length: 8 }).map((_, i) => (
-          <motion.div
-            key={i}
-            style={{ height: "16px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "2px" }}
-            animate={{ background: i === 3 || i === 6 ? ["rgba(129, 140, 248, 0.05)", "rgba(129, 140, 248, 0.25)", "rgba(129, 140, 248, 0.05)"] : "rgba(255,255,255,0.03)" }}
-            transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
-          />
-        ))}
-      </div>
-    )
+    image: "/sklad_sales.png",
   },
   {
     title: "Финансы и документы",
     desc: "Автоматический расчет P&L и CashFlow, разнесение платежей по счетам, генерация ЭДО и закрывающих актов.",
-    icon: DollarSign,
-    diagram: (
-      <div style={{ display: "flex", gap: "6px", alignItems: "center", width: "100%" }}>
-        <div style={{ width: "30px", height: "40px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "4px", position: "relative" }}>
-          <motion.div style={{ position: "absolute", top: "8px", left: "6px", right: "6px", height: "2px", background: "rgba(255,255,255,0.2)" }} />
-          <motion.div style={{ position: "absolute", top: "14px", left: "6px", right: "12px", height: "2px", background: "rgba(255,255,255,0.2)" }} />
-          <motion.div style={{ position: "absolute", top: "20px", left: "6px", right: "8px", height: "2px", background: "rgba(129,140,248,0.5)" }} />
-        </div>
-        <ArrowRight size={14} className="text-white/20" />
-        <div style={{ width: "30px", height: "40px", border: "1px dashed rgba(129, 140, 248, 0.3)", borderRadius: "4px", position: "relative" }}>
-          <motion.div style={{ position: "absolute", top: "8px", left: "6px", right: "6px", height: "2px", background: "#818cf8" }} animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, repeat: Infinity }} />
-        </div>
-      </div>
-    )
+    image: "/finance.png",
   },
   {
     title: "Аналитика и BI",
     desc: "Панели показателей эффективности в реальном времени, когортный анализ и прогнозирование дефицита остатков.",
-    icon: BarChart3,
-    diagram: (
-      <svg viewBox="0 0 120 40" style={{ width: "100px", height: "30px" }}>
-        <motion.path
-          d="M 10 30 Q 30 10 60 25 T 110 5"
-          fill="none"
-          stroke="#818cf8"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: "loop" }}
-        />
-      </svg>
-    )
+    image: "/dashboard.png",
   },
   {
     title: "HR и роли",
     desc: "Разделение уровней доступа сотрудников, учет времени, KPI-матрицы и автоматическое логирование действий.",
-    icon: UserCheck,
-    diagram: (
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#4633ff" }} />
-        <div style={{ width: "24px", height: "1px", background: "rgba(255,255,255,0.1)" }} />
-        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#818cf8" }} />
-        <div style={{ width: "24px", height: "1px", background: "rgba(255,255,255,0.1)" }} />
-        <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(255,255,255,0.2)" }} />
-      </div>
-    )
+    image: "/hr.png",
   },
   {
     title: "API и интеграции",
     desc: "Двусторонняя интеграция с 1С без задержек, автоматический импорт накладных и экспорт данных в корпоративные хранилища.",
-    icon: Network,
-    diagram: (
-      <div style={{ width: "100%", display: "flex", alignItems: "center", gap: "10px" }}>
-        <Network size={16} className="text-white/20 animate-pulse" />
-        <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.1)", position: "relative" }}>
-          <motion.div style={{ position: "absolute", top: "-1.5px", left: 0, width: "4px", height: "4px", borderRadius: "50%", background: "#818cf8" }} animate={{ left: ["0%", "100%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-        </div>
-      </div>
-    )
+    image: "/api_intigration.png",
   }
 ];
 
@@ -183,8 +121,8 @@ const LAYERS = [
   { title: "Интерфейсы", desc: "React / Next.js SPA панели для сотрудников с ролевой моделью доступа", icon: Zap },
   { title: "Бизнес-логика", desc: "Модули управления: заказы, закупки, финансы и складские регламенты", icon: Layers },
   { title: "API и интеграции", desc: "Двусторонние коннекторы: gRPC, Webhooks, REST, интеграция 1С и телефонии", icon: Network },
-  { title: "Data Layer", desc: "Оптимизированные СУБД (PostgreSQL / Redis) с версионированием операций", icon: Database },
-  { title: "Infrastructure", desc: "Отказоустойчивые контейнеры Docker/K8s с автоматическим бэкапом данных", icon: Activity }
+  { title: "Уровень данных", desc: "Оптимизированные СУБД (PostgreSQL / Redis) с версионированием операций", icon: Database },
+  { title: "Инфраструктура", desc: "Отказоустойчивые контейнеры Docker/K8s с автоматическим бэкапом данных", icon: Activity }
 ];
 
 // ── SUB-COMPONENTS ──
@@ -197,11 +135,11 @@ function DataPackets({ x1, y1, x2, y2, delay = 0, color = "#4633ff" }: { x1: num
       filter="blur(1px)"
       initial={{ offsetDistance: "0%" }}
       animate={{ offsetDistance: "100%" }}
-      transition={{ 
-        duration: 2.5 + Math.random() * 2, 
-        repeat: Infinity, 
+      transition={{
+        duration: 2.5 + Math.random() * 2,
+        repeat: Infinity,
         ease: "linear",
-        delay 
+        delay
       }}
       style={{ offsetPath: `path('M ${x1} ${y1} L ${x2} ${y2}')` }}
     />
@@ -212,7 +150,7 @@ function DataPackets({ x1, y1, x2, y2, delay = 0, color = "#4633ff" }: { x1: num
 
 function DiagnosticCard({ item, index }: { item: typeof DIAGNOSTICS[0], index: number }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true }}
@@ -477,90 +415,71 @@ export default function ERPPage() {
       <section className={s.hero} ref={heroRef}>
         {/* Background Image & Gradient overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <img 
-            src="/erpgpt.png" 
-            alt="" 
+          <img
+            src="/erpgpt.png"
+            alt=""
             className="w-full h-full object-cover opacity-[0.55] select-none"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#050508]/90 via-[#050508]/50 to-[#050508]/90" />
-          
-          {/* Subtle Indigo Glow and Grid Background */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ 
+          <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }} />
         </div>
 
-        <div className={s.container}>
-          <Breadcrumbs items={breadcrumbItems} />
-          <div className={s.heroInner}>
-            <motion.div style={{ y: heroParallax, opacity: heroOpacity }} className={s.heroContent}>
-              <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={s.heroLabel}>
-                ЦИФРОВАЯ ERP ИНФРАСТРУКТУРА
-              </motion.span>
-              <h1 className={s.heroH1}>
-                <span>ERP платформы,</span>
-                <span>которые создают</span>
-                <span>единый центр управления</span>
-              </h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-                className={s.heroSubtitle}
-              >
-                Проектируем корпоративные ERP системы для управления продажами, складами, логистикой, финансами и внутренними процессами в единой цифровой инфраструктуре.
-              </motion.p>
+        <div className={s.heroInner}>
+          {/* Left: Text Content */}
+          <motion.div
+            className={s.heroContent}
+            initial="hidden"
+            animate="show"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+          >
+            <motion.h1
+              className={s.heroH1}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span>ERP платформы,</span>
+              <span className={s.heroH1Accent}>которые создают</span>
+              <span>единый центр управления</span>
+            </motion.h1>
 
-              <div className={s.useInText}>
-                Используется в: E-commerce • Retail • Производстве • Дистрибуции • B2B • Логистике
-              </div>
-              
-              <div className={s.heroActions}>
-                <motion.button 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9 }}
-                  className={s.primaryBtn} 
-                  onClick={() => setIsPopupOpen(true)}
-                >
-                  Обсудить ERP систему
-                </motion.button>
-                <motion.button 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.0 }}
-                  className={s.secondaryBtn}
-                  onClick={() => {
-                    document.getElementById("modules-section")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  Изучить модули
-                </motion.button>
-              </div>
+            <motion.p
+              className={s.heroSubtitle}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              Проектируем корпоративные ERP системы для управления продажами, складами, логистикой, финансами и внутренними процессами в единой цифровой инфраструктуре.
+            </motion.p>
 
-              {/* Technical Indicators */}
-              <div className={s.indicators}>
-                <div className={s.indicatorItem}>
-                  <span className={s.indicatorLabel}>ERP Status</span>
-                  <span className={s.indicatorValue}>ACTIVE</span>
-                </div>
-                <div className={s.indicatorItem}>
-                  <span className={s.indicatorLabel}>Sync</span>
-                  <span className={s.indicatorValue}>REAL-TIME</span>
-                </div>
-                <div className={s.indicatorItem}>
-                  <span className={s.indicatorLabel}>API Response</span>
-                  <span className={s.indicatorValue}>31ms</span>
-                </div>
-                <div className={s.indicatorItem}>
-                  <span className={s.indicatorLabel}>Modules</span>
-                  <span className={s.indicatorValue}>CONNECTED</span>
-                </div>
-              </div>
+            <motion.div
+              className={s.heroActions}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <button className={s.ctaButton} onClick={() => setIsPopupOpen(true)}>
+                Обсудить ERP систему
+              </button>
             </motion.div>
-          </div>
+
+            <motion.div
+              className={s.heroTrustLine}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+            >
+              <span className={s.trustBadge}>✓ Единая система данных</span>
+              <span className={s.trustBadge}>✓ Интеграция с 1С</span>
+              <span className={s.trustBadge}>✓ Real-time аналитика</span>
+            </motion.div>
+          </motion.div>
+
+
         </div>
       </section>
 
@@ -605,19 +524,27 @@ export default function ERPPage() {
           </div>
           <div className={s.modulesGrid}>
             {ERP_MODULES.map((item, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 className={s.moduleCard}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
               >
-                <item.icon size={28} className={s.moduleIcon} />
-                <h4>{item.title}</h4>
-                <p>{item.desc}</p>
-                <div className={s.microDiagram}>
-                  {item.diagram}
+                {/* Full-cover background image */}
+                <div className={s.moduleCardBg}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className={s.moduleCardImg}
+                  />
+                  <div className={s.moduleCardOverlay} />
+                </div>
+                {/* Text at bottom */}
+                <div className={s.moduleCardContent}>
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -682,8 +609,8 @@ export default function ERPPage() {
               { p: "Интеграции", s: "Ограничены готовыми плагинами и закрытыми протоколами обмена", k: "Бесшовное подключение любых корпоративных API и сервисов" },
               { p: "Развитие и масштабирование", s: "Зависят от дорожной карты обновлений SaaS-провайдера", k: "Полная свобода доработок и расширения функционала силами команды" },
             ].map((row, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 className={s.tableRow}
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -720,19 +647,12 @@ export default function ERPPage() {
             <h2 className={s.ctaH2}>ERP система должна упрощать управление,<br />а не создавать новые ограничения</h2>
             <p className={s.ctaSubtitleLarge}>Получите архитектурную оценку и план проектирования ERP платформы под процессы вашей компании.</p>
             <div className={s.ctaActions}>
-              <motion.button 
-                whileHover={{ scale: 1.02 }} 
-                className={s.primaryBtn} 
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className={s.ctaButton}
                 onClick={() => setIsPopupOpen(true)}
               >
                 Обсудить ERP систему
-              </motion.button>
-              <motion.button 
-                whileHover={{ scale: 1.02 }} 
-                className={s.secondaryBtn} 
-                onClick={() => setIsPopupOpen(true)}
-              >
-                Запросить архитектурную оценку
               </motion.button>
             </div>
           </div>
