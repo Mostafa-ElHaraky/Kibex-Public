@@ -843,7 +843,6 @@ export default function SolutionsPage() {
                     />
 
                     <button
-                      disabled={consultSubmitting}
                       onClick={async () => {
                         if (!consultName.trim() || !consultPhone.trim() || !consultConsent) return;
                         setConsultSubmitting(true);
