@@ -45,14 +45,14 @@ export default function EngineeringApproachSection() {
             viewport={{ once: true }}
             className="font-geist text-4xl md:text-5xl font-bold tracking-tight text-[#FFFFFF]"
           >
-            Как создаётся инфраструктура Kibex
+            КАК СОЗДАЁТСЯ ИНФРАСТРУКТУРА KIBEX?
           </motion.h2>
         </div>
 
         <div className="relative max-w-4xl mx-auto">
           {/* Vertical Line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-white/5 md:-translate-x-1/2" />
-          <motion.div 
+          <motion.div
             style={{ scaleY, originY: 0 }}
             className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-[#4633FF] shadow-[0_0_15px_#4633FF] md:-translate-x-1/2 z-10"
           />
@@ -65,9 +65,8 @@ export default function EngineeringApproachSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${
-                  i % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
+                className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${i % 2 === 0 ? "md:flex-row-reverse" : ""
+                  }`}
               >
                 {/* Content */}
                 <div className="flex-1 pl-8 md:pl-0">

@@ -118,15 +118,15 @@ export default function BusinessProblemsSection() {
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               className="font-geist text-5xl md:text-4xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
             >
-              Когда платформа начинает
-              ограничивать рост
+              КОГДА ПЛАТФОРМА НАЧИНАЕТ
+              ОГРАНИЧИВАТЬ РОСТ?
             </motion.h2>
 
             <motion.p
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               className="font-geist text-xl md:text-2xl text-white/60 leading-relaxed max-w-2xl mx-auto"
             >
-              Большинство проблем бизнеса появляются не из-за продаж, а из-за архитектурных ограничений системы.
+              Большинство проблем бизнеса появляются не из-за продаж, а из-за архитектурных ограничений системы
             </motion.p>
           </motion.div>
         </div>

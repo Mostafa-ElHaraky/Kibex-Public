@@ -23,9 +23,12 @@ const definitions = [
 
 export default function DefinitionSection() {
   return (
-    <section className="bg-[#0A0A0B] py-24 border-t border-white/5">
-      <div className="mx-auto w-full max-w-7xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12">
+    <section className="bg-[#0A0A0B] py-32 lg:py-48 overflow-hidden border-t border-white/5 relative">
+      {/* Subtle glow background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.02)_0%,transparent_70%)] blur-3xl pointer-events-none" />
+
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 lg:gap-y-24">
           {definitions.map((def, i) => (
             <motion.div
               key={i}
@@ -33,12 +36,12 @@ export default function DefinitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="space-y-4"
+              className="space-y-6"
             >
-              <h2 className="font-geist text-xl font-bold text-[#FFFFFF] border-l-2 border-[#4633FF] pl-4">
+              <h2 className="font-geist text-2xl md:text-3xl lg:text-[34px] font-extrabold text-[#FFFFFF] border-l-4 border-[#4633FF] pl-6 tracking-tight leading-[1.25]">
                 {def.title}
               </h2>
-              <p className="font-geist text-sm text-[#FFFFFF]/50 leading-relaxed">
+              <p className="font-geist text-base md:text-lg lg:text-[20px] text-white/55 leading-relaxed font-normal pl-7">
                 {def.text}
               </p>
             </motion.div>

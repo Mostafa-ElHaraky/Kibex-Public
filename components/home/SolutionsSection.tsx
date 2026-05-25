@@ -13,7 +13,7 @@ const solutions = [
   {
     id: "01",
     title: "Модернизация интернет-магазинов",
-    description: "Бесшовный переход с WordPress, Bitrix и legacy-систем на современную API-first архитектуру без потери данных и SEO.",
+    description: "Бесшовный переход с WordPress, Bitrix и legacy-систем на современную API-first архитектуру без потери данных и SEO",
     metadata: "WordPress → Kibex Core • Bitrix → API-first • Legacy → Современная инфраструктура",
     metricLine: "Плавная миграция",
     label: "01 / МОДЕРНИЗАЦИЯ ИНТЕРНЕТ-МАГАЗИНОВ",
@@ -23,7 +23,7 @@ const solutions = [
   {
     id: "02",
     title: "Разработка ERP-систем",
-    description: "Проектирование единого цифрового ядра для управления складами, логистикой, финансами и продажами в реальном времени.",
+    description: "Проектирование единого цифрового ядра для управления складами, логистикой, финансами и продажами в реальном времени",
     metadata: "Синхронизация в реальном времени",
     metricLine: "Единый центр данных",
     label: "02 / РАЗРАБОТКА ERP-СИСТЕМ",
@@ -33,7 +33,7 @@ const solutions = [
   {
     id: "03",
     title: "Разработка Highload-систем",
-    description: "Создание отказоустойчивых систем, рассчитанных на миллионы SKU и тысячи одновременных заказов.",
+    description: "Создание отказоустойчивых систем, рассчитанных на миллионы SKU и тысячи одновременных заказов",
     metadata: "Распределённая инфраструктура",
     metricLine: "Балансировка нагрузки",
     label: "03 / РАЗРАБОТКА HIGHLOAD-СИСТЕМ",
@@ -43,7 +43,7 @@ const solutions = [
   {
     id: "04",
     title: "Разработка E-commerce-платформ",
-    description: "Кастомные интернет-платформы на базе Kibex Core с гибкой бизнес-логикой и глубокими интеграциями.",
+    description: "Кастомные интернет-платформы на базе Kibex Core с гибкой бизнес-логикой и глубокими интеграциями",
     metadata: "API-интеграции",
     metricLine: "Потоки обработки заказов",
     label: "04 / РАЗРАБОТКА E-COMMERCE-ПЛАТФОРМ",
@@ -53,7 +53,7 @@ const solutions = [
   {
     id: "05",
     title: "Аудит безопасности",
-    description: "Встроенная защита на уровне архитектуры: аудит кода, защита от атак и соответствие стандартам безопасности.",
+    description: "Встроенная защита на уровне архитектуры: аудит кода, защита от атак и соответствие стандартам безопасности",
     metadata: "Защищённая инфраструктура",
     metricLine: "Контроль безопасности",
     label: "05 / АУДИТ БЕЗОПАСНОСТИ",
@@ -436,15 +436,12 @@ export default function SolutionsSection() {
         {/* Section Header */}
         <div className="max-w-4xl mx-auto mb-16 md:mb-24 text-center">
           <Link href="/solutions" className="group/title inline-block cursor-pointer">
-            <span className="text-[12px] font-bold tracking-[0.25em] text-[#8C76FF] group-hover/title:text-purple-300 transition-colors duration-300 uppercase mb-4 block">
-              ИНЖЕНЕРНЫЕ РЕШЕНИЯ KIBEX
-            </span>
             <h2 className="font-geist text-[42px] lg:text-[46px] font-extrabold tracking-tight text-white group-hover/title:text-purple-100 transition-colors duration-300 mb-6 leading-[1.1]">
-              Инженерные решения Kibex
+              ИНЖЕНЕРНЫЕ РЕШЕНИЯ KIBEX
             </h2>
           </Link>
           <p className="font-geist text-[18px] text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Каждая система проектируется под нагрузку, бизнес-логику и долгосрочное развитие.
+            Каждая система проектируется под нагрузку, бизнес-логику и долгосрочное развитие
           </p>
         </div>
 

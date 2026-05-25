@@ -1,7 +1,4 @@
-import { Geist } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 
-export const geistSans = Geist({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-geist",
-});
+export const geistSans = GeistSans;
 

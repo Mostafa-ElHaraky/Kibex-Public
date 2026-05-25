@@ -3,7 +3,7 @@
   color: #fff;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: var(--font-sans, sans-serif);
+  font-family: var(--font-geist), system-ui, sans-serif;
 }
 
 .section {

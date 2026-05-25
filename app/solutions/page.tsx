@@ -29,15 +29,10 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SolutionPopup from "../../components/SolutionPopup";
 import SolutionsSection from "../../components/home/SolutionsSection";
+import TechStackArchitecture from "../../components/solutions/TechStackArchitecture";
+import SystemDiagnostics from "../../components/solutions/SystemDiagnostics";
 
-// ─── TYPES & INTERFACES ──────────────────────────────────────────────────────
 
-interface TechCategory {
-  title: string;
-  desc: string;
-  items: string[];
-  icon: any;
-}
 
 interface Step {
   num: string;
@@ -131,49 +126,16 @@ const BLOCKS = [
 ];
 
 const TIMELINE_STEPS: Step[] = [
-  { num: "01", title: "Анализ инфраструктуры", desc: "Детальный аудит текущих бизнес-процессов, выявление «узких горлышек» и ограничений систем." },
-  { num: "02", title: "Аудит ограничений", desc: "Поиск технических барьеров в CMS, базах данных и интеграциях, снижающих скорость работы." },
-  { num: "03", title: "Архитектурное проектирование", desc: "Создание концептуальной схемы будущего цифрового ядра, микросервисов и путей масштабирования." },
-  { num: "04", title: "Интеграционная модель", desc: "Разработка API-first шины данных для связывания 1С, ERP, CRM, сайтов и внешних сервисов." },
-  { num: "05", title: "Highload инфраструктура", desc: "Развертывание кластеров с балансировкой нагрузки, отказоустойчивыми БД и асинхронными очередями." },
-  { num: "06", title: "Непрерывное развитие платформы", desc: "Мониторинг, оптимизация запросов, CI/CD процессы и постепенное расширение функционала." },
+  { num: "01", title: "Анализ инфраструктуры", desc: "Детальный аудит текущих бизнес-процессов, выявление «узких горлышек» и ограничений систем" },
+  { num: "02", title: "Аудит ограничений", desc: "Поиск технических барьеров в CMS, базах данных и интеграциях, снижающих скорость работы" },
+  { num: "03", title: "Архитектурное проектирование", desc: "Создание концептуальной схемы будущего цифрового ядра, микросервисов и путей масштабирования" },
+  { num: "04", title: "Интеграционная модель", desc: "Разработка API-first шины данных для связывания 1С, ERP, CRM, сайтов и внешних сервисов" },
+  { num: "05", title: "Highload инфраструктура", desc: "Развертывание кластеров с балансировкой нагрузки, отказоустойчивыми БД и асинхронными очередями" },
+  { num: "06", title: "Непрерывное развитие платформы", desc: "Мониторинг, оптимизация запросов, CI/CD процессы и постепенное расширение функционала" },
 ];
 
-const TECH_CATEGORIES: TechCategory[] = [
-  {
-    title: "Backend",
-    desc: "Высокопроизводительные сервисы и бизнес-логика",
-    items: ["Go", "Node.js", "PHP"],
-    icon: Terminal,
-  },
-  {
-    title: "Infrastructure",
-    desc: "Оркестрация, шины обмена сообщениями и масштабируемость",
-    items: ["Kubernetes", "Docker", "RabbitMQ", "Redis", "NATS"],
-    icon: Network,
-  },
-  {
-    title: "Databases",
-    desc: "Хранилища данных, оптимизированные под разные типы нагрузок",
-    items: ["PostgreSQL", "ElasticSearch", "ClickHouse"],
-    icon: Database,
-  },
-  {
-    title: "Frontend",
-    desc: "Быстрые пользовательские интерфейсы с фокусом на Core Web Vitals",
-    items: ["Next.js", "React", "TypeScript"],
-    icon: Globe,
-  },
-];
 
-const LIMITS_DATA = [
-  { title: "Платформа начинает тормозить при росте каталога", desc: "Стандартные CMS (Bitrix, WooCommerce) упираются в ограничения базы данных при количестве товаров свыше 100k SKU." },
-  { title: "Интеграции с 1С становятся нестабильными", desc: "Обмен данными зависает или приводит к рассинхронизации остатков, срывая заказы и вызывая недовольство клиентов." },
-  { title: "Текущая архитектура перестаёт справляться с пиковыми нагрузками", desc: "Пиковый трафик во время промо-акций роняет сайт из-за тяжелой архитектуры плагинов и отсутствия кэширования." },
-  { title: "ERP система ограничивает бизнес-процессы", desc: "Готовые коробочные решения не позволяют внедрить уникальную логику компании, замедляя операционную работу." },
-  { title: "Стоимость поддержки постоянно растёт", desc: "Устранение старых багов (legacy) и попытки доработать закрытый код CMS обходятся дороже создания кастомной системы." },
-  { title: "Архитектура мешает масштабированию", desc: "Любая новая фича требует переписывания половины проекта, создавая новые риски безопасности и стабильности." },
-];
+
 
 const RESEARCH_DATA = [
   {
@@ -220,6 +182,410 @@ const SEGMENTS = [
 ];
 
 
+
+// ─── PIPELINE VISUALIZATION COMPONENTS ──────────────────────────────────────────
+
+function GridScanner({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      {/* Grid Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(122, 44, 255, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(122, 44, 255, 0.2) 1px, transparent 1px)
+          `,
+          backgroundSize: '12px 12px'
+        }}
+      />
+
+      {/* Moving scanner line */}
+      <motion.div
+        className="absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#7a2cff] to-transparent shadow-[0_0_8px_rgba(122,44,255,0.6)]"
+        animate={{
+          top: ["0%", "100%", "0%"]
+        }}
+        transition={{
+          duration: isHovered ? 2.2 : 3.2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      <div className="flex gap-4 font-mono text-[9px] text-white/35 z-10 select-none">
+        <div className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#7a2cff]/60 animate-pulse" />
+          <span>SYS.AUDIT</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span>LIMIT: 99.8%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ConnectionNodes({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      <svg className="w-40 h-16 opacity-75" viewBox="0 0 160 64" fill="none">
+        {/* Node connections */}
+        <line x1="20" y1="32" x2="50" y2="16" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.4" />
+        <line x1="20" y1="32" x2="50" y2="48" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.4" />
+        <line x1="50" y1="16" x2="90" y2="16" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.4" />
+
+        {/* Bottleneck link */}
+        <motion.line
+          x1="50" y1="48" x2="90" y2="48"
+          stroke="#7a2cff"
+          strokeWidth="0.8"
+          animate={{
+            strokeOpacity: isHovered ? [0.1, 0.45, 0.05, 0.35, 0.1] : [0.1, 0.25, 0.05, 0.25, 0.1]
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          strokeDasharray="2 2"
+        />
+        <line x1="90" y1="16" x2="140" y2="32" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.4" />
+        <line x1="90" y1="48" x2="140" y2="32" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.4" />
+
+        {/* Normal Nodes */}
+        <circle cx="20" cy="32" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+        <circle cx="50" cy="16" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+
+        {/* Blinking bottleneck node */}
+        <motion.circle
+          cx="50" cy="48" r="3.5"
+          fill="#0A0A0C"
+          stroke="#7a2cff"
+          strokeWidth="1.2"
+          animate={{
+            stroke: ["#7a2cff", "#3b177a", "#7a2cff"],
+            scale: isHovered ? [1, 1.2, 1] : [1, 1, 1]
+          }}
+          transition={{
+            duration: 3.0,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        <circle cx="90" cy="16" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+
+        <motion.circle
+          cx="90" cy="48" r="3"
+          fill="#0A0A0C"
+          stroke="#7a2cff"
+          strokeWidth="1.2"
+          animate={{
+            strokeOpacity: [0.3, 0.9, 0.3]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <circle cx="140" cy="32" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+      </svg>
+    </div>
+  );
+}
+
+function BlueprintLines({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(111, 60, 255, 0.15) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(111, 60, 255, 0.15) 1px, transparent 1px)
+          `,
+          backgroundSize: '8px 8px'
+        }}
+      />
+      <svg className="w-48 h-20 opacity-80" viewBox="0 0 192 80" fill="none">
+        <motion.path
+          d="M 16 40 H 56 V 16 H 136 V 64 H 176"
+          stroke="#6f3cff"
+          strokeWidth="1"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{
+            duration: isHovered ? 3.5 : 5.0,
+            repeat: Infinity,
+            ease: "easeInOut",
+            repeatType: "reverse"
+          }}
+        />
+        <rect x="56" y="24" width="24" height="12" stroke="#6f3cff" strokeWidth="0.6" strokeDasharray="2 2" strokeOpacity="0.3" />
+        <rect x="96" y="44" width="32" height="12" stroke="#6f3cff" strokeWidth="0.6" strokeDasharray="2 2" strokeOpacity="0.3" />
+        <circle cx="136" cy="40" r="12" stroke="#6f3cff" strokeWidth="0.5" strokeDasharray="3 3" strokeOpacity="0.2" />
+        <line x1="96" y1="16" x2="96" y2="64" stroke="#6f3cff" strokeWidth="0.5" strokeOpacity="0.2" strokeDasharray="1 3" />
+      </svg>
+    </div>
+  );
+}
+
+function ApiNodes({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      <svg className="w-44 h-16 opacity-75" viewBox="0 0 176 64" fill="none">
+        <line x1="20" y1="32" x2="88" y2="32" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.3" />
+        <line x1="88" y1="32" x2="156" y2="32" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.3" />
+        <line x1="88" y1="12" x2="88" y2="52" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.3" />
+
+        <motion.circle
+          r="1.8"
+          fill="#fff"
+          animate={{
+            cx: [20, 88],
+            cy: [32, 32]
+          }}
+          transition={{
+            duration: isHovered ? 1.8 : 2.5,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.circle
+          r="1.8"
+          fill="#7a2cff"
+          animate={{
+            cx: [88, 156],
+            cy: [32, 32]
+          }}
+          transition={{
+            duration: isHovered ? 1.6 : 2.2,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.6
+          }}
+        />
+        <motion.circle
+          r="1.5"
+          fill="#7a2cff"
+          animate={{
+            cx: [88, 88],
+            cy: [12, 52]
+          }}
+          transition={{
+            duration: isHovered ? 2.2 : 3.0,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.2
+          }}
+        />
+
+        <circle cx="20" cy="32" r="4.5" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+        <circle cx="88" cy="32" r="5" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+        <circle cx="156" cy="32" r="4.5" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1.2" />
+
+        <circle cx="88" cy="12" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1" />
+        <circle cx="88" cy="52" r="3" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1" />
+
+        <text x="20" y="24" textAnchor="middle" fill="#fff" fontSize="6" fontWeight="bold" opacity="0.3" className="font-mono">1C</text>
+        <text x="88" y="24" textAnchor="middle" fill="#fff" fontSize="6" fontWeight="bold" opacity="0.4" className="font-mono">BUS</text>
+        <text x="156" y="24" textAnchor="middle" fill="#fff" fontSize="6" fontWeight="bold" opacity="0.3" className="font-mono">CRM</text>
+      </svg>
+    </div>
+  );
+}
+
+function DistributedServers({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      <svg className="w-40 h-20 opacity-80" viewBox="0 0 160 80" fill="none">
+        <path d="M 80 15 Q 40 40 40 55" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.25" />
+        <path d="M 80 15 Q 80 40 80 55" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.25" />
+        <path d="M 80 15 Q 120 40 120 55" stroke="#7a2cff" strokeWidth="0.8" strokeOpacity="0.25" />
+
+        <motion.circle
+          r="1.8"
+          fill="#7a2cff"
+          animate={{
+            offsetDistance: ["0%", "100%"]
+          }}
+          transition={{
+            duration: isHovered ? 1.5 : 2.2,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ motionPath: "path('M 80 15 Q 40 40 40 55')" }}
+        />
+        <motion.circle
+          r="1.8"
+          fill="#fff"
+          animate={{
+            offsetDistance: ["0%", "100%"]
+          }}
+          transition={{
+            duration: isHovered ? 1.8 : 2.5,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.4
+          }}
+          style={{ motionPath: "path('M 80 15 Q 80 40 80 55')" }}
+        />
+        <motion.circle
+          r="1.8"
+          fill="#7a2cff"
+          animate={{
+            offsetDistance: ["0%", "100%"]
+          }}
+          transition={{
+            duration: isHovered ? 2.0 : 2.8,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.8
+          }}
+          style={{ motionPath: "path('M 80 15 Q 120 40 120 55')" }}
+        />
+
+        <rect x="68" y="5" width="24" height="10" rx="1.5" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1" />
+        <circle cx="80" cy="10" r="1.5" fill="#7a2cff" className="animate-pulse" />
+
+        {[30, 70, 110].map((xVal, idx) => (
+          <g key={idx} transform={`translate(${xVal}, 55)`}>
+            <rect x="0" y="0" width="20" height="18" rx="1.5" fill="#0A0A0C" stroke="#7a2cff" strokeWidth="1" strokeOpacity="0.8" />
+            <line x1="3" y1="5" x2="17" y2="5" stroke="#7a2cff" strokeWidth="0.6" strokeOpacity="0.4" />
+            <line x1="3" y1="9" x2="17" y2="9" stroke="#7a2cff" strokeWidth="0.6" strokeOpacity="0.4" />
+            <line x1="3" y1="13" x2="17" y2="13" stroke="#7a2cff" strokeWidth="0.6" strokeOpacity="0.4" />
+
+            <motion.circle
+              cx="16" cy="9" r="1"
+              fill="#fff"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 1.5, repeat: Infinity, delay: idx * 0.3 }}
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+function CicdLoop({ isHovered }: { isHovered: boolean }) {
+  return (
+    <div className="relative w-full h-24 bg-[#0A0A0C] rounded-xl border border-white/5 overflow-hidden flex items-center justify-center">
+      <svg className="w-24 h-24 opacity-85" viewBox="0 0 96 96" fill="none">
+        <circle cx="48" cy="48" r="32" stroke="#7a2cff" strokeWidth="0.5" strokeDasharray="2 4" strokeOpacity="0.2" />
+
+        <motion.circle
+          cx="48" cy="48"
+          r="26"
+          stroke="#7a2cff"
+          strokeWidth="1.2"
+          strokeDasharray="40 10 20 10"
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: isHovered ? 10 : 16,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ transformOrigin: "48px 48px" }}
+        />
+
+        <motion.circle
+          cx="48" cy="22"
+          r="2"
+          fill="#fff"
+          animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <motion.circle
+          cx="74" cy="48"
+          r="1.8"
+          fill="#7a2cff"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
+        />
+        <motion.circle
+          cx="22" cy="48"
+          r="1.8"
+          fill="#7a2cff"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, delay: 1.0 }}
+        />
+
+        <text x="48" y="51" textAnchor="middle" fill="#fff" fontSize="7" fontWeight="bold" opacity="0.4" className="font-mono">CI/CD</text>
+      </svg>
+    </div>
+  );
+}
+
+interface Step {
+  num: string;
+  title: string;
+  desc: string;
+}
+
+function TimelineCard({ step, idx }: { step: Step; idx: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const renderVisual = () => {
+    switch (idx) {
+      case 0:
+        return <GridScanner isHovered={isHovered} />;
+      case 1:
+        return <ConnectionNodes isHovered={isHovered} />;
+      case 2:
+        return <BlueprintLines isHovered={isHovered} />;
+      case 3:
+        return <ApiNodes isHovered={isHovered} />;
+      case 4:
+        return <DistributedServers isHovered={isHovered} />;
+      case 5:
+        return <CicdLoop isHovered={isHovered} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <motion.div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative z-10 flex flex-col md:flex-row gap-6 items-stretch p-6 rounded-2xl border bg-[#0D0D0F] border-white/5 hover:border-[#7a2cff]/40 transition-all duration-500 shadow-lg"
+    >
+      {/* Connection dot on the vertical line */}
+      <div className="absolute left-[-24px] md:left-[-36px] top-[34px] w-4 h-4 rounded-full bg-[#0A0A0B] border border-white/10 z-10 flex items-center justify-center">
+        <motion.div
+          className="w-2 h-2 rounded-full bg-[#7a2cff]"
+          animate={isHovered ? { scale: [1, 1.35, 1] } : { scale: 0.8 }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        />
+      </div>
+
+      {/* Text Info */}
+      <div className="flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="font-mono text-sm text-[#8C76FF] font-bold">{step.num}</span>
+            <div className="h-px flex-1 bg-white/5" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2 transition-transform duration-300 group-hover:translate-x-[2px] font-sans">
+            {step.title}
+          </h3>
+          <p className="text-white/45 text-sm md:text-[15px] leading-relaxed font-sans">
+            {step.desc}
+          </p>
+        </div>
+      </div>
+
+      {/* Visual representation */}
+      <div className="w-full md:w-56 shrink-0 flex items-center">
+        {renderVisual()}
+      </div>
+    </motion.div>
+  );
+}
 
 // ─── MAIN SOLUTIONS HUB PAGE ─────────────────────────────────────────────────
 
@@ -350,7 +716,7 @@ export default function SolutionsPage() {
         </div>
 
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-          
+
           {/* Left Hero Content */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
             <motion.span
@@ -361,9 +727,9 @@ export default function SolutionsPage() {
             >
               АРХИТЕКТУРНЫЕ РЕШЕНИЯ KIBEX
             </motion.span>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6 font-sans">
-              {["Проектируем цифровые системы,", "которые выдерживают рост,", "нагрузку и сложную бизнес-логику"].map((line, i) => (
+
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-6 font-sans">
+              {["Проектируем", "цифровые системы", "которые", "выдерживают рост,", "нагрузку и сложную бизнес-логику"].map((line, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 25 }}
@@ -413,151 +779,123 @@ export default function SolutionsPage() {
       <SolutionsSection />
 
       {/* ── 3. SECTION: АРХИТЕКТУРНЫЙ ПОДХОД ── */}
-      <section className="py-24 border-t border-white/5 bg-[#0A0A0B] relative">
+      <section className="py-32 border-t border-white/5 bg-[#0A0A0B] relative overflow-hidden">
+        {/* Background Grid Pattern & Faint Topology */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `linear-gradient(rgba(122, 44, 255, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(122, 44, 255, 0.15) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
+            }}
+          />
+          <svg className="absolute w-[800px] h-[800px] top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 opacity-30 text-[#7a2cff]" fill="none" stroke="currentColor">
+            <circle cx="400" cy="400" r="100" strokeWidth="0.5" strokeDasharray="3 3" />
+            <circle cx="400" cy="400" r="200" strokeWidth="0.5" />
+            <circle cx="400" cy="400" r="300" strokeWidth="0.5" strokeDasharray="5 5" />
+            <circle cx="400" cy="400" r="400" strokeWidth="0.5" />
+          </svg>
+        </div>
+
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
-          <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">ПРОЦЕСС ИНЖЕНЕРИИ</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Как Kibex проектирует системы
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              Мы опираемся на строгие инженерные фазы, гарантирующие предсказуемость масштабирования, стабильность интеграций и готовность инфраструктуры к нагрузкам.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-          {/* Interactive Steps Timeline */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-            {/* Horizontal timeline connector lines (Desktop only) */}
-            <div className="hidden lg:block absolute top-[52px] left-[5%] right-[5%] h-[1px] bg-white/[0.04] pointer-events-none z-0" />
+            {/* Left side Sticky Title Column */}
+            <div className="lg:col-span-4 lg:sticky lg:top-32 space-y-6">
+              <div>
+                <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">
+                  ПРОЦЕСС ИНЖЕНЕРИИ
+                </span>
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 leading-tight">
+                  КАК KIBEX ПРОЕКТИРУЕТ СИСТЕМЫ?
+                </h2>
+                <p className="text-white/50 text-base leading-relaxed">
+                  Мы опираемся на строгие инженерные фазы, гарантирующие предсказуемость масштабирования, стабильность интеграций и готовность инфраструктуры к нагрузкам
+                </p>
+              </div>
 
-            {TIMELINE_STEPS.map((step, i) => {
-              const isActive = activeStep === i;
-              return (
-                <div
-                  key={i}
-                  className="relative z-10 cursor-pointer"
-                  onClick={() => setActiveStep(i)}
-                >
-                  <div
-                    className={`h-full p-8 rounded-2xl border transition-all duration-500 ${
-                      isActive
-                        ? "bg-[#11101E] border-[#4633FF]/40 shadow-[0_0_20px_rgba(70,51,255,0.1)]"
-                        : "bg-white/[0.01] border-white/[0.04] hover:border-white/10"
-                    }`}
-                  >
-                    {/* Connection dot on the horizontal line */}
-                    <div className="hidden lg:flex absolute top-[43px] left-1/2 -translate-x-1/2 w-5 h-5 rounded-full items-center justify-center bg-[#0A0A0B] border border-white/10 z-20">
-                      <motion.div
-                        className="w-2.5 h-2.5 rounded-full bg-[#4633FF]"
-                        animate={isActive ? { scale: [1, 1.4, 1] } : { scale: 0.8 }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                      />
-                    </div>
-
-                    <div className="mb-6 lg:mt-8">
-                      <span className="font-mono text-sm text-[#8C76FF] font-bold">{step.num}</span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#8C76FF]">
-                      {step.title}
-                    </h3>
-                    <p className="text-white/40 text-sm leading-relaxed">
-                      {step.desc}
+              {/* Short Engineering Philosophy */}
+              <div className="pt-8 border-t border-white/5 space-y-4">
+                <div className="flex gap-3">
+                  <div>
+                    <h4 className="text-xl font-bold text-white uppercase tracking-wider mb-1">Точность проектирования</h4>
+                    <p className="text-[15px] text-white/35 leading-relaxed">
+                      Каждая интеграционная шина и база данных проходит симуляцию пиковых нагрузок до написания первой строчки кода
                     </p>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="flex gap-3">
+                  <div>
+                    <h4 className="text-xl font-bold text-white uppercase tracking-wider mb-1">Непрерывный цикл</h4>
+                    <p className="text-[15px] text-white/35 leading-relaxed">
+                      Процесс разработки полностью автоматизирован: от тестирования кода до автоматического деплоя в кластер Kubernetes
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side Timeline Pipeline */}
+            <div className="lg:col-span-8">
+              <div className="relative pl-8 md:pl-12 space-y-8">
+                {/* Thin vertical infrastructure line */}
+                <div className="absolute left-[15px] md:left-[27px] top-4 bottom-4 w-[2px] bg-white/[0.04] z-0" />
+
+                {/* Flow packets layer */}
+                <div className="absolute left-[15px] md:left-[27px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#7a2cff]/30 via-[#6f3cff] to-[#7a2cff]/30 z-0 overflow-hidden">
+                  <motion.div
+                    className="absolute left-0 right-0 h-16 bg-gradient-to-b from-transparent via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                    animate={{
+                      top: ["0%", "0%", "20%", "20%", "40%", "40%", "60%", "60%", "80%", "80%", "100%", "100%"]
+                    }}
+                    transition={{
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute left-0 right-0 h-16 bg-gradient-to-b from-transparent via-[#7a2cff] to-transparent shadow-[0_0_8px_rgba(122,44,255,0.8)]"
+                    animate={{
+                      top: ["0%", "0%", "20%", "20%", "40%", "40%", "60%", "60%", "80%", "80%", "100%", "100%"]
+                    }}
+                    transition={{
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 6
+                    }}
+                  />
+                  <motion.div
+                    className="absolute left-0 right-0 h-16 bg-gradient-to-b from-transparent via-[#6f3cff] to-transparent shadow-[0_0_8px_rgba(111,60,255,0.8)]"
+                    animate={{
+                      top: ["0%", "0%", "20%", "20%", "40%", "40%", "60%", "60%", "80%", "80%", "100%", "100%"]
+                    }}
+                    transition={{
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 12
+                    }}
+                  />
+                </div>
+
+                {TIMELINE_STEPS.map((step, i) => (
+                  <TimelineCard key={i} step={step} idx={i} />
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── 4. SECTION: ИНФРАСТРУКТУРНЫЙ СТЕК ── */}
-      <section className="py-24 border-t border-white/5 bg-[#09090A] relative">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
-          <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-3 block">ТЕХНОЛОГИЧЕСКИЙ СТЕК</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Технологическая инфраструктура
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              Архитектура систем Kibex базируется на открытых протоколах и индустриальных стандартах корпоративного ПО.
-            </p>
-          </div>
-
-          {/* Stacks Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {TECH_CATEGORIES.map((cat, idx) => {
-              const CatIcon = cat.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-8 bg-white/[0.01] border border-white/[0.04] rounded-2xl hover:border-white/10 transition-colors shadow-lg"
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center text-[#8C76FF]">
-                      <CatIcon size={16} />
-                    </div>
-                    <h3 className="font-bold text-white text-lg">{cat.title}</h3>
-                  </div>
-
-                  <p className="text-white/40 text-xs leading-relaxed mb-6 min-h-[36px]">
-                    {cat.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {cat.items.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1.5 bg-white/[0.02] border border-white/5 rounded-lg text-xs font-mono text-white/70"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <TechStackArchitecture />
 
       {/* ── 5. SECTION: КОГДА БИЗНЕСУ НУЖНА НОВАЯ АРХИТЕКТУРА ── */}
-      <section className="py-24 border-t border-white/5 bg-[#0A0A0B] relative">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10">
-          <div className="mb-16 max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.2em] text-amber-500 uppercase mb-3 block">ДИАГНОСТИКА СИСТЕМ</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Когда бизнесу нужна новая архитектура
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              Недоработки и ограничения старой кодовой базы со временем тормозят операционное развитие. Обратите внимание на ключевые симптомы деградации инфраструктуры:
-            </p>
-          </div>
-
-          {/* Limits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {LIMITS_DATA.map((limit, idx) => (
-              <div
-                key={idx}
-                className="p-8 bg-[#0D0D0E]/60 border border-white/[0.03] rounded-2xl flex items-start gap-5 hover:border-amber-500/20 transition-all shadow-md"
-              >
-                <div className="w-10 h-10 rounded-lg bg-amber-500/5 border border-amber-500/10 flex items-center justify-center text-amber-500 shrink-0 mt-0.5">
-                  <AlertTriangle size={18} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-3 leading-snug">
-                    {limit.title}
-                  </h3>
-                  <p className="text-white/40 text-xs leading-relaxed">
-                    {limit.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SystemDiagnostics />
 
       {/* ── 6. SECTION: ИССЛЕДОВАНИЯ KIBEX ── */}
       <section id="research-section" className="py-24 border-t border-white/5 bg-[#09090A] relative">
@@ -580,7 +918,7 @@ export default function SolutionsPage() {
                 className="p-8 bg-white/[0.01] border border-white/[0.03] rounded-2xl flex flex-col justify-between hover:border-[#4633FF]/30 transition-all relative overflow-hidden group shadow-lg"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_70%)] pointer-events-none" />
-                
+
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="px-2.5 py-1 bg-white/[0.03] border border-white/5 rounded-md text-[10px] uppercase font-mono tracking-widest text-[#8C76FF] font-bold">
@@ -658,7 +996,7 @@ export default function SolutionsPage() {
 
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
+
             {/* CTA Left Copy */}
             <div className="lg:col-span-5 flex flex-col text-left">
               <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-4 block">АРХИТЕКТУРНЫЙ АУДИТ</span>
@@ -668,7 +1006,7 @@ export default function SolutionsPage() {
               <p className="text-white/50 text-base leading-relaxed mb-8">
                 Получите архитектурную оценку текущей инфраструктуры и стратегию масштабирования цифровой системы компании.
               </p>
-              
+
               <div className="space-y-4 border-t border-white/5 pt-8">
                 {[
                   "Абсолютная конфиденциальность данных",
@@ -750,7 +1088,7 @@ export default function SolutionsPage() {
                     {isSubmitting ? "Отправка..." : "Получить консультацию"}
                     {!isSubmitting && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
                   </button>
-                  
+
                   <p className="text-center text-[10px] text-white/20 uppercase tracking-widest leading-relaxed">
                     Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
                   </p>
@@ -808,13 +1146,13 @@ export default function SolutionsPage() {
                 onClick={() => { setConsultPopupOpen(false); setConsultSubmitted(false); }}
                 className="absolute top-5 right-5 text-white/40 hover:text-white transition-colors"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
               </button>
 
               {consultSubmitted ? (
                 <div className="text-center py-6">
                   <div className="w-14 h-14 rounded-full bg-[#4633FF]/15 border border-[#4633FF]/30 flex items-center justify-center mx-auto mb-5">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">Заявка отправлена!</h3>
                   <p className="text-white/50 text-sm">Наш менеджер свяжется с вами в ближайшее время.</p>
@@ -863,15 +1201,14 @@ export default function SolutionsPage() {
                   <label className="flex items-start gap-3 mt-4 cursor-pointer group">
                     <div
                       onClick={() => setConsultConsent(v => !v)}
-                      className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded-md border transition-all ${
-                        consultConsent
-                          ? "bg-[#4633FF] border-[#4633FF]"
-                          : "bg-white/5 border-white/15 group-hover:border-white/30"
-                      } flex items-center justify-center`}
+                      className={`flex-shrink-0 w-5 h-5 mt-0.5 rounded-md border transition-all ${consultConsent
+                        ? "bg-[#4633FF] border-[#4633FF]"
+                        : "bg-white/5 border-white/15 group-hover:border-white/30"
+                        } flex items-center justify-center`}
                     >
                       {consultConsent && (
                         <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
-                          <polyline points="1 4 4 7 10 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          <polyline points="1 4 4 7 10 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </div>

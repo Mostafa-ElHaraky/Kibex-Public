@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-geist: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+:root {
+  --font-geist: var(--font-geist-sans);
+}
+
 html,
 body {
   height: 100%;

@@ -10,6 +10,34 @@ export default function HeroSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("+7");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [description, setDescription] = useState("");
+  const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setName("");
+      setPhone("+7");
+      setEmail("");
+      setProjectType("");
+      setDescription("");
+      setIsPrivacyAccepted(false);
+    }, 500);
+  };
+
+  const isFormValid =
+    /^[A-Za-zА-Яа-я\s]{2,50}$/.test(name) &&
+    /^\+7\d{10}$/.test(phone) &&
+    /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) &&
+    projectType !== "" &&
+    (description === "" || description.length >= 100) &&
+    isPrivacyAccepted;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -98,7 +126,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-4 lg:mt-5 font-geist text-base sm:text-lg text-[#FFFFFF]/60 max-w-xl leading-relaxed"
           >
-            КиБекс проектирует e-commerce платформы, ERP системы и highload инфраструктуру для компаний, которым важны масштабируемость, стабильность, интеграции и контроль над развитием бизнеса.
+            КиБекс проектирует e-commerce платформы, ERP системы и highload инфраструктуру для компаний, которым важны масштабируемость, стабильность, интеграции и контроль над развитием бизнеса
           </motion.p>
 
           <motion.div
@@ -146,10 +174,7 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => {
-                setIsModalOpen(false);
-                setTimeout(() => setIsSubmitted(false), 500);
-              }}
+              onClick={handleCloseModal}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
 
@@ -162,10 +187,7 @@ export default function HeroSection() {
               className="relative w-full max-w-[860px] max-h-[90vh] overflow-y-auto bg-[#0D0D0E]/95 border border-[#4633FF]/20 rounded-[28px] backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] scrollbar-hide"
             >
               <button
-                onClick={() => {
-                  setIsModalOpen(false);
-                  setTimeout(() => setIsSubmitted(false), 500);
-                }}
+                onClick={handleCloseModal}
                 className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors z-10"
               >
                 <X className="w-6 h-6" />
@@ -180,30 +202,12 @@ export default function HeroSection() {
                   >
                     {/* Header */}
                     <div className="mb-10">
-                      <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-[#4633FF] uppercase mb-3 block">
-                        АРХИТЕКТУРНАЯ КОНСУЛЬТАЦИЯ
-                      </span>
                       <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
                         Получите оценку цифровой платформы
                       </h2>
                       <p className="text-[#FFFFFF]/60 text-base md:text-lg leading-relaxed max-w-2xl">
-                        Мы изучим текущую инфраструктуру, интеграции и бизнес-процессы, чтобы определить ограничения роста, архитектурные риски и возможности масштабирования.
+                        Мы изучим текущую инфраструктуру, интеграции и бизнес-процессы, чтобы определить ограничения роста, архитектурные риски и возможности масштабирования
                       </p>
-                    </div>
-
-                    {/* Trust Indicators */}
-                    <div className="grid grid-cols-2 md:flex md:flex-wrap gap-4 md:gap-8 mb-12 py-6 border-y border-white/5">
-                      {[
-                        { text: "Конфиденциально", icon: ShieldCheck },
-                        { text: "Ответ в течение 24 часов", icon: Check },
-                        { text: "Без обязательств", icon: Check },
-                        { text: "Архитектурный подход", icon: Check }
-                      ].map((item, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-[13px] text-white/70">
-                          <item.icon className="w-4 h-4 text-[#4633FF]" />
-                          <span>{item.text}</span>
-                        </div>
-                      ))}
                     </div>
 
                     {/* Form */}
@@ -242,6 +246,8 @@ export default function HeroSection() {
                           type="text"
                           name="name"
                           required
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           pattern="^[A-Za-zА-Яа-я\s]{2,50}$"
                           placeholder="Ваше имя"
                           className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.05] transition-all"
@@ -252,7 +258,6 @@ export default function HeroSection() {
                         <input
                           type="text"
                           name="company"
-                          required
                           placeholder="Название компании"
                           className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.05] transition-all"
                         />
@@ -263,8 +268,17 @@ export default function HeroSection() {
                           type="tel"
                           name="phone"
                           required
-                          pattern="^[\d\s\+\-\(\)]{10,20}$"
-                          placeholder="+7 (999) 999-99-99"
+                          value={phone}
+                          onChange={(e) => {
+                            let val = e.target.value;
+                            if (!val.startsWith("+7")) {
+                              val = "+7";
+                            }
+                            const digits = val.substring(2).replace(/\D/g, "");
+                            setPhone("+7" + digits.substring(0, 10));
+                          }}
+                          pattern="^\+7\d{10}$"
+                          placeholder="+79999999999"
                           className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.05] transition-all"
                         />
                       </div>
@@ -274,6 +288,9 @@ export default function HeroSection() {
                           type="email"
                           name="email"
                           required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                           placeholder="your@company.ru"
                           className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.05] transition-all"
                         />
@@ -284,7 +301,8 @@ export default function HeroSection() {
                           <select
                             name="projectType"
                             required
-                            defaultValue=""
+                            value={projectType}
+                            onChange={(e) => setProjectType(e.target.value)}
                             className="w-full appearance-none bg-[#0D0D0E] border border-white/10 rounded-xl px-5 py-3.5 text-white focus:outline-none focus:border-[#4633FF]/50 focus:bg-[#151517] transition-all cursor-pointer"
                           >
                             <option value="" disabled className="bg-[#0D0D0E]">Выберите тип проекта</option>
@@ -300,28 +318,64 @@ export default function HeroSection() {
                         </div>
                       </div>
                       <div className="md:col-span-2 space-y-2">
-                        <label className="text-xs font-medium text-white/40 ml-1">Текущее состояние системы</label>
+                        <div className="flex justify-between items-center ml-1">
+                          <label className="text-xs font-medium text-white/40">Текущее состояние системы</label>
+                          <span className={`text-[10px] ${description.length === 0
+                            ? "text-white/30"
+                            : description.length < 100
+                              ? "text-red-500/60 font-semibold"
+                              : "text-emerald-500/60 font-semibold"
+                            }`}>
+                            {description.length === 0
+                              ? "Необязательно"
+                              : description.length < 100
+                                ? `Минимум 100 символов (введено: ${description.length})`
+                                : `Минимум достигнут (${description.length} / 100)`}
+                          </span>
+                        </div>
                         <textarea
                           name="description"
-                          placeholder="Кратко опишите текущую платформу, задачи или ограничения"
-                          maxLength={1000}
-                          rows={4}
+                          placeholder="Кратко опишите текущую платформу, задачи или ограничения (необязательно, при заполнении минимум 100 символов)"
+                          minLength={100}
+                          maxLength={100}
+                          rows={5}
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
                           className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.05] transition-all resize-none"
                         />
                       </div>
 
-                      <div className="md:col-span-2 mt-4">
+                      <div className="md:col-span-2 mt-4 space-y-6 pb-2">
+                        <div className="flex items-start gap-3">
+                          <input
+                            type="checkbox"
+                            id="privacy-checkbox"
+                            name="privacy"
+                            required
+                            checked={isPrivacyAccepted}
+                            onChange={(e) => setIsPrivacyAccepted(e.target.checked)}
+                            className="mt-1 w-4 h-4 rounded border-white/10 bg-white/[0.03] text-[#4633FF] focus:ring-[#4633FF]/50 focus:ring-2 focus:ring-offset-0 accent-[#4633FF] cursor-pointer"
+                          />
+                          <label htmlFor="privacy-checkbox" className="text-xs text-white/50 leading-relaxed cursor-pointer select-none">
+                            Нажимая кнопку,{" "}
+                            <Link href="/privacy-policy" className="text-[#8C76FF] hover:underline transition-colors">
+                              вы соглашаетесь с политикой конфиденциальности
+                            </Link>
+                            .
+                          </label>
+                        </div>
+
                         <button
                           type="submit"
-                          disabled={isSubmitting}
-                          className={`w-full group relative flex items-center justify-center gap-2 bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white px-8 py-5 rounded-[18px] font-geist font-bold transition-all duration-[350ms] shadow-[0_10px_30px_rgba(70,51,255,0.2)] ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-[0_15px_40px_rgba(70,51,255,0.4)] hover:-translate-y-1 active:scale-[0.98]'}`}
+                          disabled={isSubmitting || !isFormValid}
+                          className={`w-full group relative flex items-center justify-center gap-2 bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white px-8 py-5 rounded-[18px] font-geist font-bold transition-all duration-[350ms] shadow-[0_10px_30px_rgba(70,51,255,0.2)] ${isSubmitting || !isFormValid
+                            ? 'opacity-40 cursor-not-allowed pointer-events-none'
+                            : 'hover:shadow-[0_15px_40px_rgba(70,51,255,0.4)] hover:-translate-y-1 active:scale-[0.98]'
+                            }`}
                         >
                           {isSubmitting ? "Отправка..." : "Получить консультацию"}
                           {!isSubmitting && <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />}
                         </button>
-                        <p className="text-center mt-6 text-[11px] text-white/30 uppercase tracking-widest font-medium">
-                          Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
-                        </p>
                       </div>
                     </form>
                   </motion.div>
@@ -346,10 +400,7 @@ export default function HeroSection() {
                       Мы свяжемся с вами в течение 24 часов для первичной архитектурной консультации.
                     </p>
                     <button
-                      onClick={() => {
-                        setIsModalOpen(false);
-                        setTimeout(() => setIsSubmitted(false), 500);
-                      }}
+                      onClick={handleCloseModal}
                       className="mt-10 text-white/40 hover:text-white transition-colors text-sm font-medium uppercase tracking-widest"
                     >
                       Закрыть окно

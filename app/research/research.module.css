@@ -2,7 +2,7 @@
   background: #050508;
   color: #fff;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
   overflow-x: hidden;
 }
 

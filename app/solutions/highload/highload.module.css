@@ -6,7 +6,7 @@
   width: 100%;
   background: #030305;
   color: #fff;
-  font-family: var(--font-geist-sans, sans-serif);
+  font-family: var(--font-geist), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
