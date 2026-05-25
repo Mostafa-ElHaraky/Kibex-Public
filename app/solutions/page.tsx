@@ -22,7 +22,8 @@ import {
   Globe,
   Settings,
   Zap,
-  Check
+  Check,
+  ChevronDown
 } from "lucide-react";
 import Link from "next/link";
 import Header from "../../components/Header";
@@ -593,25 +594,47 @@ export default function SolutionsPage() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [consultPopupOpen, setConsultPopupOpen] = useState(false);
   const [consultName, setConsultName] = useState("");
-  const [consultPhone, setConsultPhone] = useState("");
+  const [consultPhone, setConsultPhone] = useState("+7");
   const [consultConsent, setConsultConsent] = useState(false);
   const [consultSubmitted, setConsultSubmitted] = useState(false);
   const [consultSubmitting, setConsultSubmitting] = useState(false);
+
+  const isConsultFormValid =
+    /^[A-Za-zА-Яа-я\s]{2,50}$/.test(consultName) &&
+    /^\+7\d{10}$/.test(consultPhone) &&
+    consultConsent;
+
+  const handleCloseConsultPopup = () => {
+    setConsultPopupOpen(false);
+    setConsultSubmitted(false);
+    setConsultName("");
+    setConsultPhone("+7");
+    setConsultConsent(false);
+  };
+
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
-  // Form submission states for Final CTA
+  // Form submission states for Final CTA (aligned with main page hero popup modal)
+  const [ctaName, setCtaName] = useState("");
+  const [ctaCompany, setCtaCompany] = useState("");
+  const [ctaPhone, setCtaPhone] = useState("+7");
+  const [ctaEmail, setCtaEmail] = useState("");
+  const [ctaProjectType, setCtaProjectType] = useState("");
+  const [ctaDescription, setCtaDescription] = useState("");
+  const [ctaIsPrivacyAccepted, setCtaIsPrivacyAccepted] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
-  const [formErrors, setFormErrors] = useState<Partial<Record<string, string>>>({});
 
-  // Refs for final form fields
-  const nameRef = useRef<HTMLInputElement>(null);
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const descRef = useRef<HTMLTextAreaElement>(null);
-  const hpRef = useRef<HTMLInputElement>(null);
+  const isCtaFormValid =
+    /^[A-Za-zА-Яа-я\s]{2,50}$/.test(ctaName) &&
+    /^\+7\d{10}$/.test(ctaPhone) &&
+    /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ctaEmail) &&
+    ctaProjectType !== "" &&
+    (ctaDescription === "" || ctaDescription.length >= 100) &&
+    ctaIsPrivacyAccepted;
 
   // Auto-scroll logic to research or elements
   const scrollToId = (id: string) => {
@@ -621,11 +644,12 @@ export default function SolutionsPage() {
     }
   };
 
-  const handleFinalSubmit = async (e: React.FormEvent) => {
+  const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
     // Honeypot check
-    if (hpRef.current?.value) {
+    if (formData.get("_hp_field")) {
       setIsSubmitted(true);
       return;
     }
@@ -637,26 +661,6 @@ export default function SolutionsPage() {
       return;
     }
 
-    // Extraction & Validation
-    const name = nameRef.current?.value.trim() ?? "";
-    const phone = phoneRef.current?.value.trim() ?? "";
-    const email = emailRef.current?.value.trim() ?? "";
-    const desc = descRef.current?.value.trim() ?? "";
-
-    const newErrors: Partial<Record<string, string>> = {};
-    if (!name) newErrors.name = "Имя обязательно";
-    if (!phone) newErrors.phone = "Телефон обязателен";
-    if (!email) newErrors.email = "Email обязателен";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "Введите корректный email";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setFormErrors(newErrors);
-      return;
-    }
-
-    setFormErrors({});
     setIsSubmitting(true);
 
     try {
@@ -664,10 +668,11 @@ export default function SolutionsPage() {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify({
-          name,
-          contact: `${phone} / ${email}`,
-          projectType: "Нужна консультация",
-          description: desc,
+          name: ctaName,
+          company: ctaCompany,
+          contact: `${ctaPhone} / ${ctaEmail}`,
+          projectType: ctaProjectType,
+          description: ctaDescription,
         }),
       });
 
@@ -719,15 +724,6 @@ export default function SolutionsPage() {
 
           {/* Left Hero Content */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
-            <motion.span
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-xs font-bold tracking-[0.3em] text-[#8C76FF] uppercase mb-4 block"
-            >
-              АРХИТЕКТУРНЫЕ РЕШЕНИЯ KIBEX
-            </motion.span>
-
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-6 font-sans">
               {["Проектируем", "цифровые системы", "которые", "выдерживают рост,", "нагрузку и сложную бизнес-логику"].map((line, i) => (
                 <motion.span
@@ -999,7 +995,6 @@ export default function SolutionsPage() {
 
             {/* CTA Left Copy */}
             <div className="lg:col-span-5 flex flex-col text-left">
-              <span className="text-xs font-bold tracking-[0.2em] text-[#8C76FF] uppercase mb-4 block">АРХИТЕКТУРНЫЙ АУДИТ</span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
                 Бизнес не должен упираться в ограничения платформы
               </h2>
@@ -1025,90 +1020,199 @@ export default function SolutionsPage() {
             <div className="lg:col-span-7 w-full bg-white/[0.01] border border-white/[0.04] rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden">
               {!isSubmitted ? (
                 <form onSubmit={handleFinalSubmit} className="space-y-6">
-                  {/* Honeypot field */}
-                  <input ref={hpRef} type="text" name="_hp_site" className="hidden" tabIndex={-1} autoComplete="off" />
+                  {/* Honeypot Field (Hidden from users) */}
+                  <input type="text" name="_hp_field" className="hidden" tabIndex={-1} autoComplete="off" />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Name Input */}
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-white/40 ml-1 block">Имя *</label>
                       <input
-                        ref={nameRef}
                         type="text"
+                        name="name"
                         required
+                        value={ctaName}
+                        onChange={(e) => setCtaName(e.target.value)}
+                        pattern="^[A-Za-zА-Яа-я\s]{2,50}$"
                         placeholder="Ваше имя"
-                        className={`w-full bg-white/[0.02] border ${formErrors.name ? 'border-red-500' : 'border-white/10'} rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 transition-colors`}
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.04] transition-all"
                       />
-                      {formErrors.name && <p className="text-red-500 text-[11px] ml-1">{formErrors.name}</p>}
+                    </div>
+
+                    {/* Company Input */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-white/40 ml-1 block">Компания</label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={ctaCompany}
+                        onChange={(e) => setCtaCompany(e.target.value)}
+                        placeholder="Название компании"
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.04] transition-all"
+                      />
                     </div>
 
                     {/* Phone Input */}
                     <div className="space-y-2">
                       <label className="text-xs font-medium text-white/40 ml-1 block">Телефон *</label>
                       <input
-                        ref={phoneRef}
                         type="tel"
+                        name="phone"
                         required
-                        placeholder="+7 (999) 999-99-99"
-                        className={`w-full bg-white/[0.02] border ${formErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 transition-colors`}
+                        value={ctaPhone}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          if (!val.startsWith("+7")) {
+                            val = "+7";
+                          }
+                          const digits = val.substring(2).replace(/\D/g, "");
+                          setCtaPhone("+7" + digits.substring(0, 10));
+                        }}
+                        pattern="^\+7\d{10}$"
+                        placeholder="+79999999999"
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.04] transition-all"
                       />
-                      {formErrors.phone && <p className="text-red-500 text-[11px] ml-1">{formErrors.phone}</p>}
+                    </div>
+
+                    {/* Email Input */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-white/40 ml-1 block">Email *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={ctaEmail}
+                        onChange={(e) => setCtaEmail(e.target.value)}
+                        pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                        placeholder="your@company.ru"
+                        className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.04] transition-all"
+                      />
                     </div>
                   </div>
 
-                  {/* Email Input */}
+                  {/* Project Type Input */}
                   <div className="space-y-2">
-                    <label className="text-xs font-medium text-white/40 ml-1 block">Email *</label>
-                    <input
-                      ref={emailRef}
-                      type="email"
-                      required
-                      placeholder="your@company.ru"
-                      className={`w-full bg-white/[0.02] border ${formErrors.email ? 'border-red-500' : 'border-white/10'} rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 transition-colors`}
-                    />
-                    {formErrors.email && <p className="text-red-500 text-[11px] ml-1">{formErrors.email}</p>}
+                    <label className="text-xs font-medium text-white/40 ml-1 block">Тип проекта *</label>
+                    <div className="relative">
+                      <select
+                        name="projectType"
+                        required
+                        value={ctaProjectType}
+                        onChange={(e) => setCtaProjectType(e.target.value)}
+                        className="w-full appearance-none bg-[#0D0D0E] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white focus:outline-none focus:border-[#4633FF]/50 focus:bg-[#151517] transition-all cursor-pointer"
+                      >
+                        <option value="" disabled className="bg-[#0D0D0E]">Выберите тип проекта</option>
+                        <option value="ecommerce" className="bg-[#0D0D0E]">E-commerce платформа</option>
+                        <option value="erp" className="bg-[#0D0D0E]">ERP система</option>
+                        <option value="highload" className="bg-[#0D0D0E]">Highload инфраструктура</option>
+                        <option value="modernization" className="bg-[#0D0D0E]">Модернизация WordPress / Bitrix</option>
+                        <option value="integration" className="bg-[#0D0D0E]">Интеграции и API</option>
+                        <option value="security" className="bg-[#0D0D0E]">Кибербезопасность</option>
+                        <option value="other" className="bg-[#0D0D0E]">Другое</option>
+                      </select>
+                      <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 pointer-events-none" />
+                    </div>
                   </div>
 
                   {/* Description Input */}
                   <div className="space-y-2">
-                    <label className="text-xs font-medium text-white/40 ml-1 block">Описание задачи</label>
+                    <div className="flex justify-between items-center ml-1">
+                      <label className="text-xs font-medium text-white/40 block">Описание задачи</label>
+                      <span className={`text-[10px] ${ctaDescription.length === 0
+                        ? "text-white/30"
+                        : ctaDescription.length < 100
+                          ? "text-red-500/60 font-semibold"
+                          : "text-emerald-500/60 font-semibold"
+                        }`}>
+                        {ctaDescription.length === 0
+                          ? "Необязательно"
+                          : ctaDescription.length < 100
+                            ? `Минимум 100 символов (введено: ${ctaDescription.length})`
+                            : `Минимум достигнут (${ctaDescription.length} / 1000)`}
+                      </span>
+                    </div>
                     <textarea
-                      ref={descRef}
-                      placeholder="Опишите текущую систему, ограничения или задачи бизнеса"
-                      rows={4}
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 transition-colors resize-none"
+                      name="description"
+                      placeholder="Кратко опишите текущую платформу, задачи или ограничения (необязательно, при заполнении минимум 100 символов)"
+                      minLength={100}
+                      maxLength={1000}
+                      rows={5}
+                      value={ctaDescription}
+                      onChange={(e) => setCtaDescription(e.target.value)}
+                      className="w-full bg-white/[0.02] border border-white/10 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#4633FF]/50 focus:bg-white/[0.04] transition-all resize-none"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full group relative flex items-center justify-center gap-2 bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white py-4.5 rounded-xl font-bold transition-all duration-300 shadow-[0_4px_20px_rgba(70,51,255,0.2)] hover:shadow-[0_4px_35px_rgba(70,51,255,0.4)] hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
-                  >
-                    {isSubmitting ? "Отправка..." : "Получить консультацию"}
-                    {!isSubmitting && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
-                  </button>
+                  {/* Consent Checkbox */}
+                  <div className="space-y-6 pb-2">
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="privacy-checkbox"
+                        name="privacy"
+                        required
+                        checked={ctaIsPrivacyAccepted}
+                        onChange={(e) => setCtaIsPrivacyAccepted(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-white/10 bg-white/[0.02] text-[#4633FF] focus:ring-[#4633FF]/50 focus:ring-2 focus:ring-offset-0 accent-[#4633FF] cursor-pointer"
+                      />
+                      <label htmlFor="privacy-checkbox" className="text-xs text-white/50 leading-relaxed cursor-pointer select-none">
+                        Нажимая кнопку,{" "}
+                        <Link href="/privacy-policy" className="text-[#8C76FF] hover:underline transition-colors">
+                          вы соглашаетесь с политикой конфиденциальности
+                        </Link>
+                        .
+                      </label>
+                    </div>
 
-                  <p className="text-center text-[10px] text-white/20 uppercase tracking-widest leading-relaxed">
-                    Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
-                  </p>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || !isCtaFormValid}
+                      className={`w-full group relative flex items-center justify-center gap-2 bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white py-4.5 rounded-[18px] font-bold transition-all duration-[350ms] shadow-[0_10px_30px_rgba(70,51,255,0.2)] ${isSubmitting || !isCtaFormValid
+                        ? 'opacity-40 cursor-not-allowed pointer-events-none'
+                        : 'hover:shadow-[0_15px_40px_rgba(70,51,255,0.4)] hover:-translate-y-1 active:scale-[0.98]'
+                        }`}
+                    >
+                      {isSubmitting ? "Отправка..." : "Получить консультацию"}
+                      {!isSubmitting && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
+                    </button>
+                  </div>
                 </form>
               ) : (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#4633FF]/10 border border-[#4633FF]/30 flex items-center justify-center text-[#8C76FF] mb-6">
-                    <Check size={28} strokeWidth={2.5} />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-20 text-center"
+                >
+                  <div className="relative mb-8">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="absolute inset-0 bg-[#4633FF] rounded-full blur-2xl"
+                    />
+                    <div className="relative w-20 h-20 bg-[#0D0D0E] border border-[#4633FF]/40 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(70,51,255,0.2)]">
+                      <Check className="w-10 h-10 text-[#4633FF]" />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">Запрос отправлен</h3>
-                  <p className="text-white/50 text-sm max-w-sm leading-relaxed mb-8">
+                  <h3 className="text-3xl font-bold text-white mb-4">Запрос отправлен</h3>
+                  <p className="text-[#FFFFFF]/60 text-lg max-w-sm">
                     Мы свяжемся с вами в течение 24 часов для проведения первичной архитектурной консультации.
                   </p>
                   <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="text-xs font-bold text-white/40 hover:text-white uppercase tracking-wider transition-colors"
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setCtaName("");
+                      setCtaCompany("");
+                      setCtaPhone("+7");
+                      setCtaEmail("");
+                      setCtaProjectType("");
+                      setCtaDescription("");
+                      setCtaIsPrivacyAccepted(false);
+                    }}
+                    className="mt-10 text-white/40 hover:text-white transition-colors text-sm font-medium uppercase tracking-widest cursor-pointer"
                   >
                     Отправить ещё раз
                   </button>
-                </div>
+                </motion.div>
               )}
             </div>
 
@@ -1127,7 +1231,7 @@ export default function SolutionsPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-            onClick={() => { setConsultPopupOpen(false); setConsultSubmitted(false); }}
+            onClick={handleCloseConsultPopup}
           >
             {/* Backdrop */}
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -1143,7 +1247,7 @@ export default function SolutionsPage() {
             >
               {/* Close */}
               <button
-                onClick={() => { setConsultPopupOpen(false); setConsultSubmitted(false); }}
+                onClick={handleCloseConsultPopup}
                 className="absolute top-5 right-5 text-white/40 hover:text-white transition-colors"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
@@ -1168,30 +1272,45 @@ export default function SolutionsPage() {
                     <input
                       type="text"
                       placeholder="Введите имя"
+                      required
                       value={consultName}
                       onChange={(e) => setConsultName(e.target.value)}
+                      pattern="^[A-Za-zА-Яа-я\s]{2,50}$"
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#4633FF]/60 transition-colors"
                     />
                     <input
                       type="tel"
                       placeholder="Введите телефон"
+                      required
                       value={consultPhone}
-                      onChange={(e) => setConsultPhone(e.target.value)}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (!val.startsWith("+7")) {
+                          val = "+7";
+                        }
+                        const digits = val.substring(2).replace(/\D/g, "");
+                        setConsultPhone("+7" + digits.substring(0, 10));
+                      }}
+                      pattern="^\+7\d{10}$"
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#4633FF]/60 transition-colors"
                     />
 
                     <button
                       onClick={async () => {
-                        if (!consultName.trim() || !consultPhone.trim() || !consultConsent) return;
+                        if (!isConsultFormValid) return;
                         setConsultSubmitting(true);
                         await new Promise(r => setTimeout(r, 800));
                         setConsultSubmitting(false);
                         setConsultSubmitted(true);
                         setConsultName("");
-                        setConsultPhone("");
+                        setConsultPhone("+7");
+                        setConsultConsent(false);
                       }}
-                      className={`w-full bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white font-bold py-4 rounded-xl transition-all hover:shadow-[0_0_25px_rgba(70,51,255,0.4)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed mt-1`}
-                      disabled={consultSubmitting || !consultConsent}
+                      className={`w-full bg-gradient-to-br from-[#4633FF] to-[#2A1E99] text-white font-bold py-4 rounded-xl transition-all duration-[350ms] mt-1 ${consultSubmitting || !isConsultFormValid
+                        ? "opacity-40 cursor-not-allowed pointer-events-none"
+                        : "hover:shadow-[0_0_25px_rgba(70,51,255,0.4)] hover:-translate-y-0.5 active:scale-[0.98]"
+                        }`}
+                      disabled={consultSubmitting || !isConsultFormValid}
                     >
                       {consultSubmitting ? "Отправляем..." : "Оставить заявку"}
                     </button>

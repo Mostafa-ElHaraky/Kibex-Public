@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import SolutionPopup from "../../../components/SolutionPopup";
+import ModernizationDiagnosticPopup from "./ModernizationDiagnosticPopup";
 import s from "./modernizaciya.module.css";
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -549,7 +549,7 @@ export default function ModernizaciyaPage() {
       </section>
 
       <Footer />
-      <SolutionPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+      <ModernizationDiagnosticPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );
 }

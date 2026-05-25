@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import SolutionPopup from "../../../components/SolutionPopup";
+import HighloadDiagnosticPopup from "./HighloadDiagnosticPopup";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import Schema from "../../../components/Schema";
 import s from "./highload.module.css";
@@ -413,9 +413,25 @@ export default function HighloadPage() {
 
       {/* ── 1. HERO ───────────────────────────────────────────────────────────── */}
       <section className={s.hero} ref={heroRef}>
-        <div className={s.heroGrid} />
+        {/* Background Image & Gradient overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <img
+            src="/highloadgpt.png"
+            alt=""
+            className="w-full h-full object-cover opacity-[0.55] select-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B]/90 via-[#0A0A0B]/50 to-[#0A0A0B]/90" />
+
+          {/* Subtle Indigo Glow and Grid Background */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `linear-gradient(rgba(140, 118, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 118, 255, 0.08) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
+
         <div className={s.heroInner}>
-          <div className="w-full mb-8">
+          <div className={s.heroBreadcrumbs}>
             <Breadcrumbs items={breadcrumbItems} />
           </div>
 
@@ -424,15 +440,7 @@ export default function HighloadPage() {
             className={s.heroContent}
             style={{ y: heroTextY, opacity: heroTextOp }}
           >
-            {/* Label */}
-            <motion.span
-              className={s.heroLabel}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-            >
-              Инфраструктура высокой нагрузки
-            </motion.span>
+
 
             {/* H1 — two lines staggered */}
             <h1 className={s.heroTitle}>
@@ -768,7 +776,7 @@ export default function HighloadPage() {
       </section>
 
       <Footer />
-      <SolutionPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+      <HighloadDiagnosticPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );
 }

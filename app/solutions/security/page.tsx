@@ -5,7 +5,7 @@ import { motion, useScroll, useInView, AnimatePresence } from "framer-motion";
 import { Shield, AlertTriangle, Search, Lock, Check, ArrowRight, Activity, Database, Cpu, Globe, Network, ShieldCheck } from "lucide-react";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import SolutionPopup from "../../../components/SolutionPopup";
+import SecurityAssessmentPopup from "./SecurityAssessmentPopup";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import Schema from "../../../components/Schema";
 import s from "./security.module.css";
@@ -579,7 +579,7 @@ export default function SecurityAuditPage() {
       </section>
 
       <Footer/>
-      {popupOpen && <SolutionPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)}/>}
+      {popupOpen && <SecurityAssessmentPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)}/>}
     </div>
   );
 }

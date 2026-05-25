@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import SolutionPopup from "../../../components/SolutionPopup";
+import PlatformDiagnosticPopup from "./PlatformDiagnosticPopup";
 import s from "./platformy.module.css";
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -419,7 +419,7 @@ export default function RazrabotkaPlatformyPage() {
       </section>
 
       <Footer />
-      <SolutionPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+      <PlatformDiagnosticPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );
 }
