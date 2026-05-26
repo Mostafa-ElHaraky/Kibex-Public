@@ -53,7 +53,9 @@
   align-items: center;
   position: relative;
   padding-top: 100px;
+  overflow: hidden;
 }
+
 
 .heroInner {
   display: grid;

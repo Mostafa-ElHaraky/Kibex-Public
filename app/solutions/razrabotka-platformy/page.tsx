@@ -14,6 +14,7 @@ import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import PlatformDiagnosticPopup from "./PlatformDiagnosticPopup";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import s from "./platformy.module.css";
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -76,43 +77,15 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-const InfraScene = () => {
-  const nodes = useMemo(() => [
-    { icon: Database, angle: 0, dist: 220, label: "DATA" },
-    { icon: Cpu, angle: 72, dist: 240, label: "LOGIC" },
-    { icon: Globe, angle: 144, dist: 200, label: "API" },
-    { icon: Shield, angle: 216, dist: 250, label: "SECURITY" },
-    { icon: Layers, angle: 288, dist: 230, label: "INFRA" },
-  ], []);
 
-  return (
-    <div className={s.sceneContainer}>
-      <motion.div className={s.infraCore} animate={{ scale: [1, 1.05, 1], rotate: [0, 5, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}>
-        <div className={s.coreLabel}>KIBEX<br/>INFRA</div>
-        <div className={s.coreRing} />
-        <div className={s.coreRing} style={{ animationDelay: "2s" }} />
-      </motion.div>
-      {nodes.map((node, i) => {
-        const x = Math.cos(node.angle * Math.PI / 180) * node.dist;
-        const y = Math.sin(node.angle * Math.PI / 180) * node.dist;
-        return (
-          <motion.div key={i} className={s.infraNode} initial={{ opacity: 0, x: 0, y: 0 }} animate={{ opacity: 1, x, y, rotate: [0, 360] }} transition={{ opacity: { duration: 1, delay: i * 0.2 }, x: { duration: 2, delay: i * 0.2, type: "spring" }, y: { duration: 2, delay: i * 0.2, type: "spring" }, rotate: { duration: 100, repeat: Infinity, ease: "linear" } }}>
-            <node.icon size={24} />
-            <motion.div className={s.infraRoute} style={{ width: node.dist, left: "50%", top: "50%", rotate: `${node.angle + 180}deg` }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1 + i * 0.1, duration: 1.5 }} />
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-};
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 
 const businessPains = [
-  { icon: TrendingDown, title: "Упущенные продажи", desc: "Сайт тормозит при пиковых нагрузках, клиенты уходят к конкурентам из-за медленной загрузки каталога." },
-  { icon: AlertCircle, title: "Ошибки интеграций", desc: "Нестабильный обмен данными с 1С и ERP приводит к неверным остаткам и сорванным заказам." },
-  { icon: DollarSign, title: "Дорогая эксплуатация", desc: "Технические ограничения WordPress и Bitrix требуют всё больших бюджетов на доработки и поддержку." },
-  { icon: ShieldCheck, title: "Риски безопасности", desc: "Устаревшие CMS становятся уязвимыми для атак, угрожая потерей данных клиентов и репутации." },
+  { className: "painCardSale", title: "Упущенные продажи", desc: "Сайт тормозит при пиковых нагрузках, клиенты уходят к конкурентам из-за медленной загрузки каталога." },
+  { className: "painCardError", title: "Ошибки интеграций", desc: "Нестабильный обмен данными с 1С и ERP приводит к неверным остаткам и сорванным заказам." },
+  { className: "painCardExpensive", title: "Дорогая эксплуатация", desc: "Технические ограничения WordPress и Bitrix требуют всё больших бюджетов на доработки и поддержку." },
+  { className: "painCardSecurity", title: "Риски безопасности", desc: "Устаревшие CMS становятся уязвимыми для атак, угрожая потерей данных клиентов и репутации." },
 ];
 
 const whatWeBuild = [
@@ -124,11 +97,200 @@ const whatWeBuild = [
   { icon: Layers, title: "Инфраструктурные ядра", desc: "Центральные шины данных (ESB) для управления всей экосистемой бизнеса." },
 ];
 
-const archLayers = [
-  { n: "01", label: "Frontend Layer", title: "Next.js · React · TypeScript", metric: "LCP < 1.0c" },
-  { n: "02", label: "Logic Layer", title: "Node.js · Go · Microservices", metric: "5k+ ops/sec" },
-  { n: "03", label: "Integration Layer", title: "API-first · 1C · ERP · CRM", metric: "Real-time sync" },
-  { n: "04", label: "Security Layer", title: "OWASP · Hardening · Encryption", metric: "Tier-4 Protection" },
+const FrontendVisual = () => {
+  return (
+    <div className={s.feWireframe}>
+      <div className={s.feHeader}>
+        <div className={s.feLogo} />
+        <div className={s.feNav}>
+          <div className={s.feNavItem} />
+          <div className={s.feNavItem} />
+        </div>
+        <div className={s.feUser} />
+      </div>
+      <div className={s.feGrid}>
+        <div className={`${s.feCard} ${s.feCard1Active}`}>
+          <div className={s.feImg}>
+            <div className={s.feShimmer} />
+          </div>
+          <div className={s.feTitle} />
+          <div className={s.fePrice} />
+        </div>
+        <div className={`${s.feCard} ${s.feCard2Active}`}>
+          <div className={s.feImg}>
+            <div className={s.feShimmer} />
+          </div>
+          <div className={s.feTitle} />
+          <div className={s.fePrice} />
+        </div>
+      </div>
+      <div className={s.feCursor} />
+    </div>
+  );
+};
+
+const APIGatewayVisual = () => {
+  return (
+    <svg className={s.apiGatewaySvg} viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 40 L200 120" className={s.apiPulseLine} />
+      <path d="M300 40 L200 120" className={s.apiPulseLine} />
+      <path d="M200 120 L60 200" className={s.apiPulseLine} />
+      <path d="M200 120 L150 200" className={s.apiPulseLine} />
+      <path d="M200 120 L250 200" className={s.apiPulseLine} />
+      <path d="M200 120 L340 200" className={s.apiPulseLine} />
+      <circle cx="100" cy="40" r="16" className={s.apiNode} />
+      <text x="100" y="44" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">WEB</text>
+      <circle cx="300" cy="40" r="16" className={s.apiNode} />
+      <text x="300" y="44" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">APP</text>
+      <circle cx="200" cy="120" r="28" className={s.apiNodeActive} />
+      <text x="200" y="124" fill="#fff" fontSize="10" fontWeight="900" textAnchor="middle">API</text>
+      <circle cx="60" cy="200" r="16" className={s.apiNode} />
+      <text x="60" y="204" fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="800" textAnchor="middle">OMS</text>
+      <circle cx="150" cy="200" r="16" className={s.apiNode} />
+      <text x="150" y="204" fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="800" textAnchor="middle">ERP</text>
+      <circle cx="250" cy="200" r="16" className={s.apiNode} />
+      <text x="250" y="204" fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="800" textAnchor="middle">CRM</text>
+      <circle cx="340" cy="200" r="16" className={s.apiNode} />
+      <text x="340" y="204" fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="800" textAnchor="middle">PAY</text>
+    </svg>
+  );
+};
+
+const CommerceCoreVisual = () => {
+  return (
+    <svg className={s.apiGatewaySvg} viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="120" r="40" fill="rgba(70, 51, 255, 0.05)" className={s.corePulse} />
+      <circle cx="200" cy="120" r="55" fill="rgba(70, 51, 255, 0.02)" className={s.corePulse} style={{ animationDelay: "1.25s" }} />
+      <line x1="200" y1="120" x2="80" y2="60" className={`${s.coreLine} ${s.coreLineActive}`} />
+      <line x1="200" y1="120" x2="320" y2="60" className={`${s.coreLine} ${s.coreLineActive}`} />
+      <line x1="200" y1="120" x2="80" y2="180" className={`${s.coreLine} ${s.coreLineActive}`} />
+      <line x1="200" y1="120" x2="320" y2="180" className={`${s.coreLine} ${s.coreLineActive}`} />
+      <circle cx="80" cy="60" r="22" className={s.apiNode} />
+      <text x="80" y="64" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">Заказы</text>
+      <circle cx="320" cy="60" r="22" className={s.apiNode} />
+      <text x="320" y="64" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">Платежи</text>
+      <circle cx="80" cy="180" r="22" className={s.apiNode} />
+      <text x="80" y="184" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">Скидки</text>
+      <circle cx="320" cy="180" r="22" className={s.apiNode} />
+      <text x="320" y="184" fill="rgba(255,255,255,0.6)" fontSize="9" fontWeight="800" textAnchor="middle">Склад</text>
+      <circle cx="200" cy="120" r="26" className={s.apiNodeActive} />
+      <text x="200" y="123" fill="#fff" fontSize="10" fontWeight="900" textAnchor="middle">CORE</text>
+    </svg>
+  );
+};
+
+const ERPSyncVisual = () => {
+  return (
+    <svg className={s.apiGatewaySvg} viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M120 100 L280 100" className={`${s.erpSyncLine} ${s.erpSyncLineRight}`} />
+      <path d="M280 140 L120 140" className={`${s.erpSyncLine} ${s.erpSyncLineLeft}`} />
+      <rect x="20" y="80" width="80" height="80" rx="16" className={s.apiNodeActive} />
+      <text x="60" y="116" fill="#fff" fontSize="10" fontWeight="900" textAnchor="middle">KIBEX</text>
+      <text x="60" y="130" fill="rgba(255,255,255,0.5)" fontSize="8" fontWeight="800" textAnchor="middle">CORE</text>
+      <rect x="300" y="80" width="80" height="80" rx="16" className={s.apiNode} />
+      <text x="340" y="116" fill="rgba(255,255,255,0.8)" fontSize="10" fontWeight="900" textAnchor="middle">1С / ERP</text>
+      <text x="340" y="130" fill="rgba(255,255,255,0.4)" fontSize="8" fontWeight="800" textAnchor="middle">WMS</text>
+    </svg>
+  );
+};
+
+const InfrastructureVisual = () => {
+  return (
+    <svg className={s.apiGatewaySvg} viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="200" y1="50" x2="100" y2="120" className={s.coreLine} />
+      <line x1="200" y1="50" x2="200" y2="120" className={s.coreLine} />
+      <line x1="200" y1="50" x2="300" y2="120" className={s.coreLine} />
+      <line x1="100" y1="120" x2="120" y2="190" className={s.coreLine} />
+      <line x1="200" y1="120" x2="200" y2="190" className={s.coreLine} />
+      <line x1="300" y1="120" x2="280" y2="190" className={s.coreLine} />
+      <path d="M220 190 H260" className={s.dbReplLine} />
+      <rect x="170" y="30" width="60" height="28" rx="8" className={s.apiNodeActive} />
+      <text x="200" y="47" fill="#fff" fontSize="8" fontWeight="900" textAnchor="middle">BALANCER</text>
+      <rect x="75" y="105" width="50" height="28" rx="8" className={s.apiNode} />
+      <text x="100" y="122" fill="rgba(255,255,255,0.7)" fontSize="8" fontWeight="800" textAnchor="middle">APP-01</text>
+      <rect x="175" y="105" width="50" height="28" rx="8" className={s.apiNode} />
+      <text x="200" y="122" fill="rgba(255,255,255,0.7)" fontSize="8" fontWeight="800" textAnchor="middle">APP-02</text>
+      <rect x="275" y="105" width="50" height="28" rx="8" className={s.apiNode} />
+      <text x="300" y="122" fill="rgba(255,255,255,0.7)" fontSize="8" fontWeight="800" textAnchor="middle">APP-03</text>
+      <circle cx="120" cy="190" r="16" className={s.apiNode} />
+      <text x="120" y="194" fill="rgba(255,255,255,0.6)" fontSize="8" fontWeight="800" textAnchor="middle">REDIS</text>
+      <circle cx="200" cy="190" r="16" className={s.apiNode} />
+      <text x="200" y="194" fill="rgba(255,255,255,0.6)" fontSize="8" fontWeight="800" textAnchor="middle">DB-M</text>
+      <circle cx="280" cy="190" r="16" className={s.apiNode} />
+      <text x="280" y="194" fill="rgba(255,255,255,0.6)" fontSize="8" fontWeight="800" textAnchor="middle">DB-S</text>
+    </svg>
+  );
+};
+
+const SecurityVisual = () => {
+  return (
+    <svg className={s.apiGatewaySvg} viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="120" r="50" className={s.securityShield} strokeWidth="1.5" />
+      <circle cx="150" cy="120" r="62" className={s.securityShield} strokeWidth="1" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
+      <circle cx="150" cy="120" r="28" className={s.apiNodeActive} />
+      <text x="150" y="124" fill="#fff" fontSize="9" fontWeight="900" textAnchor="middle">SECURE API</text>
+      <rect x="270" y="60" width="100" height="120" rx="12" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.05)" strokeWidth="1.5" />
+      <path d="M280 150 Q295 110, 310 130 T340 90 T360 110" className={s.monitorLine} />
+      <text x="320" y="170" fill="rgba(255,255,255,0.4)" fontSize="8" fontWeight="700" textAnchor="middle">REALTIME MON</text>
+    </svg>
+  );
+};
+
+const archLayersData = [
+  {
+    num: "01",
+    label: "FRONTEND",
+    title: "Frontend слой",
+    stack: "Next.js · React · TypeScript",
+    badge: "LCP < 1.0с",
+    desc: "Высокоскоростной интерфейс с мгновенной загрузкой страниц, оптимизацией Core Web Vitals и серверным рендерингом.",
+    Visual: FrontendVisual,
+  },
+  {
+    num: "02",
+    label: "API",
+    title: "API-шлюз",
+    stack: "REST · GraphQL · Webhooks",
+    badge: "Задержка 12ms",
+    desc: "Централизованный API-слой для синхронизации frontend, ERP, CRM, складов и внешних сервисов.",
+    Visual: APIGatewayVisual,
+  },
+  {
+    num: "03",
+    label: "CORE LOGIC",
+    title: "Слой бизнес-логики",
+    stack: "OMS · Checkout · Pricing",
+    badge: "Оркестрация в реальном времени",
+    desc: "Ядро платформы управляет заказами, ценами, остатками, скидками и всей бизнес-логикой в реальном времени.",
+    Visual: CommerceCoreVisual,
+  },
+  {
+    num: "04",
+    label: "INTEGRATIONS",
+    title: "Интеграционный слой",
+    stack: "1С · CRM · WMS · ERP",
+    badge: "Синхронизация < 1.2s",
+    desc: "Интеграционный слой обеспечивает стабильный обмен данными между платформой и внутренними системами компании.",
+    Visual: ERPSyncVisual,
+  },
+  {
+    num: "05",
+    label: "INFRASTRUCTURE",
+    title: "Инфраструктурный слой",
+    stack: "Kubernetes · Redis · PostgreSQL",
+    badge: "99.99% uptime",
+    desc: "Отказоустойчивая highload инфраструктура с горизонтальным масштабированием и распределёнными сервисами.",
+    Visual: InfrastructureVisual,
+  },
+  {
+    num: "06",
+    label: "SECURITY",
+    title: "Безопасность и мониторинг",
+    stack: "WAF · RBAC · Observability",
+    badge: "Защищённая инфраструктура",
+    desc: "Многоуровневая защита платформы, контроль доступа и мониторинг инфраструктуры в режиме реального времени.",
+    Visual: SecurityVisual,
+  },
 ];
 
 const timelineSteps = [
@@ -167,6 +329,11 @@ export default function RazrabotkaPlatformyPage() {
   const timeProgress = useSpring(timeScroll, { stiffness: 100, damping: 30 });
   const blueprintRef = useRef(null);
 
+  const breadcrumbItems = [
+    { name: "Решения", item: "/solutions" },
+    { name: "Разработка платформ", item: "/solutions/razrabotka-platformy" }
+  ];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -186,6 +353,9 @@ export default function RazrabotkaPlatformyPage() {
       <section className={s.hero}>
         <div className={s.heroBg} aria-hidden><div className={s.heroGrid} /><div className={s.heroAtmosphere} /></div>
         <div className={s.heroInner}>
+          <div className={s.heroBreadcrumbs}>
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
           <motion.div className={s.heroContent} initial="hidden" animate="show" variants={stagger}>
             <motion.span className={s.heroLabel} variants={fadeUp}>E-commerce Инфраструктура</motion.span>
             <motion.h1 className={s.heroTitle} variants={fadeUp}>
@@ -204,7 +374,6 @@ export default function RazrabotkaPlatformyPage() {
               <span className={s.trustBadge}><Lock size={16} /> Highload системы</span>
             </motion.div>
           </motion.div>
-          <motion.div className={s.heroVisual} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}><InfraScene /></motion.div>
         </div>
       </section>
 
@@ -232,8 +401,7 @@ export default function RazrabotkaPlatformyPage() {
           </div>
           <div className={s.painGrid}>
             {businessPains.map((p, i) => (
-              <motion.div key={i} className={s.painCard} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <div className={s.painIcon}><p.icon size={28} /></div>
+              <motion.div key={i} className={`${s.painCard} ${s[p.className]}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h3 className={s.painCardTitle}>{p.title}</h3>
                 <p className={s.painCardDesc}>{p.desc}</p>
               </motion.div>
@@ -292,27 +460,43 @@ export default function RazrabotkaPlatformyPage() {
 
       {/* ── 5. BLUEPRINT (Architecture) ─────────────────────────────────────── */}
       <section className={s.blueprint}>
+        <div className={s.blueprintGrid} />
+        <div className={s.blueprintGlow} />
         <div className={s.sectionInner}>
           <div className={s.sectionHeaderCenter}>
             <span className={s.sectionTag}>Инженерия</span>
             <h2 className={s.sectionTitle}>Архитектура e-commerce платформы</h2>
+            <p className={s.sectionSubtitleCenter}>
+              Мы проектируем платформы как многослойную инфраструктуру, где каждый компонент отвечает за производительность, масштабируемость и стабильность системы.
+            </p>
           </div>
-          <div className={s.blueprintVisual}>
-            <motion.div className={s.blueprintCore} animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}><Cpu size={64} /></motion.div>
-            {archLayers.map((layer, i) => {
-              const angles = [45, 135, 225, 315];
-              const dist = 320;
-              const x = Math.cos(angles[i] * Math.PI / 180) * dist;
-              const y = Math.sin(angles[i] * Math.PI / 180) * dist;
-              return (
-                <motion.div key={i} className={s.blueprintLayer} style={{ x: `calc(-50% + ${x}px)`, y: `calc(-50% + ${y}px)`, top: "50%", left: "50%" }} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.2 }}>
-                  <span className={s.layerNum}>{layer.n}</span>
-                  <div className={s.layerLabel}>{layer.label}</div>
-                  <h4 className={s.layerTitle}>{layer.title}</h4>
-                  <div className={s.layerMetric}>{layer.metric}</div>
+          
+          <div className={s.blueprintStack}>
+            {archLayersData.map((layer, i) => (
+              <div key={layer.num} style={{ width: "100%" }}>
+                <motion.div 
+                  className={s.archRow}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  <div className={s.archColInfo}>
+                    <span className={s.archLayerNum}>{layer.num} &nbsp; // &nbsp; {layer.label}</span>
+                    <h3 className={s.archLayerTitle}>{layer.title}</h3>
+                    <div className={s.archLayerStack}>{layer.stack}</div>
+                    <span className={s.archLayerBadge}>{layer.badge}</span>
+                    <p className={s.archLayerDesc}>{layer.desc}</p>
+                  </div>
+                  <div className={s.archColVisual}>
+                    <layer.Visual />
+                  </div>
                 </motion.div>
-              );
-            })}
+                {i < archLayersData.length - 1 && (
+                  <div className={s.connectionLine} />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

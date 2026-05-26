@@ -429,6 +429,10 @@ export default function ERPPage() {
         </div>
 
         <div className={s.heroInner}>
+          <div className={s.heroBreadcrumbs}>
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
+
           {/* Left: Text Content */}
           <motion.div
             className={s.heroContent}

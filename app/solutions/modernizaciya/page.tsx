@@ -12,6 +12,7 @@ import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import ModernizationDiagnosticPopup from "./ModernizationDiagnosticPopup";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 import s from "./modernizaciya.module.css";
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
@@ -187,6 +188,11 @@ const preserved = [
 export default function ModernizaciyaPage() {
   const [popupOpen, setPopupOpen] = useState(false);
 
+  const breadcrumbItems = [
+    { name: "Решения", item: "/solutions" },
+    { name: "Модернизация", item: "/solutions/modernizaciya" }
+  ];
+
   const lifecycleRef = useRef(null);
   const { scrollYProgress: lifeProgress } = useScroll({
     target: lifecycleRef,
@@ -249,6 +255,10 @@ export default function ModernizaciyaPage() {
         </div>
 
         <div className={s.heroInner}>
+          <div className={s.heroBreadcrumbs}>
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
+
           <motion.div
             className={s.heroContent}
             initial="hidden"

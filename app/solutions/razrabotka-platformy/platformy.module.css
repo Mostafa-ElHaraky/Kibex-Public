@@ -76,8 +76,11 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 10% 30%, rgba(70, 51, 255, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 70%, rgba(129, 140, 248, 0.04) 0%, transparent 45%);
+    linear-gradient(to right, #050508 15%, rgba(5, 5, 8, 0.3) 50%, #050508 85%),
+    linear-gradient(to bottom, rgba(5, 5, 8, 0.2) 0%, #050508 100%),
+    radial-gradient(circle at 10% 30%, rgba(70, 51, 255, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(129, 140, 248, 0.05) 0%, transparent 45%),
+    url('/e-commercegpt.png') center/cover no-repeat;
   z-index: 1;
 }
 
@@ -104,6 +107,12 @@
   100% { background-position: 80px 80px; }
 }
 
+.heroBreadcrumbs {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-bottom: 0;
+}
+
 .heroInner {
   max-width: 1500px;
   width: 100%;
@@ -111,8 +120,8 @@
   padding: 0 40px;
   display: grid;
   grid-template-columns: 4fr 6fr;
-  gap: 120px;
-  align-items: center;
+  gap: 24px 120px;
+  align-items: start;
   position: relative;
   z-index: 2;
 }
@@ -332,50 +341,383 @@
 /* ── 4. BLUEPRINT CENTERPIECE ── */
 .blueprint {
   position: relative;
-  padding: 200px 0;
-  background: #030305;
+  padding: 160px 0;
+  background: #050508;
+  overflow: hidden;
 }
 
-.blueprintInner {
+.blueprintGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+  opacity: 0.7;
+  pointer-events: none;
+  animation: gridShift 120s linear infinite;
+}
+
+.blueprintGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle at center, rgba(70, 51, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(120px);
+}
+
+.blueprintStack {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  margin-top: 80px;
+  width: 100%;
 }
 
-.blueprintVisual {
+.archRow {
+  display: grid;
+  grid-template-columns: 5.5fr 6.5fr;
+  gap: 80px;
+  align-items: center;
+  background: rgba(10, 10, 18, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 40px;
+  padding: 60px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  transition: all 0.4s ease, transform 0.4s ease;
+}
+
+.archRow:hover {
+  border-color: rgba(70, 51, 255, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(70, 51, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.archColInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.archLayerNum {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 800;
+  color: #818cf8;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.archLayerTitle {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.archLayerStack {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+}
+
+.archLayerBadge {
+  align-self: flex-start;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #818cf8;
+  background: rgba(129, 140, 248, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.15);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+.archLayerDesc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6;
+}
+
+.archColVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 100%;
-  max-width: 1000px;
-  height: 600px;
-  margin-bottom: 100px;
+  height: 280px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 24px;
+  overflow: hidden;
 }
 
-.blueprintCore {
+.connectionLine {
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, #4633ff, rgba(70, 51, 255, 0.1));
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.connectionLine::after {
+  content: "";
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px; height: 160px;
-  background: rgba(70, 51, 255, 0.1);
-  border: 1px solid #4633ff;
-  border-radius: 32px;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 10;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #818cf8;
+  box-shadow: 0 0 8px #818cf8;
+  animation: linePulse 2.5s infinite linear;
 }
 
-.blueprintLayer {
+@keyframes linePulse {
+  0% { top: -20px; }
+  100% { top: 80px; }
+}
+
+/* Layer 01: Frontend Wireframe */
+.feWireframe {
+  width: 100%;
+  height: 100%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.feHeader {
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 12px;
+}
+
+.feLogo { width: 40px; height: 8px; background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+.feNav { display: flex; gap: 8px; }
+.feNavItem { width: 24px; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+.feUser { width: 12px; height: 12px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; }
+
+.feGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  flex: 1;
+}
+
+.feCard {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.feImg {
+  height: 70px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.feShimmer {
   position: absolute;
-  padding: 24px 32px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  z-index: 11;
-  width: 280px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  transform: translateX(-100%);
+  animation: feShimmerAnim 2s infinite;
 }
 
-.layerNum { font-size: 10px; font-weight: 900; color: #4633ff; margin-bottom: 8px; display: block; letter-spacing: 0.1em; }
-.layerTitle { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
-.layerMetric { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.3); }
+@keyframes feShimmerAnim {
+  100% { transform: translateX(100%); }
+}
+
+.feTitle { width: 70%; height: 8px; background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+.fePrice { width: 40%; height: 8px; background: rgba(70, 51, 255, 0.3); border-radius: 4px; }
+
+.feCursor {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #818cf8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #818cf8;
+  pointer-events: none;
+  animation: feCursorMove 6s infinite ease-in-out;
+}
+
+@keyframes feCursorMove {
+  0% { top: 80%; left: 80%; }
+  30% { top: 60%; left: 30%; }
+  45% { top: 60%; left: 30%; }
+  70% { top: 60%; left: 70%; }
+  85% { top: 60%; left: 70%; }
+  100% { top: 80%; left: 80%; }
+}
+
+.feCard1Active {
+  animation: feCard1Hover 6s infinite ease-in-out;
+}
+.feCard2Active {
+  animation: feCard2Hover 6s infinite ease-in-out;
+}
+
+@keyframes feCard1Hover {
+  0%, 29% { border-color: rgba(255, 255, 255, 0.05); transform: translateY(0); background: rgba(255, 255, 255, 0.01); }
+  30%, 45% { border-color: rgba(129, 140, 248, 0.3); transform: translateY(-2px); background: rgba(70, 51, 255, 0.04); }
+  46%, 100% { border-color: rgba(255, 255, 255, 0.05); transform: translateY(0); background: rgba(255, 255, 255, 0.01); }
+}
+
+@keyframes feCard2Hover {
+  0%, 69% { border-color: rgba(255, 255, 255, 0.05); transform: translateY(0); background: rgba(255, 255, 255, 0.01); }
+  70%, 85% { border-color: rgba(129, 140, 248, 0.3); transform: translateY(-2px); background: rgba(70, 51, 255, 0.04); }
+  86%, 100% { border-color: rgba(255, 255, 255, 0.05); transform: translateY(0); background: rgba(255, 255, 255, 0.01); }
+}
+
+/* Layer 02: API Gateway Topology */
+.apiPulseLine {
+  stroke: rgba(129, 140, 248, 0.25);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 12;
+  animation: apiFlow 4s infinite linear;
+}
+
+@keyframes apiFlow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+.apiNode {
+  fill: #0d0d14;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1.5;
+}
+
+.apiNodeActive {
+  fill: rgba(70, 51, 255, 0.1);
+  stroke: #818cf8;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.2));
+}
+
+/* Layer 03: Commerce Core */
+.corePulse {
+  animation: corePulseAnim 2.5s infinite ease-out;
+  transform-origin: center;
+}
+
+@keyframes corePulseAnim {
+  0% { transform: scale(0.8) translate(-10%, -10%); opacity: 0.8; }
+  100% { transform: scale(1.6) translate(-25%, -25%); opacity: 0; }
+}
+
+.coreLine {
+  stroke: rgba(129, 140, 248, 0.15);
+  stroke-width: 1.5;
+}
+
+.coreLineActive {
+  stroke: #818cf8;
+  stroke-dasharray: 5 10;
+  animation: coreFlow 3s infinite linear;
+}
+
+@keyframes coreFlow {
+  to { stroke-dashoffset: -15; }
+}
+
+/* Layer 04: ERP Sync */
+.erpSyncLine {
+  stroke: rgba(129, 140, 248, 0.2);
+  stroke-width: 2;
+  stroke-dasharray: 8 16;
+}
+
+.erpSyncLineRight {
+  animation: erpSyncRight 3s infinite linear;
+}
+
+.erpSyncLineLeft {
+  animation: erpSyncLeft 3s infinite linear;
+}
+
+@keyframes erpSyncRight {
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes erpSyncLeft {
+  to { stroke-dashoffset: 24; }
+}
+
+/* Layer 05: Kubernetes Cluster */
+.lbPulse {
+  animation: lbPulseAnim 2s infinite ease-in-out;
+}
+
+@keyframes lbPulseAnim {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.dbReplLine {
+  stroke: rgba(129, 140, 248, 0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  animation: dbReplFlow 2.5s infinite linear;
+}
+
+@keyframes dbReplFlow {
+  to { stroke-dashoffset: -8; }
+}
+
+/* Layer 06: Security & Monitoring */
+.securityShield {
+  stroke: rgba(129, 140, 248, 0.3);
+  stroke-dasharray: 10 20;
+  animation: shieldRotate 20s infinite linear;
+  transform-origin: center;
+}
+
+@keyframes shieldRotate {
+  100% { transform: rotate(360deg); }
+}
+
+.monitorLine {
+  stroke: #818cf8;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawChart 4s infinite ease-in-out;
+}
+
+@keyframes drawChart {
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -300; }
+}
 
 /* ── 5. ENGINEERING TIMELINE ── */
 .timeline {
@@ -567,21 +909,56 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .painCard {
   padding: 48px;
-  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 40px;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease, transform 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.painCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
+.painCardSale::before {
+  background-image: linear-gradient(180deg, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.95) 100%), url('/sale_improve.png');
+}
+.painCardError::before {
+  background-image: linear-gradient(180deg, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.95) 100%), url('/error_at_intigration.png');
+}
+.painCardExpensive::before {
+  background-image: linear-gradient(180deg, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.95) 100%), url('/expensive_supp.png');
+}
+.painCardSecurity::before {
+  background-image: linear-gradient(180deg, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.95) 100%), url('/systems_vuln.png');
 }
 
 .painCard:hover {
-  background: rgba(255, 68, 68, 0.02);
-  border-color: rgba(255, 68, 68, 0.1);
+  border-color: rgba(70, 51, 255, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+.painCard:hover::before {
+  transform: scale(1.08);
 }
 
 .painIcon {

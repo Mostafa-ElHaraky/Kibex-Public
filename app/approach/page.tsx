@@ -94,92 +94,8 @@ const SECURITY_GRID = [
 
 // ── COMPONENTS ──
 
-function SystemStatePanel() {
-  const [latency, setLatency] = useState(39);
-  
-  useEffect(() => {
-    const t = setInterval(() => setLatency(Math.max(35, Math.min(45, 39 + (Math.random() * 4 - 2)))), 3000);
-    return () => clearInterval(t);
-  }, []);
 
-  return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className={s.systemState}>
-      <div className={s.stateHeader}>SYSTEM STATUS</div>
-      <div className={s.stateRow}><span className={s.stateLabel}>API</span> <span className={s.stateVal}>stable</span> <div className={s.statePulse} /></div>
-      <div className={s.stateRow}><span className={s.stateLabel}>Queue</span> <span className={s.stateVal}>normal</span></div>
-      <div className={s.stateRow}><span className={s.stateLabel}>Integrations</span> <span className={s.stateVal}>active</span></div>
-      <div className={s.stateRow}><span className={s.stateLabel}>Latency</span> <span className={s.stateVal}>{latency.toFixed(0)}ms</span></div>
-    </motion.div>
-  );
-}
 
-function DataPackets({ x1, y1, x2, y2, delay = 0, duration = 3 }: { x1: number, y1: number, x2: number, y2: number, delay?: number, duration?: number }) {
-  return (
-    <motion.circle
-      r="1.5"
-      fill="#4633ff"
-      filter="blur(1px)"
-      initial={{ offsetDistance: "0%" }}
-      animate={{ offsetDistance: "100%" }}
-      transition={{ 
-        duration, 
-        repeat: Infinity, 
-        ease: "linear",
-        delay 
-      }}
-      style={{ offsetPath: `path('M ${x1} ${y1} L ${x2} ${y2}')` }}
-    />
-  );
-}
-
-function BlueprintVisual() {
-  const layers = [
-    { label: "USERS", metric: "1.2M events/day" },
-    { label: "INTERFACE", metric: "99.9% uptime" },
-    { label: "API", metric: "24ms latency", active: true },
-    { label: "SERVICES", metric: "auto-scaling" },
-    { label: "QUEUE", metric: "sync stable" },
-    { label: "DATABASE", metric: "redundant" },
-    { label: "ANALYTICS", metric: "real-time" },
-  ];
-
-  return (
-    <div className={s.blueprint}>
-      <svg className={s.bpLines} viewBox="0 0 400 700">
-        <defs>
-          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(70, 51, 255, 0.1)" />
-            <stop offset="50%" stopColor="rgba(70, 51, 255, 0.5)" />
-            <stop offset="100%" stopColor="rgba(70, 51, 255, 0.1)" />
-          </linearGradient>
-        </defs>
-        {layers.map((_, i) => i < layers.length - 1 && (
-          <g key={i}>
-            <motion.line 
-              x1="200" y1={50 + i * 90} x2="200" y2={50 + (i + 1) * 90} 
-              stroke="url(#lineGrad)" strokeWidth="1" 
-              initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, delay: i * 0.1 }}
-            />
-            {/* Very slow, purposeful packet movement - 1 every 2s per route essentially via stagger */}
-            <DataPackets x1={200} y1={50 + i * 90} x2={200} y2={50 + (i + 1) * 90} delay={i * 2} duration={4} />
-          </g>
-        ))}
-      </svg>
-      {layers.map((l, i) => (
-        <motion.div 
-          key={i} 
-          className={`${s.bpLayer} ${l.active ? s.bpLayerActive : ""}`}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.15 }}
-        >
-          {l.label}
-          <div className={s.layerMetric}>{l.metric}</div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
 
 function MonitoringVisual() {
   const [metrics, setMetrics] = useState([
@@ -233,8 +149,6 @@ export default function ApproachPage() {
   const timelineRef = useRef(null);
 
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const mapScale = useTransform(heroScroll, [0, 1], [1, 1.15]);
-  const mapOpacity = useTransform(heroScroll, [0, 0.8], [1, 0.2]);
   const textTranslate = useTransform(heroScroll, [0, 1], [0, -100]);
   const textOpacity = useTransform(heroScroll, [0, 0.6], [1, 0]);
 
@@ -245,10 +159,20 @@ export default function ApproachPage() {
     <div className={s.page}>
       <div className={s.grid} />
       <Header />
-      <SystemStatePanel />
 
       {/* ── 1. HERO ── */}
       <section className={s.hero} ref={heroRef}>
+        {/* Background Image & Gradient overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <img
+            src="/handled_Security Support_1080_1920_80.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-[0.55] select-none"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050508]/90 via-[#050508]/50 to-[#050508]/90" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] aspect-square bg-[radial-gradient(circle_at_center,rgba(70,51,255,0.06)_0%,transparent_60%)] blur-3xl opacity-70" />
+        </div>
+
         <div className={s.container}>
           <div className={s.heroInner}>
             <motion.div className={s.heroLeft} style={{ y: textTranslate, opacity: textOpacity }}>
@@ -273,10 +197,7 @@ export default function ApproachPage() {
                 <span className={s.execLine2}>Конфиденциально • Без обязательств</span>
               </div>
             </motion.div>
-            <motion.div className={s.heroRight} style={{ scale: mapScale, opacity: mapOpacity }}>
-              <BlueprintVisual />
-            </motion.div>
-          </div>
+        </div>
         </div>
       </section>
 
