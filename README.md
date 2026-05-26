@@ -1,4 +1,3 @@
-```markdown
 # Kibex
 
 An engineering digital platform for enterprise e-commerce, ERP systems, and highload infrastructure.
