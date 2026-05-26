@@ -1,32 +1,33 @@
+```markdown
 # Kibex
 
-Инженерная digital-платформа для enterprise e-commerce, ERP систем и highload инфраструктуры.
+An engineering digital platform for enterprise e-commerce, ERP systems, and highload infrastructure.
 
-Kibex — это современный веб-проект, ориентированный на разработку масштабируемых цифровых платформ для бизнеса: интернет-магазинов, корпоративных ERP систем, интеграционных решений и высоконагруженной инфраструктуры.
-
----
-
-# О проекте
-
-Проект построен как premium enterprise website с акцентом на:
-
-* архитектурный подход
-* API-first мышление
-* highload инфраструктуру
-* интеграции с ERP / CRM / 1С
-* enterprise UI/UX
-* observability и безопасность
-* SEO / GEO / AEO оптимизацию
-
-Сайт использует минималистичный dark enterprise дизайн с анимированными инфраструктурными визуализациями и инженерной стилистикой.
+Kibex is a modern web project focused on developing scalable digital platforms for business: online stores, corporate ERP systems, integration solutions, and high-load infrastructure.
 
 ---
 
-# Основные разделы
+# About the Project
 
-## Главная страница
+The project is built as a premium enterprise website with an emphasis on:
 
-Главный landing section с инфраструктурной визуализацией:
+* Architectural approach
+* API-first mindset
+* Highload infrastructure
+* Integrations with ERP / CRM / 1C
+* Enterprise UI/UX
+* Observability and security
+* SEO / GEO / AEO optimization
+
+The site uses a minimalist dark enterprise design with animated infrastructure visualizations and an engineering aesthetic.
+
+---
+
+# Main Sections
+
+## Home Page
+
+The main landing section with infrastructure visualization:
 
 * animated infrastructure core
 * topology network visualization
@@ -36,60 +37,60 @@ Kibex — это современный веб-проект, ориентиро�
 
 ---
 
-## Решения
+## Solutions
 
-Раздел с направлениями разработки:
+A section covering development focus areas:
 
-* Модернизация платформ
-* Разработка digital-платформ
-* Highload инфраструктура
-* ERP системы
-* Кибербезопасность
+* Platform Modernization
+* Digital Platform Development
+* Highload Infrastructure
+* ERP Systems
+* Cybersecurity
 
-Каждое решение ориентировано на enterprise и масштабируемый бизнес.
-
----
-
-## Подход
-
-Раздел о системном инженерном подходе Kibex:
-
-* архитектурное проектирование
-* API-first подход
-* observability
-* security-by-design
-* инфраструктурное мышление
-* масштабирование
+Each solution is geared towards enterprise and scalable business.
 
 ---
 
-## Исследования
+## Approach
 
-Kibex Research — раздел инженерных исследований:
+A section about the Kibex systematic engineering approach:
 
-* highload архитектура
-* ERP системы
-* e-commerce scalability
+* Architectural design
+* API-first approach
+* Observability
+* Security-by-design
+* Infrastructure thinking
+* Scaling
+
+---
+
+## Research
+
+Kibex Research — a section dedicated to engineering research:
+
+* Highload architecture
+* ERP systems
+* E-commerce scalability
 * WordPress bottlenecks
-* интеграции и API
-* security architecture
+* Integrations and APIs
+* Security architecture
 
-Каждое исследование оптимизировано под SEO / GEO / AEO.
-
----
-
-## Контакты
-
-Enterprise contact flow с:
-
-* архитектурной консультацией
-* проектной оценкой
-* business onboarding
-* premium modal interaction
+Each research piece is optimized for SEO / GEO / AEO.
 
 ---
 
-# Технологии
+## Contacts
+
+Enterprise contact flow including:
+
+* Architectural consultation
+* Project estimation
+* Business onboarding
+* Premium modal interaction
+
+---
+
+# Technologies
 
 ## Frontend
 
@@ -121,15 +122,15 @@ Enterprise contact flow с:
 
 # SEO & AI Optimization
 
-Проект ориентирован не только на классическое SEO, но и на:
+The project is focused not only on classic SEO but also on:
 
 * GEO (Generative Engine Optimization)
 * AEO (Answer Engine Optimization)
 * AI discoverability
-* semantic architecture
-* structured content hierarchy
+* Semantic architecture
+* Structured content hierarchy
 
-Используются:
+The following are used:
 
 * FAQ schema
 * Organization schema
@@ -142,28 +143,28 @@ Enterprise contact flow с:
 
 # UI / UX Philosophy
 
-Kibex не использует шаблонный SaaS-подход.
+Kibex does not use a template-based SaaS approach.
 
-Основные принципы:
+Core principles:
 
-* минимализм
-* архитектурная глубина
-* enterprise aesthetic
-* restrained animations
-* infrastructure-inspired UI
-* high contrast typography
-* observability-inspired visuals
+* Minimalism
+* Architectural depth
+* Enterprise aesthetic
+* Restrained animations
+* Infrastructure-inspired UI
+* High contrast typography
+* Observability-inspired visuals
 
 ---
 
-# Дизайн-концепция
+# Design Concept
 
-Визуальный стиль вдохновлен:
+The visual style is inspired by:
 
-* enterprise observability platforms
-* distributed systems dashboards
-* infrastructure topology
-* modern engineering products
+* Enterprise observability platforms
+* Distributed systems dashboards
+* Infrastructure topology
+* Modern engineering products
 * Vercel
 * Stripe
 * Cloudflare
@@ -172,17 +173,17 @@ Kibex не использует шаблонный SaaS-подход.
 
 ---
 
-# Цели проекта
+# Project Goals
 
-* Создать premium digital identity для Kibex
-* Подчеркнуть инженерный подход
-* Повысить trust и enterprise positioning
-* Демонстрировать expertise в архитектуре систем
-* Получать inbound enterprise leads
+* Create a premium digital identity for Kibex
+* Emphasize the engineering approach
+* Increase trust and enterprise positioning
+* Demonstrate expertise in systems architecture
+* Generate inbound enterprise leads
 
 ---
 
-# Структура проекта
+# Project Structure
 
 ```bash
 /app
@@ -196,15 +197,15 @@ Kibex не использует шаблонный SaaS-подход.
 
 ---
 
-# Запуск проекта
+# Running the Project
 
-## Установка зависимостей
+## Install dependencies
 
 ```bash
 npm install
 ```
 
-## Запуск development сервера
+## Start the development server
 
 ```bash
 npm run dev
@@ -216,7 +217,7 @@ npm run dev
 npm run build
 ```
 
-## Запуск production версии
+## Run the production version
 
 ```bash
 npm run start
@@ -226,7 +227,7 @@ npm run start
 
 # Deployment
 
-Проект готов для deployment на:
+The project is ready for deployment on:
 
 * Vercel
 * Docker
@@ -238,18 +239,18 @@ npm run start
 
 ---
 
-# Статус проекта
+# Project Status
 
-Проект находится в активной разработке.
+The project is under active development.
 
-Планируемые улучшения:
+Planned improvements:
 
-* advanced topology animations
-* research article expansion
-* case studies
-* enterprise observability sections
-* advanced schema optimization
-* multilingual support
+* Advanced topology animations
+* Research article expansion
+* Case studies
+* Enterprise observability sections
+* Advanced schema optimization
+* Multilingual support
 * CMS integration
 
 ---
@@ -259,3 +260,4 @@ npm run start
 Private commercial project.
 
 All rights reserved © Kibex.
+```
