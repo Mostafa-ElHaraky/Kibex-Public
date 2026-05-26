@@ -234,14 +234,6 @@ npm run start
 * Kubernetes
 * Dedicated infrastructure
 
----
-
-# Domain
-
-Production domain:
-
-```bash
-https://kibex.ru
 ```
 
 ---
